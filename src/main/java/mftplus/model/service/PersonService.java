@@ -14,7 +14,6 @@ public class PersonService implements Service<Person, Integer> {
     private PersonService() {
     }
 
-
     @Override
     public void save(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
