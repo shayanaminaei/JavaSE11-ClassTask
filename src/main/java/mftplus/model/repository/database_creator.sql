@@ -102,7 +102,7 @@ create table medicals
     status     number(1) default 1
 );
 
-create sequence medical_seq
+create sequence medical_seq start with 1 increment by 1;
 
 --
 
