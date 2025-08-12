@@ -1,6 +1,6 @@
 create table persons
 (
-    id         number unique not null,
+    id              number primary key,
     name       nvarchar2(20) not null,
     family     nvarchar2(20) not null,
     birth_date date          not null,
