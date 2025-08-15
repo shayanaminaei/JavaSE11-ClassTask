@@ -14,7 +14,7 @@ import java.util.List;
 public class PropertyRepository implements Repository<Property, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
-    private PropertyMapper propertyMapper;
+    private PropertyMapper propertyMapper= new PropertyMapper();
 
     public PropertyRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
@@ -53,7 +53,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from property where id=?"
+                "delete from properties where id=?"
         );
         preparedStatement.setInt(1,id);
         preparedStatement.execute();
@@ -85,6 +85,12 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
             property = PropertyMapper.propertyMapper(resultSet);
         }
         return property;
+    }
+    public List<Property> findByName(String name) throws Exception {
+        List<Property> propertyList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from properties where name=?");
+        preparedStatement.setString(1, name+"%");
+        ResultSet resultSet = preparedStatement.executeQuery();
     }
 
 
