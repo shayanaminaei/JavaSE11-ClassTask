@@ -2,18 +2,22 @@ package mftplus.model.repository;
 
 
 import mftplus.model.entity.SimCard;
+import mftplus.model.tools.ConnectionProvider;
+import mftplus.model.tools.SimCardMapper;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class SimCardsRepository implements Repository <SimCard,Integer> , AutoCloseable{
+public class SimCardsRepository implements Repository<SimCard, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
+    private SimCardMapper simCardMapper = new SimCardMapper();
+
+    public SimCardsRepository() throws SQLException {
+        connection = ConnectionProvider.getProvider().getConnection();
+        System.out.println("Connection ");
+    }
 
     @Override
     public void save(SimCard simCard) throws Exception {
@@ -24,7 +28,7 @@ public class SimCardsRepository implements Repository <SimCard,Integer> , AutoCl
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
-        preparedStatement.setDate(5,Date.valueOf(simCard.getRegisterDate()));
+        preparedStatement.setDate(5, Date.valueOf(simCard.getRegisterDate()));
         preparedStatement.setBoolean(6, simCard.isStatus());
         preparedStatement.execute();
     }
@@ -38,7 +42,7 @@ public class SimCardsRepository implements Repository <SimCard,Integer> , AutoCl
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
-        preparedStatement.setDate(5,Date.valueOf(simCard.getRegisterDate()));
+        preparedStatement.setDate(5, Date.valueOf(simCard.getRegisterDate()));
         preparedStatement.setBoolean(6, simCard.isStatus());
         preparedStatement.setInt(7, simCard.getId());
         preparedStatement.execute();
@@ -57,18 +61,33 @@ public class SimCardsRepository implements Repository <SimCard,Integer> , AutoCl
 
     @Override
     public List<SimCard> findAll() throws Exception {
-        return Collections.emptyList();
+        List<SimCard> simCardList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from sim_Cards");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            SimCard simCard = simCardMapper.SimCardMapper(resultSet);
+            simCardList.add(simCard);
+        }
+        return simCardList;
     }
 
 
     @Override
     public SimCard findById(Integer id) throws Exception {
-        return null;
+        SimCard simCard = null;
+        preparedStatement = connection.prepareStatement("select * from sim_Cards where id=?");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            simCard = simCardMapper.SimCardMapper(resultSet);
+        }
+        return simCard;
     }
 
     @Override
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
+        System.out.println("Connection closed");
     }
 }
