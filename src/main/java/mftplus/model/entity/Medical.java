@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @SuperBuilder
 
 public class Medical {
+
     private int id;
     private String personId;
     private String disease;
