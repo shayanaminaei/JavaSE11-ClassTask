@@ -7,8 +7,14 @@ import java.time.LocalDate;
 
 public class PersonTest {
     public static void main(String[] args) throws Exception {
-        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);
-
+//        UNIT TEST
+//        تست واحد
+//        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);
+//        PersonController.getController().edit(7,"ahmad", "ahmadi", LocalDate.of(2010, 1, 1), Role.customer,true);
+//        PersonController.getController().delete(7);
+//        System.out.println(PersonController.getController().findAll());
+//        System.out.println(PersonController.getController().findById(6));
+//        System.out.println(PersonController.getController().findByNameAndFamily("a" ,"a"));
 
 //        Person person = Person
 //                .builder()

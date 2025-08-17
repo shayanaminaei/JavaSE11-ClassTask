@@ -1,6 +1,7 @@
 package mftplus.controller;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PersonService;
@@ -8,7 +9,7 @@ import mftplus.model.service.PersonService;
 import java.time.LocalDate;
 import java.util.List;
 
-
+@Log4j
 public class PersonController {
     @Getter
     private static PersonController controller = new PersonController();
@@ -29,9 +30,9 @@ public class PersonController {
                             .status(status)
                             .build();
             PersonService.getService().save(person);
-            System.out.println("Info : Person Saved Successfully");
+            log.info("Person Saved Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Person Save Failed " + e.getMessage());
+            log.error("Person Save Failed " + e.getMessage());
         }
     }
 
@@ -40,6 +41,7 @@ public class PersonController {
             Person person =
                     Person
                             .builder()
+                            .id(id)
                             .name(name)
                             .family(family)
                             .birthDate(birthDate)
