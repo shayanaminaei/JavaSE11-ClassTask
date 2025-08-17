@@ -1,6 +1,6 @@
 - OK babak oveisi : educations (id, person_id, university, grade, average, start_date, end_date)    
 
-- mohadese saeedi : jobs (id, person_id, organisation, job_title, start_date, end_date, description)
+- OK mohadese saeedi : jobs (id, person_id, organisation, job_title, start_date, end_date, description)
 
 - -5 zahra moradi nejhad : driver_licenses (id, person_id, serial, license_type, city, register_date, expire_date)
 
@@ -24,6 +24,6 @@
 
 - mahdiar naseri : accounts (id, person_id, bank, branch, account_id, card_number, register_date)
 
-- milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
+- -5 milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
 
-- -5 romina mirfatahi : 
+- -5 romina mirfatahi : lessons (id, person_id, title, code, teacher, unit, start_date_time)

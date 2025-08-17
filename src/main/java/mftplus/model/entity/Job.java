@@ -9,15 +9,15 @@ import mftplus.model.entity.enums.JobTitle;
 
 import java.time.LocalDate;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 
 public class Job {
     private int id;
     private String organisation;
-    private JobTitle jobTitle;
+    private JobTitle title;
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
