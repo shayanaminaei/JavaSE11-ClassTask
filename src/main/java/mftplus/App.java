@@ -9,7 +9,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = FXMLLoader.load(getClass().getResource("/view/PersonView.fxml"));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/PersonView.fxml")));
         primaryStage.setScene(scene);
         primaryStage.setTitle("Person Information");
         primaryStage.show();
