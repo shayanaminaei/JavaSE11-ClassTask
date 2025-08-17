@@ -1,23 +1,22 @@
-import mftplus.model.entity.Salaries;
-import mftplus.model.entity.enums.Employee_Type;
-import mftplus.model.service.SalariesService;
+import mftplus.model.entity.Salary;
+import mftplus.model.entity.enums.EmployeeType;
+import mftplus.model.service.SalaryService;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public class SalariesTest {
+public class SalaryTest {
     public static void main(String[] args) throws Exception {
-        Salaries salaries = Salaries.builder()
+        Salary salary = Salary.builder()
                 .id(1)
                 .personId(1)
                 .weeklyHour(40)
                 .payPerHour(200)
                 .startDate(LocalDate.of(2025, 8, 1))
                 .endDate(LocalDate.of(2025, 8, 2))
-                .employeeType(Employee_Type.FullTime)
+                .employeeType(EmployeeType.FullTime)
                 .build();
 
-        SalariesService.getService().save(salaries);
+        SalaryService.getService().save(salary);
         System.out.println("Salary saved successfully!");
 
 //        salary.setPayPerHour(250);

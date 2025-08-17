@@ -8,10 +8,11 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
+
 public class Skill {
     private int id;
     private int personId;

@@ -1,30 +1,27 @@
 package mftplus.model.entity;
 
-import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 
-public class Property {
+
+public class Car {
     private int id;
     private int personId;
     private String name;
+    private String model;
     private String brand;
-    private String serial;
-    private int count;
-    private LocalDateTime dateTime;
-
-    @Override
-    public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
+    private LocalDate manDate;
+    private String color;
+    private String plate;
 }

@@ -1,17 +1,14 @@
 package mftplus.model.repository;
 
 import mftplus.model.entity.Education;
-import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.EducationMapper;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class EducationRepository implements Repository<Education, Integer>, AutoCloseable{
+public class EducationRepository implements Repository<Education, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private EducationMapper educationMapper = new EducationMapper();
@@ -93,10 +90,10 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         List<Education> educationList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from educations where university=? and education_grade=?"
+                "select * from educations where university like ? and education_grade like ?"
         );
-        preparedStatement.setString(1, university+"%");
-        preparedStatement.setString(2, grade+"%");
+        preparedStatement.setString(1, university + "%");
+        preparedStatement.setString(2, grade + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {

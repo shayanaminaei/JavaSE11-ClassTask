@@ -1,28 +1,24 @@
 package mftplus.model.entity;
-
-
 import com.google.gson.Gson;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+
 
 @SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
 
-
-public class Medical {
-    private int id;
-    private String personId;
-    private String disease;
-    private String medicine;
-    private String doctor;
-    private LocalDate visitDate;
-    private boolean status;
+public class Marriage {
+    private int marriageId;
+    private int personId;
+    private String name;
+    private String family;
+    private LocalDate marriageDate;
+    private boolean isAlive;
+    private int children;
 
 
     @Override
@@ -31,4 +27,3 @@ public class Medical {
         return gson.toJson(this);
     }
 }
-

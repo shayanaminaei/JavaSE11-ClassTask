@@ -11,6 +11,19 @@ create table persons
 create sequence person_seq start with 1 increment by 1;
 
 --
+create table cars
+(
+    id         number unique not null,
+    person_id  nvarchar2(20) not null,
+    name       nvarchar2(20) not null,
+    brand      nvarchar2(20) not null,
+    man_date   DATE DEFAULT SYSDATE NOT NULL,
+    color      nvarchar2(20) default 'Black',
+    status     number(1)     default 1
+);
+
+create sequence cars_seq start with 1 increment by 1;
+
 
 create table educations
 (
