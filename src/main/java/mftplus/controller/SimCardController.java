@@ -2,7 +2,6 @@ package mftplus.controller;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
-import mftplus.model.entity.Person;
 import mftplus.model.entity.SimCard;
 import mftplus.model.entity.enums.SimCardOperator;
 import mftplus.model.entity.enums.Title;
@@ -65,9 +64,9 @@ public class SimCardController {
     public void delete(Integer id) throws Exception {
         try {
             SimCardService.getService().delete(id);
-            log.info("SimCard deleted successfully");
+            log.info("SimCard Deleted successfully");
         } catch (Exception e) {
-            log.info("SimCard delete failed" + e.getMessage());
+            log.info("SimCard Delete failed" + e.getMessage());
         }
 
     }
@@ -75,7 +74,9 @@ public class SimCardController {
 
     public List<SimCard> findAll() throws Exception {
         try {
-            return SimCardService.getService().findAll();
+            List<SimCard> simCardList = SimCardService.getService().findAll();
+            log.info("SimCard findAll successfully");
+            return simCardList;
         } catch (Exception e) {
             log.info("SimCard findAll failed" + e.getMessage());
             return null;
@@ -85,9 +86,11 @@ public class SimCardController {
 
     public SimCard findById(Integer id) throws Exception {
         try {
-            return SimCardService.getService().findById(id);
+            SimCard simCard = SimCardService.getService().findById(id);
+            log.info("SimCard findById" + id + "successfully");
+            return simCard;
         } catch (Exception e) {
-            log.info("SimCard findById failed" + e.getMessage());
+            log.info("SimCard findById" + id + "failed" + e.getMessage());
             return null;
         }
 
