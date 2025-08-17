@@ -1,11 +1,11 @@
 package mftplus.model.entity;
 
+
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
 
 import java.time.LocalDate;
 
@@ -15,12 +15,13 @@ import java.time.LocalDate;
 @Setter
 
 
-public class Person {
+public class Medical {
     private int id;
-    private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
+    private String personId;
+    private String disease;
+    private String medicine;
+    private String doctor;
+    private LocalDate visitDate;
     private boolean status;
 
 
@@ -30,3 +31,4 @@ public class Person {
         return gson.toJson(this);
     }
 }
+

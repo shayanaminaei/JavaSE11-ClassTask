@@ -5,24 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
 
-
-public class Person {
+public class Property {
     private int id;
+    private int personId;
     private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
-    private boolean status;
-
+    private String brand;
+    private String serial;
+    private int count;
+    private LocalDateTime dateTime;
 
     @Override
     public String toString() {

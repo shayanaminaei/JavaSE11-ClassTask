@@ -5,26 +5,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
+import mftplus.model.entity.enums.SimCardOperator;
+import mftplus.model.entity.enums.Title;
 
 import java.time.LocalDate;
 
-@SuperBuilder
+
 @NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 
-
-public class Person {
+public class SimCard {
     private int id;
-    private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
+    private int personId;
+    private Title title;
+    private String numbers;
+    private SimCardOperator simCardOperator;
+    private LocalDate registerDate;
     private boolean status;
 
 
-    @Override
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);

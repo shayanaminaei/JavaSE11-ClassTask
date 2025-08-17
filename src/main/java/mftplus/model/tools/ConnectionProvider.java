@@ -4,21 +4,29 @@ import lombok.Getter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionProvider {
     // Singleton
     @Getter
-    private static ConnectionProvider provider = new ConnectionProvider();
+    private final static ConnectionProvider provider = new ConnectionProvider();
 
     private ConnectionProvider() {
     }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
                 "javase",
                 "java123"
         );
+    }
+
+
+    public int getNextId(String sequenceName) throws Exception{
+        ResultSet resultSet = getConnection().prepareStatement("select person_seq.nextval as NEXT_ID from dual").executeQuery();
+        resultSet.next();
+        return resultSet.getInt("NEXT_ID");
     }
 }

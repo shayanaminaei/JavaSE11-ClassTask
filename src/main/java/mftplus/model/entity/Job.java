@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
+import mftplus.model.entity.enums.JobTitle;
 
 import java.time.LocalDate;
 
@@ -14,15 +14,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-
-public class Person {
+public class Job {
     private int id;
-    private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
-    private boolean status;
-
+    private String organisation;
+    private JobTitle title;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String description;
 
     @Override
     public String toString() {

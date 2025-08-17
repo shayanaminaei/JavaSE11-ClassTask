@@ -1,11 +1,12 @@
 package mftplus.model.entity;
 
+
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
+import mftplus.model.entity.enums.EmployeeType;
 
 import java.time.LocalDate;
 
@@ -15,16 +16,16 @@ import java.time.LocalDate;
 @Setter
 
 
-public class Person {
+public class Salary {
     private int id;
-    private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
-    private boolean status;
+    private int personId;
+    private int weeklyHour;
+    private int payPerHour;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private EmployeeType employeeType;
 
 
-    @Override
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);

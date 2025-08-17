@@ -4,8 +4,9 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Role;
+import mftplus.model.entity.enums.EducationGrade;
 
 import java.time.LocalDate;
 
@@ -15,14 +16,14 @@ import java.time.LocalDate;
 @Setter
 
 
-public class Person {
+public class Education {
     private int id;
-    private String name;
-    private String family;
-    private LocalDate birthDate;
-    private Role role;
-    private boolean status;
-
+    private int personId;
+    private String university;
+    private EducationGrade educationGrade;
+    private double average;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @Override
     public String toString() {
