@@ -19,15 +19,18 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
 
     @Override
     public void save(Education education) throws Exception {
+        education.setId(ConnectionProvider.getProvider().getNextId("education-seq"));
+
         preparedStatement = connection.prepareStatement(
-                "insert into educations (id, person_id, university, education_grade, average, start_date, end_date) values (education_seq.nextval, ?, ?, ?, ?, ?, ?)"
+                "insert into educations (id, person_id, university, education_grade, average, start_date, end_date) values (?, ?, ?, ?, ?, ?, ?)"
         );
-        preparedStatement.setInt(1, education.getPersonId());
-        preparedStatement.setString(2, education.getUniversity());
-        preparedStatement.setString(3, education.getEducationGrade().name());
-        preparedStatement.setDouble(4, education.getAverage());
-        preparedStatement.setDate(5, Date.valueOf(education.getStartDate()));
-        preparedStatement.setDate(6, Date.valueOf(education.getEndDate()));
+        preparedStatement.setInt(1, education.getId());
+        preparedStatement.setInt(2, education.getPersonId());
+        preparedStatement.setString(3, education.getUniversity());
+        preparedStatement.setString(4, education.getEducationGrade().name());
+        preparedStatement.setDouble(5, education.getAverage());
+        preparedStatement.setDate(6, Date.valueOf(education.getStartDate()));
+        preparedStatement.setDate(7, Date.valueOf(education.getEndDate()));
         preparedStatement.execute();
     }
 

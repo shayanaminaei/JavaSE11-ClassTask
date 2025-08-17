@@ -13,7 +13,7 @@ public class JobMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .organisation(resultSet.getString("organisation"))
-                .jobTitle(JobTitle.valueOf(resultSet.getString("job_title")))
+                .title(JobTitle.valueOf(resultSet.getString("job_title")))
                 .startDate(resultSet.getDate("start_date").toLocalDate())
                 .endDate(resultSet.getDate("end_date").toLocalDate())
                 .description(resultSet.getString("description"))
