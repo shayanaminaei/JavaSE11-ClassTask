@@ -47,9 +47,5 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <resources>
-            <resource>resources</resource>
-        </resources>
-    </build>
+
 </project>

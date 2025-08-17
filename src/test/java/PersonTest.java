@@ -1,3 +1,4 @@
+import lombok.extern.log4j.Log4j;
 import mftplus.controller.PersonController;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.Role;
@@ -5,8 +6,11 @@ import mftplus.model.service.PersonService;
 
 import java.time.LocalDate;
 
+@Log4j
 public class PersonTest {
     public static void main(String[] args) throws Exception {
+        log.info("Starting Person Test");
+        log.error("error saving");
 //        UNIT TEST
 //        تست واحد
 //        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);
