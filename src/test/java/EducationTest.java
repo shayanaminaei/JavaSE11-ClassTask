@@ -1,10 +1,14 @@
+import lombok.extern.log4j.Log4j;
+import mftplus.controller.EducationController;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.entity.enums.Role;
+import sun.util.resources.cldr.sah.LocaleNames_sah;
 
 import java.time.LocalDate;
 
+@Log4j
 public class EducationTest {
     public static void main(String[] args) throws Exception {
         Person person1 =
@@ -59,6 +63,44 @@ public class EducationTest {
                         .startDate(LocalDate.of(2018, 6, 26))
                         .endDate(LocalDate.of(2020, 4, 15))
                         .build();
+
+//        log.info("Starting Education Test");
+//        log.error("error saving");
+
+        // EducationController test:
+
+        // save() test:
+//        EducationController.getController().save(
+//                1,
+//                "amirkabir",
+//                EducationGrade.master,
+//                17.95,
+//                LocalDate.of(2020, 9, 26),
+//                LocalDate.of(2023, 1, 15)
+//        );
+//
+//        EducationController.getController().save(
+//                2,
+//                "sharif",
+//                EducationGrade.doctorate,
+//                19.50,
+//                LocalDate.of(2020, 9, 26),
+//                LocalDate.of(2025, 3, 15)
+//        );
+//
+//        EducationController.getController().save(
+//                2,
+//                "sharif",
+//                EducationGrade.master,
+//                18.79,
+//                LocalDate.of(2018, 6, 26),
+//                LocalDate.of(2020, 4, 15)
+//        );
+
+        // edit() test:
+
+
+
 
 
         // EducationService test:
