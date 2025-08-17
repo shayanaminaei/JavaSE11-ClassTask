@@ -1,10 +1,9 @@
 import lombok.extern.log4j.Log4j;
-import mftplus.controller.EducationController;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.entity.enums.Role;
-import sun.util.resources.cldr.sah.LocaleNames_sah;
+
 
 import java.time.LocalDate;
 
