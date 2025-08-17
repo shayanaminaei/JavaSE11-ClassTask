@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-public class DriverLicenses {
+public class DriverLicense {
     private int id;
     private String personId;
     private String serial;
