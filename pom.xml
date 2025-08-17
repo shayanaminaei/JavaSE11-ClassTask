@@ -47,5 +47,13 @@
         </dependency>
     </dependencies>
 
-
+<build>
+    <resources>
+        <resource>
+            <directory>
+                main/resources
+            </directory>
+        </resource>
+    </resources>
+</build>
 </project>
