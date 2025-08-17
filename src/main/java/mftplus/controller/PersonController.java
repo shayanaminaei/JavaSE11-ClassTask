@@ -49,44 +49,50 @@ public class PersonController {
                             .status(status)
                             .build();
             PersonService.getService().edit(person);
-            System.out.println("Info : Person Edited Successfully");
+            log.info("Person Edited Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Person Edit Failed " + e.getMessage());
+            log.error("Person Edit Failed " + e.getMessage());
         }
     }
 
     public void delete(Integer id) throws Exception {
         try {
             PersonService.getService().delete(id);
-            System.out.println("Info : Person Deleted Successfully");
+            log.info("Person Deleted Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Person Delete Failed " + e.getMessage());
+            log.error("Person Delete Failed " + e.getMessage());
         }
     }
 
     public List<Person> findAll() throws Exception {
         try {
-            return PersonService.getService().findAll();
+            List<Person> personList = PersonService.getService().findAll();
+            log.info("Persons FindAll");
+            return personList;
         } catch (Exception e) {
-            System.out.println("Error : Person FindAll Failed " + e.getMessage());
+            log.error("Person FindAll Failed " + e.getMessage());
             return null;
         }
     }
 
     public Person findById(Integer id) throws Exception {
         try {
-            return PersonService.getService().findById(id);
+            Person person = PersonService.getService().findById(id);
+            log.info("Person FindById : " + id );
+            return person;
         } catch (Exception e) {
-            System.out.println("Error : Person FindId " + id + " Failed " + e.getMessage());
+            log.error("Person FindById " + id + " Failed " + e.getMessage());
             return null;
         }
     }
 
     public List<Person> findByNameAndFamily(String name, String family) throws Exception {
         try {
-            return PersonService.getService().findByNameAndFamily(name, family);
+            List<Person> personList = PersonService.getService().findByNameAndFamily(name, family);
+            log.info("Persons FindByNameAndFamily :" + name + " " + family);
+            return personList;
         } catch (Exception e) {
-            System.out.println("Error : Person FindNameFamily " + name + " " + family + " Failed " + e.getMessage());
+            log.error("Person FindNameFamily " + name + " " + family + " Failed " + e.getMessage());
             return null;
         }
     }

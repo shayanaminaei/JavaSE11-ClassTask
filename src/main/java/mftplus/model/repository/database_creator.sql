@@ -1,6 +1,6 @@
 create table persons
 (
-    id              number primary key,
+    id         number primary key,
     name       nvarchar2(20) not null,
     family     nvarchar2(20) not null,
     birth_date date          not null,
@@ -13,13 +13,13 @@ create sequence person_seq start with 1 increment by 1;
 --
 create table cars
 (
-    id         number unique not null,
-    person_id  nvarchar2(20) not null,
-    name       nvarchar2(20) not null,
-    brand      nvarchar2(20) not null,
-    man_date   DATE DEFAULT SYSDATE NOT NULL,
-    color      nvarchar2(20) default 'Black',
-    status     number(1)     default 1
+    id       number primary key,
+    person_id references persons,
+    name     nvarchar2(20)                 not null,
+    brand    nvarchar2(20)                 not null,
+    man_date DATE          DEFAULT SYSDATE NOT NULL,
+    color    nvarchar2(20) default 'Black',
+    status   number(1)     default 1
 );
 
 create sequence cars_seq start with 1 increment by 1;
@@ -62,7 +62,7 @@ create table jobs
     id           number primary key,
     person_id references persons,
     organisation nvarchar2(20) not null,
-    title    nvarchar2(20) default 'Employee',
+    title        nvarchar2(20) default 'Employee',
     start_date   date          not null,
     end_date     date          not null,
     description  nvarchar2(200)
@@ -121,12 +121,12 @@ create sequence medical_seq start with 1 increment by 1;
 
 create table sim_cards
 (
-    id         number primary key ,
-    person_id   references persons,
-    title         nvarchar2(20) not null,
+    id            number primary key,
+    person_id references persons,
+    title         nvarchar2(20)        not null,
     numbers       nvarchar2(20) unique not null,
-    operator      nvarchar2(20) not null,
-    register_date date          not null,
+    operator      nvarchar2(20)        not null,
+    register_date date                 not null,
     status        number(1) default 1
 );
 
@@ -141,7 +141,7 @@ create table properties
     name      nvarchar2(20)        not null,
     brand     nvarchar2(20)        not null,
     serial    nvarchar2(20) unique not null,
-    count     number default 0,
+    count     number    default 0,
     date_time timestamp default sysdate
 );
 

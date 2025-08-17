@@ -18,7 +18,7 @@ Create table if not exists persons(
 );
 
 
-CREATE TABLE marriages (
+CREATE TABLE  if not exists marriages (
                            id             BIGSERIAL PRIMARY KEY,
                            person_id      BIGINT      NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
                            name           VARCHAR(50) NOT NULL,
