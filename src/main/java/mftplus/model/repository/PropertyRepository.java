@@ -1,13 +1,12 @@
 package mftplus.model.repository;
 
+import mftplus.model.entity.Person;
 import mftplus.model.entity.Property;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.PropertyMapper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         preparedStatement.setString(3, property.getBrand());
         preparedStatement.setString(4, property.getSerial());
         preparedStatement.setInt(5, property.getCount());
-        preparedStatement.setTimestamp(6, null); // todo :property.getDateTime());
+        preparedStatement.setTimestamp(6, Timestamp.valueOf(property.getDateTime()));
         preparedStatement.executeUpdate();
     }
 
@@ -42,7 +41,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         preparedStatement.setString(3, property.getBrand());
         preparedStatement.setString(4, property.getSerial());
         preparedStatement.setInt(5, property.getCount());
-        preparedStatement.setTimestamp(6, null); // todo :property.getDateTime());
+        preparedStatement.setTimestamp(6, Timestamp.valueOf(property.getDateTime()));
         preparedStatement.setInt(7, property.getId());
         preparedStatement.executeUpdate();
     }
