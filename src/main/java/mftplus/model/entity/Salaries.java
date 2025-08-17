@@ -9,7 +9,6 @@ import lombok.experimental.SuperBuilder;
 import mftplus.model.entity.enums.Employee_Type;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @Getter
