@@ -29,10 +29,18 @@ public class JobController {
                             .description(description)
                             .build();
             JobService.getService().edit(job);
-            System.out.println("Info : Job Edited Successfully");
+            log.info("Info : Job Edited Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Job Edit Failed " + e.getMessage());
+            log.info("Error : Job Edit Failed " + e.getMessage());
         }
 
+    }
+
+    public void delete (Integer id) throws Exception {
+        try {
+            JobService.getService().delete(id);
+            log.info("Info : Job Deleted Successfully");
+        }catch (Exception e) {
+            log.info("Error : Job Delete Failed " + e.getMessage());}
     }
 }
