@@ -1,4 +1,5 @@
 import lombok.extern.log4j.Log4j;
+import mftplus.controller.EducationController;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.EducationGrade;
@@ -97,9 +98,28 @@ public class EducationTest {
 //        );
 
         // edit() test:
+//        EducationController.getController().edit(
+//                2,
+//                2,
+//                "tabriz",
+//                EducationGrade.doctorate,
+//                19.30,
+//                LocalDate.of(2020, 9, 26),
+//                LocalDate.of(2025, 3, 15)
+//        );
 
+        // delete() test:
+//        EducationController.getController().delete(2);
 
+        // findAll() test:
+//        System.out.println(EducationController.getController().findall());
 
+        // findById() test:
+//        System.out.println(EducationController.getController().findById(10));
+//        System.out.println(EducationController.getController().findById(3));
+
+        // findByUniversityAndGrade() test:
+//        System.out.println(EducationController.getController().findByUniversityAndGrade("sharif", ""));
 
 
         // EducationService test:
