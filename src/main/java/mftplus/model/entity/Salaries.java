@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.Employee_Type;
+import mftplus.model.entity.enums.EmployeeType;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @Getter
@@ -23,7 +22,7 @@ public class Salaries {
     private int payPerHour;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Employee_Type employeeType;
+    private EmployeeType employeeType;
 
 
     public String toString() {

@@ -1,6 +1,6 @@
 package mftplus.model.entity.enums;
 
-public enum Employee_Type {
+public enum EmployeeType {
     FullTime,
     PartTime,
     Contractor,

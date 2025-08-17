@@ -46,7 +46,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         preparedStatement.setDate(5, Date.valueOf(skill.getRegisterDate()));
         preparedStatement.setInt(6, skill.getScore());
         preparedStatement.setInt(7, skill.getId());
-        PreparedStatement.execute();
+        preparedStatement.execute();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
 
     @Override
     public Skill findById(Integer id) throws Exception {
-        Person person= null;
+        Skill  skill= null;
 
         preparedStatement = connection.prepareStatement("select * from skills where id=?");
         preparedStatement.setInt(1, id);

@@ -1,9 +1,8 @@
 import mftplus.model.entity.Salaries;
-import mftplus.model.entity.enums.Employee_Type;
+import mftplus.model.entity.enums.EmployeeType;
 import mftplus.model.service.SalariesService;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class SalariesTest {
     public static void main(String[] args) throws Exception {
@@ -14,7 +13,7 @@ public class SalariesTest {
                 .payPerHour(200)
                 .startDate(LocalDate.of(2025, 8, 1))
                 .endDate(LocalDate.of(2025, 8, 2))
-                .employeeType(Employee_Type.FullTime)
+                .employeeType(EmployeeType.FullTime)
                 .build();
 
         SalariesService.getService().save(salaries);

@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EducationRepository implements Repository<Education, Integer>, AutoCloseable{
+public class EducationRepository implements Repository<Education, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private EducationMapper educationMapper = new EducationMapper();
@@ -92,8 +92,8 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         preparedStatement = connection.prepareStatement(
                 "select * from educations where university like ? and education_grade like ?"
         );
-        preparedStatement.setString(1, university+"%");
-        preparedStatement.setString(2, grade+"%");
+        preparedStatement.setString(1, university + "%");
+        preparedStatement.setString(2, grade + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {

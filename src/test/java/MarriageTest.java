@@ -21,7 +21,7 @@ public class MarriageTest {
                 .children(2)
                 .build();
 
-        repo.save(marriage);
+//        repo.save(marriage);
         System.out.println("Marriage saved: " + marriage.getMarriageId());
     }
 

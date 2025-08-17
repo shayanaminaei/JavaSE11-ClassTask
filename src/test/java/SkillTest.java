@@ -14,8 +14,8 @@ public class SkillTest {
                 .institute("mft")
                 .duration(150)
                 .registerDate(LocalDate.of(1404, 5, 1))
-                .role(Role.admin)
-                .status(true)
+//                .role(Role.admin)
+//                .status(true)
                 .build();
 
         SkillService.getService().save(skill);

@@ -91,6 +91,10 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         preparedStatement = connection.prepareStatement("select * from properties where name=?");
         preparedStatement.setString(1, name+"%");
         ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+
+        }
+        return propertyList;
     }
 
 

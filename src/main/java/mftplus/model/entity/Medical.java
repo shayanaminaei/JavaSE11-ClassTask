@@ -9,13 +9,13 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
+
 
 public class Medical {
-
     private int id;
     private String personId;
     private String disease;
