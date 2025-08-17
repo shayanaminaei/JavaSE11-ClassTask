@@ -1,3 +1,4 @@
+import mftplus.controller.PersonController;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PersonService;
@@ -6,16 +7,21 @@ import java.time.LocalDate;
 
 public class PersonTest {
     public static void main(String[] args) throws Exception {
-        Person person = Person
-                .builder()
-                .name("reza")
-                .family("rezsdfdsfsdaii")
-                .birthDate(LocalDate.of(2000, 1, 1))
-                .role(Role.admin)
-                .status(true)
-                .build();
+        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);
 
-        PersonService.getService().save(person);
+
+//        Person person = Person
+//                .builder()
+//                .name("reza")
+//                .family("rezsdfdsfsdaii")
+//                .birthDate(LocalDate.of(2000, 1, 1))
+//                .role(Role.admin)
+//                .status(true)
+//                .build();
+//
+//        PersonService.getService().save(person);
+//        System.out.println(person);
+//        System.out.println(PersonService.getService().findByNameAndFamily("r", ""));
 
 //        Repository Test Passed
 //        try with resource

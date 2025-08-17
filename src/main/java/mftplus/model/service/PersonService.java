@@ -4,6 +4,7 @@ import lombok.Getter;
 import mftplus.model.entity.Person;
 import mftplus.model.repository.PersonRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -17,7 +18,11 @@ public class PersonService implements Service<Person, Integer> {
     @Override
     public void save(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
-            personRepository.save(person);
+            if(person.getBirthDate().isBefore(LocalDate.of(2015,1,1))) {
+                personRepository.save(person);
+            }else{
+                throw new Exception("Age is not acceptable !");
+            }
         }
     }
 
@@ -49,9 +54,9 @@ public class PersonService implements Service<Person, Integer> {
         }
     }
 
-    public void findByNameAndFamily(String name, String family) throws Exception {
+    public List<Person> findByNameAndFamily(String name, String family) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
-            personRepository.findByNameAndFamily(name, family);
+            return personRepository.findByNameAndFamily(name, family);
         }
     }
 }
