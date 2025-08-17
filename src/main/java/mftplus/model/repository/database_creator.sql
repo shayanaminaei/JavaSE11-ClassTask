@@ -62,7 +62,7 @@ create table jobs
     id           number primary key,
     person_id references persons,
     organisation nvarchar2(20) not null,
-    job_title    nvarchar2(20) default 'Employee',
+    title    nvarchar2(20) default 'Employee',
     start_date   date          not null,
     end_date     date          not null,
     description  nvarchar2(200)

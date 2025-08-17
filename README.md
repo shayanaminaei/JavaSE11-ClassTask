@@ -24,6 +24,6 @@
 
 - mahdiar naseri : accounts (id, person_id, bank, branch, account_id, card_number, register_date)
 
-- milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
+- -5 milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
 
 - -5 romina mirfatahi : 

@@ -10,7 +10,7 @@ public class JobTest {
                 .builder()
                 .id(1)
                 .organisation("mft")
-                .jobTitle(JobTitle.valueOf("employee"))
+                .title(JobTitle.valueOf("employee"))
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now())
                 .description("New employee")
