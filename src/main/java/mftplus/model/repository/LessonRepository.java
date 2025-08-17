@@ -13,7 +13,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
 
     private Connection connection;
     private PreparedStatement preparedStatement;
-    private LessonMapper LessonMapper = new LessonMapper();
+    private LessonMapper lessonMapper = new LessonMapper();
 
     public LessonRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
