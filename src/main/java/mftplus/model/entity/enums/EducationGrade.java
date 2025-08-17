@@ -1,10 +1,10 @@
 package mftplus.model.entity.enums;
 
 public enum EducationGrade {
-    Diploma,
-    Advanced_Diploma,
-    Bachelor,
-    Master,
-    Doctorate,
-    Post_Doctorate,
+    diploma,
+    advanced_diploma,
+    bachelor,
+    master,
+    doctorate,
+    post_doctorate,
 }
