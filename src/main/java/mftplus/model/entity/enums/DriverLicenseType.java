@@ -1,6 +1,6 @@
 package mftplus.model.entity.enums;
 
-public enum LicenseType {
+public enum DriverLicenseType {
     Bus,
     Car,
     MotorCycle,
