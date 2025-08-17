@@ -56,16 +56,38 @@ public class SkillController {
         }
     }
 
-    public List<Skill> delete(Integer id) throws Exception {
+    public void delete(Integer id) throws Exception {
+        try {
+            SkillService.getService().delete(id);
+            log.info("Skill Deleted Successfully");
+        } catch (Exception e) {
+            log.error("Skill Deleted Failed" + e.getMessage());
+        }
+    }
+    public List<Skill> findAll() throws Exception {
         try {
             List<Skill> skillList = SkillService.getService().findAll();
-            log.info("Skill Find All");
+            log.info("Skills FindAll");
             return skillList;
         } catch (Exception e) {
-            log.error("Skill FindAll Failed" + e.getMessage());
+            log.error("Skill FindAll Failed " + e.getMessage());
             return null;
         }
     }
+
+    public Skill findById(Integer id) throws Exception {
+        try {
+            Skill skill = SkillService.getService().findById(id);
+            log.info("Skill FindById : " + id );
+            return skill;
+        } catch (Exception e) {
+            log.error("Skill FindById " + id + " Failed " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
 
 
 }
