@@ -1,6 +1,6 @@
 package mftplus.model.tools;
 
-import mftplus.model.entity.Salaries;
+import mftplus.model.entity.Salary;
 import mftplus.model.entity.enums.EmployeeType;
 
 import java.sql.ResultSet;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class SalariesMapper {
 
-    public Salaries salaryMapper(ResultSet rs) throws SQLException {
-        Salaries.SalariesBuilder builder = Salaries.builder()
+    public Salary salaryMapper(ResultSet rs) throws SQLException {
+        Salary.SalaryBuilder builder = Salary.builder()
                 .id(rs.getInt("id"))
                 .personId(rs.getInt("person_id"))
                 .weeklyHour(rs.getInt("weekly_hour"))

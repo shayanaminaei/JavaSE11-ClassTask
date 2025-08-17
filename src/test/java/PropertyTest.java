@@ -14,7 +14,7 @@ public class PropertyTest {
                 .brand("nike")
                 .serial("1234")
                 .count(2)
-                .dateTime(Timestamp.from(Instant.from(Instant.now())))
+                .dateTime(null)
                 .build();
 
         PropertyService.getService().save(property);

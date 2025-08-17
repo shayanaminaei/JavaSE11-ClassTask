@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 
 public class Property {
     private int id;
@@ -20,8 +20,7 @@ public class Property {
     private String brand;
     private String serial;
     private int count;
-    private Timestamp dateTime;
-
+    private LocalDateTime dateTime;
 
     @Override
     public String toString() {

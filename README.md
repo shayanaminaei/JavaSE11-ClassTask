@@ -14,7 +14,7 @@
 
 - mobina mokhbery : medicals (id, person_id, disease, medicine, doctor, visit_date, status)
 
-- amirsobhan ghandizadeh:  : salaries (id, person_id, weekly_hour, pay_per_hour, start_date, end_date, employment_type)
+- amirsobhan ghandizadeh:  : salary (id, person_id, weekly_hour, pay_per_hour, start_date, end_date, employment_type)
 
 - mobina rahi : sim_cards (id, person_id, title, number, operator, register_date, status)
 

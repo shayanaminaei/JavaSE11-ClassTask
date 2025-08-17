@@ -17,7 +17,6 @@ public class PropertyService implements Service<Property, Integer> {
     public void save(Property property) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             propertyRepository.save(property);
-
         }
     }
 
@@ -25,7 +24,6 @@ public class PropertyService implements Service<Property, Integer> {
     public void edit(Property property) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             propertyRepository.edit(property);
-
         }
     }
 
@@ -33,7 +31,6 @@ public class PropertyService implements Service<Property, Integer> {
     public void delete(Integer id) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             propertyRepository.delete(id);
-
         }
     }
 
@@ -42,7 +39,6 @@ public class PropertyService implements Service<Property, Integer> {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             return propertyRepository.findAll();
         }
-
     }
 
     public Property findById(Integer id) throws Exception {

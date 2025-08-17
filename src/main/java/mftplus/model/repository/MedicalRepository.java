@@ -23,13 +23,14 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
     @Override
     public void save(Medical medical) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into MEDICALS (id, person_id, disease, medicine, doctor, visit_date, status) VALUES (medical_seq.nextval,?,?,?,?,?)"
+                "insert into MEDICALS (id, person_id, disease, medicine, doctor, visit_date, status) VALUES (medical_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setString(1, medical.getDisease());
-        preparedStatement.setString(2, medical.getMedicine());
-        preparedStatement.setString(3, medical.getDoctor());
-        preparedStatement.setDate(4, Date.valueOf(medical.getVisitDate()));
-        preparedStatement.setBoolean(5, medical.isStatus());
+        preparedStatement.setInt(1, medical.getId());
+        preparedStatement.setString(2, medical.getDisease());
+        preparedStatement.setString(3, medical.getMedicine());
+        preparedStatement.setString(4, medical.getDoctor());
+        preparedStatement.setDate(5, Date.valueOf(medical.getVisitDate()));
+        preparedStatement.setBoolean(6, medical.isStatus());
         preparedStatement.execute();
 
     }

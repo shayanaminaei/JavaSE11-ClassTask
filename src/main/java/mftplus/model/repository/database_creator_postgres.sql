@@ -1,5 +1,5 @@
-create table if not exists salaries (
-    id int primary key  ,
+create table if not exists salary (
+    id serial primary key ,
     person_id INTEGER NOT NULL ,
     weekly_hour integer not null ,
     pay_per_hour integer not null ,

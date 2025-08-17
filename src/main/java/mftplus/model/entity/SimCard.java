@@ -30,5 +30,4 @@ public class SimCard {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-
 }

@@ -1,14 +1,11 @@
 package mftplus.model.repository;
 
-import mftplus.model.entity.Person;
 import mftplus.model.entity.Skill;
 import mftplus.model.tools.ConnectionProvider;
-import mftplus.model.tools.PersonMapper;
 import mftplus.model.tools.SkillMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SkillRepository implements Repository<Skill, Integer>, AutoCloseable {
@@ -61,7 +58,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     @Override
     public List<Skill> findAll() throws Exception {
         List<Skill> skillList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from skills order by id,person_id");
+        preparedStatement = connection.prepareStatement("select * from skills order by id, person_id");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {

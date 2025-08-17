@@ -16,7 +16,6 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
 
     public SimCardsRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
-        System.out.println("Connection ");
     }
 
     @Override
@@ -52,7 +51,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from sim_Cards where id=?"
+                "delete from sim_cards where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -62,7 +61,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public List<SimCard> findAll() throws Exception {
         List<SimCard> simCardList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from sim_Cards");
+        preparedStatement = connection.prepareStatement("select * from sim_cards");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             SimCard simCard = simCardMapper.SimCardMapper(resultSet);
@@ -75,7 +74,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public SimCard findById(Integer id) throws Exception {
         SimCard simCard = null;
-        preparedStatement = connection.prepareStatement("select * from sim_Cards where id=?");
+        preparedStatement = connection.prepareStatement("select * from sim_cards where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -88,6 +87,5 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
-        System.out.println("Connection closed");
     }
 }
