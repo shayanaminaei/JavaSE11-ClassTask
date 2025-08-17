@@ -6,18 +6,20 @@ import java.time.Instant;
 
 public class PropertyTest {
     public static void main(String[] args) throws Exception {
-        Property property = Property
-                .builder()
-                .id(1)
-                .personId(1)
-                .name("arian")
-                .brand("nike")
-                .serial("1234")
-                .count(2)
-                .dateTime(null)
-                .build();
 
-        PropertyService.getService().save(property);
+
+//        Property property = Property
+//                .builder()
+//                .id(1)
+//                .personId(1)
+//                .name("arian")
+//                .brand("nike")
+//                .serial("1234")
+//                .count(2)
+//                .dateTime(null)
+//                .build();
+//
+//        PropertyService.getService().save(property);
  //       Repository Test Passed
  //      try with resource
 //       try (PropertyRepository propertyRepository = new propertyRepository()) {

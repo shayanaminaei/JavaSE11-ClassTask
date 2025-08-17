@@ -63,6 +63,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
     @Override
     public List<Medical> findAll() throws Exception {
         List<Medical> medicals = new ArrayList<>();
+
         preparedStatement = connection.prepareStatement("select * from medicals");
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -80,6 +81,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         preparedStatement = connection.prepareStatement("select * from medicals where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
+
 
         if (resultSet.next()) {
             medical = medicalMapper.medicalMapper(resultSet);
