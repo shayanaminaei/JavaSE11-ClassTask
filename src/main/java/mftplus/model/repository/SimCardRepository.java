@@ -9,12 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimCardsRepository implements Repository<SimCard, Integer>, AutoCloseable {
+public class SimCardRepository implements Repository<SimCard, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private SimCardMapper simCardMapper = new SimCardMapper();
 
-    public SimCardsRepository() throws SQLException {
+    public SimCardRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
     }
 

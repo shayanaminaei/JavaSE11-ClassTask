@@ -3,12 +3,14 @@
 - OK mohadese saeedi : jobs (id, person_id, organisation, job_title, start_date, end_date, description)
 
 - -5 zahra moradi nejhad : driver_licenses (id, person_id, serial, license_type, city, register_date, expire_date)
+ (dao/repository)
 
 - -5 saray qorbani : military_cards : (id, person_id, card_serial, license_type, city, organisation, duration)
 
 - -1 alireza nourahmadi : marriages (id, person_id, name, family, marriage_date, is_alive, childes)
 
 - -5 tina aghaei : childes (id, person_id, name, family, birth_date, is_alive, status)
+  (controller)
 
 - OK samin salehzadeh : skills (id ,person_id, title, institute, duration, register_date, score)
 
@@ -25,5 +27,7 @@
 - mahdiar naseri : accounts (id, person_id, bank, branch, account_id, card_number, register_date)
 
 - -5 milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
+  (polymorphism)
 
 - -5 romina mirfatahi : lessons (id, person_id, title, code, teacher, unit, start_date_time)
+  (POJO/entity/bean)
