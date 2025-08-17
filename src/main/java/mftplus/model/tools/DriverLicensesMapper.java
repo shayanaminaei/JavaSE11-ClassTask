@@ -12,7 +12,7 @@ public class DriverLicensesMapper {
         return  DriverLicense
                 .builder()
                 .id(resultSet.getInt("id"))
-                .personId(resultSet.getString("personId"))
+//                .personId(resultSet.getString("personId"))
                 .serial(resultSet.getString("serial"))
                 .driverLicenseType(DriverLicenseType.valueOf(resultSet.getString("licenseType")))
                 .city(resultSet.getString("city"))
