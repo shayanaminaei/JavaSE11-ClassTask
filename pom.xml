@@ -51,7 +51,7 @@
     <resources>
         <resource>
             <directory>
-                main/resources
+                src/main/resources
             </directory>
         </resource>
     </resources>
