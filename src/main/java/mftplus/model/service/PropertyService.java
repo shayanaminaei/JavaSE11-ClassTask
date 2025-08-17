@@ -47,10 +47,11 @@ public class PropertyService implements Service<Property, Integer> {
         }
     }
 
-    public void findByName(String name) throws Exception {
+    public List<Property> findByName(String name) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
-            propertyRepository.findByName(name);
+            return propertyRepository.findByName(name);
         }
+
     }
 }
 

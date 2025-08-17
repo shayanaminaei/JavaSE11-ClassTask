@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Log4j
 public class PersonTest {
     public static void main(String[] args) throws Exception {
-        log.info("Starting Person Test");
-        log.error("error saving");
+//        log.info("Starting Person Test");
+//        log.error("error saving");
 //        UNIT TEST
 //        تست واحد
 //        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);

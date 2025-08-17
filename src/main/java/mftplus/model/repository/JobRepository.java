@@ -20,10 +20,10 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public void save(Job job) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into job (id, organisation, jobTitle, startDate, endDate, description ) values (person_seq.nextval,?,?,?,?,?)"
+                "insert into jobs (id, organisation, title, start_date, end_date, description ) values (person_seq.nextval,?,?,?,?,?)"
         );
         preparedStatement.setString(1, job.getOrganisation());
-        preparedStatement.setString(2, job.getJobTitle().name());
+        preparedStatement.setString(2, job.getTitle().name());
         preparedStatement.setDate(3,Date.valueOf(job.getStartDate()));
         preparedStatement.setDate(4,Date.valueOf(job.getEndDate()));
         preparedStatement.setString(5, job.getDescription());
@@ -33,10 +33,10 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public void edit(Job job) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update job set orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
+                "update jobs set orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
         );
         preparedStatement.setString(1, job.getOrganisation());
-        preparedStatement.setString(2, job.getJobTitle().name());
+        preparedStatement.setString(2, job.getTitle().name());
         preparedStatement.setDate(3,Date.valueOf(job.getStartDate()));
         preparedStatement.setDate(4,Date.valueOf(job.getEndDate()));
         preparedStatement.setString(5, job.getDescription());
