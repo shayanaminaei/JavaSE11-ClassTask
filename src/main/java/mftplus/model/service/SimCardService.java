@@ -13,10 +13,6 @@ public class SimCardService implements Service<SimCard, Integer> {
     private SimCardService() {
     }
 
-    public static SimCardService getInstance() {
-        return service;
-    }
-
     @Override
     public void save(SimCard simCard) throws Exception {
         try (SimCardRepository simCardRepository = new SimCardRepository()) {

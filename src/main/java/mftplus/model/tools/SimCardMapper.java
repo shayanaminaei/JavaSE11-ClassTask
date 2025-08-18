@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SimCardMapper {
-    public SimCard SimCardMapper(ResultSet resultSet) throws SQLException {
+    public SimCard simCardMapper(ResultSet resultSet) throws SQLException {
         return SimCard
                 .builder()
                 .id(resultSet.getInt("id"))

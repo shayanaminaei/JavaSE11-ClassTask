@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimCardRepository implements Repository<SimCard, Integer>, AutoCloseable {
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private SimCardMapper simCardMapper = new SimCardMapper();
+    private final SimCardMapper simCardMapper = new SimCardMapper();
 
     public SimCardRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
@@ -64,7 +64,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
         preparedStatement = connection.prepareStatement("select * from sim_cards");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            SimCard simCard = simCardMapper.SimCardMapper(resultSet);
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
             simCardList.add(simCard);
         }
         return simCardList;
@@ -78,7 +78,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            simCard = simCardMapper.SimCardMapper(resultSet);
+            simCard = simCardMapper.simCardMapper(resultSet);
         }
         return simCard;
     }
