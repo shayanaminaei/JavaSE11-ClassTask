@@ -28,7 +28,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         preparedStatement.setInt(1, medical.getId());
         preparedStatement.setString(2, medical.getDisease());
         preparedStatement.setString(3, medical.getMedicine());
-        preparedStatement.setString(4, medical.getDoctor());
+        preparedStatement.setString(4, medical.getDoctor().name());
         preparedStatement.setDate(5, Date.valueOf(medical.getVisitDate()));
         preparedStatement.setBoolean(6, medical.isStatus());
         preparedStatement.execute();
@@ -42,7 +42,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         );
         preparedStatement.setString(1, medical.getDisease());
         preparedStatement.setString(2, medical.getMedicine());
-        preparedStatement.setString(3, medical.getDoctor());
+        preparedStatement.setString(3, medical.getDoctor().name());
         preparedStatement.setDate(4, Date.valueOf(medical.getVisitDate()));
         preparedStatement.setBoolean(5, medical.isStatus());
         preparedStatement.setInt(6, medical.getId());

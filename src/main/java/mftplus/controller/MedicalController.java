@@ -3,6 +3,7 @@ package mftplus.controller;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Medical;
+import mftplus.model.entity.enums.Doctor;
 import mftplus.model.service.MedicalService;
 
 
@@ -18,11 +19,10 @@ public class MedicalController {
     private MedicalController() {
     }
 
-    public void save(int id, String personId, String disease, String medicine, String doctor, LocalDate visitDate, boolean status) throws Exception {
+    public void save( String personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
         try {
             Medical medical = Medical
                     .builder()
-                    .id(id)
                     .personId(personId)
                     .disease(disease)
                     .medicine(medicine)
@@ -38,7 +38,7 @@ public class MedicalController {
     }
 
 
-    public void edit(int id, String personId, String disease, String medicine, String doctor, LocalDate visitDate, boolean status) throws Exception {
+    public void edit(int id, String personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
         try {
 
             Medical medical = Medical
@@ -52,35 +52,39 @@ public class MedicalController {
                     .status(status)
                     .build();
             MedicalService.getService().edit(medical);
-            System.out.println("Info : Medical Edited Successfully");
+            log.info("Info : Medical Edited Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Medical Delete Failed " + e.getMessage());
+            log.error("Error : Medical Delete Failed " + e.getMessage());
         }
     }
 
     public void delete(Integer id) throws Exception {
         try {
             MedicalService.getService().delete(id);
-            System.out.println("Info : Medical Deleted Successfully");
+            log.info("Info : Medical Deleted Successfully");
         } catch (Exception e) {
-            System.out.println("Error : Medical Delete Failed " + e.getMessage());
+           log.error("Error : Medical Delete Failed " + e.getMessage());
         }
     }
 
     public List<Medical> findAll() throws Exception {
         try {
-            return MedicalService.getService().findAll();
+           List<Medical> medicals = MedicalService.getService().findAll();
+            log.info("Medical FindAll");
+           return medicals;
         } catch (Exception e) {
-            System.out.println("Error : Medical FindAll Failed " + e.getMessage());
+            log.error("Error : Medical FindAll Failed " + e.getMessage());
             return null;
         }
     }
 
     public Medical findById(Integer id) throws Exception {
         try {
-            return MedicalService.getService().findById(id);
+            Medical medical = MedicalService.getService().findById(id);
+            log.info("Medical findById" + id);
+            return medical;
         } catch (Exception e) {
-            System.out.println("Error : Medical FindId " + id + " Failed " + e.getMessage());
+            log.error("Error : Medical FindId " + id + " Failed " + e.getMessage());
             return null;
         }
     }
