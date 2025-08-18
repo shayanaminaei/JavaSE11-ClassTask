@@ -19,7 +19,7 @@ create table cars
     brand      nvarchar2(20) not null,
     man_date   DATE DEFAULT SYSDATE NOT NULL,
     color      nvarchar2(20) default 'Black',
-    status     number(1)     default 1
+    plate      nvarchar2(10)
 );
 
 create sequence cars_seq start with 1 increment by 1;

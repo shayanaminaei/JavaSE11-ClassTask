@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import mftplus.model.entity.enums.CarModel;
 
 import java.time.LocalDate;
 
@@ -21,8 +19,7 @@ public class Car {
     private int id;
     private int personId;
     private String name;
-    private String model;
-    private CarModel carModel;
+    private String brand;
     private LocalDate manDate;
     private String color;
     private String plate;
