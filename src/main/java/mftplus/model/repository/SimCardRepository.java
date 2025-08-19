@@ -20,6 +20,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
 
     @Override
     public void save(SimCard simCard) throws Exception {
+        simCard.setId(ConnectionProvider.getProvider().getNextId("sim_card_seq"));
         preparedStatement = connection.prepareStatement(
                 "insert into sim_Cards (id,person_id,title,numbers,operator,register_date,status) values (sim_card_seq.nextval,?,?,?,?,?,?)"
         );

@@ -11,7 +11,7 @@ public class MedicalMapper {
         return Medical
                 .builder()
                 .id(resultSet.getInt("id"))
-                .personId(resultSet.getString("person_id"))
+                .personId(resultSet.getInt("person_id"))
                 .disease(resultSet.getString("disease"))
                 .medicine(resultSet.getString("medicine"))
                 .doctor(Doctor.valueOf(resultSet.getString("doctor")))
