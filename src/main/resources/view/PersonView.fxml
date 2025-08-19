@@ -79,7 +79,7 @@
             <Button fx:id="deleteButton" mnemonicParsing="false" prefWidth="60.0" text="Delete" />
          </children>
       </HBox>
-      <TableView fx:id="personTable" layoutX="257.0" layoutY="24.0" prefHeight="380.0" prefWidth="478.0">
+      <TableView fx:id="personTable" layoutX="256.0" layoutY="78.0" prefHeight="326.0" prefWidth="478.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="57.0" text="Id" />
           <TableColumn fx:id="nameColumn" prefWidth="93.0" text="Name" />
@@ -89,5 +89,30 @@
             <TableColumn fx:id="statusColumn" prefWidth="71.0" text="Status" />
         </columns>
       </TableView>
+      <HBox layoutX="256.0" layoutY="30.0" prefHeight="25.0" prefWidth="478.0">
+         <children>
+            <Label text="Search : " />
+            <Label text="Name">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="searchNameText" prefHeight="25.0" prefWidth="140.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Label text="Family">
+               <HBox.margin>
+                  <Insets left="32.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="searchFamilyText" prefHeight="25.0" prefWidth="140.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
    </children>
 </Pane>

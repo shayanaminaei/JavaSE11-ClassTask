@@ -1,12 +1,17 @@
 package mftplus.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PersonService;
+import mftplus.model.tools.FormLoader;
 
 import java.beans.EventHandler;
 import java.net.URL;
@@ -17,7 +22,7 @@ import java.util.ResourceBundle;
 @Log4j
 public class PersonController implements Initializable {
     @FXML
-    private TextField idText, nameText, familyText;
+    private TextField idText, nameText, familyText, searchNameText, searchFamilyText;
 
     @FXML
     private DatePicker birthDate;
@@ -55,9 +60,14 @@ public class PersonController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        resetForm();
+        try {
+            resetForm();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
+        }
 
-        saveButton.setOnAction((event) ->{
+        saveButton.setOnAction((event) -> {
             try {
                 Person person =
                         Person
@@ -70,7 +80,7 @@ public class PersonController implements Initializable {
                                 .build();
                 PersonService.getService().save(person);
                 log.info("Person Saved Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" +person, ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + person, ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
@@ -80,7 +90,7 @@ public class PersonController implements Initializable {
             }
         });
 
-        editButton.setOnAction((event) ->{
+        editButton.setOnAction((event) -> {
             try {
                 Person person =
                         Person
@@ -94,7 +104,7 @@ public class PersonController implements Initializable {
                                 .build();
                 PersonService.getService().edit(person);
                 log.info("Person Edited Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" +person, ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + person, ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
@@ -104,13 +114,9 @@ public class PersonController implements Initializable {
             }
         });
 
-        deleteButton.setOnAction((event) ->{
+        deleteButton.setOnAction((event) -> {
             try {
-                PersonService.getService().delete(Integer.valueOf(idText.getText()));
-                log.info("Person Deleted Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
-                alert.show();
-                resetForm();
+                FormLoader.getFormLoader().showStage(new Stage(), "/view/PersonView.fxml", "Person Information");
             } catch (Exception e) {
                 log.error("Person Delete Failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Person Delete Failed " + e.getMessage(), ButtonType.OK);
@@ -118,9 +124,24 @@ public class PersonController implements Initializable {
             }
         });
 
+        searchNameText.setOnKeyReleased((event) -> {
+            searchByNameAndFamily();
+        });
+        searchFamilyText.setOnKeyReleased((event) -> {
+            searchByNameAndFamily();
+        });
+
+        personTable.setOnMouseReleased((event) -> {
+            selectFromTable();
+        });
+
+        personTable.setOnKeyReleased((event) -> {
+            selectFromTable();
+        });
+
     }
 
-    private void resetForm() {
+    private void resetForm() throws Exception {
         idText.clear();
         nameText.clear();
         familyText.clear();
@@ -134,9 +155,47 @@ public class PersonController implements Initializable {
 
         enableRadio.setSelected(true);
 
-//        showDateOnTable(PersonService.getService().findAll());
+        showDateOnTable(PersonService.getService().findAll());
     }
 
-    private void showDateOnTable(List<Person> personList){}
+    private void showDateOnTable(List<Person> personList) {
+        ObservableList<Person> observableList = FXCollections.observableList(personList);
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
+        familyColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("family"));
+        birthDateColumn.setCellValueFactory(new PropertyValueFactory<Person, LocalDate>("birthDate"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<Person, Role>("role"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<Person, Boolean>("status"));
+
+        personTable.setItems(observableList);
+    }
+
+    public void selectFromTable() {
+        try {
+            Person person = personTable.getSelectionModel().getSelectedItem();
+            idText.setText(String.valueOf(person.getId()));
+            nameText.setText(person.getName());
+            familyText.setText(person.getFamily());
+            birthDate.setValue(person.getBirthDate());
+            roleCombo.getSelectionModel().select(person.getRole());
+            enableRadio.setSelected(person.isStatus());
+            disableRadio.setSelected(!person.isStatus());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
+        }
+    }
+
+    public void searchByNameAndFamily() {
+        try {
+            showDateOnTable(PersonService.getService().findByNameAndFamily(searchNameText.getText(), searchFamilyText.getText()));
+            log.info("Persons FindByNameAndFamily :" + searchNameText.getText() + " " + searchFamilyText.getText());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
+            alert.show();
+            log.error("Person FindNameFamily " +searchNameText.getText() + " " + searchFamilyText.getText() + " Failed " + e.getMessage());
+        }
+    }
 }
 

@@ -38,7 +38,7 @@ public class DriverLicenseController {
                             .expireDate(expireDate)
                             .build();
 
-            DriverLicenseService.getService().save(driverLicense);
+//            DriverLicenseService.getService().save(driverLicense);
             log.info("DriverLicense Saved Successfully");
         } catch (Exception e) {
             log.error("DriverLicense Saving Failed" + e.getMessage());
@@ -67,7 +67,7 @@ public class DriverLicenseController {
                             .expireDate(expireDate)
                             .build();
 
-            DriverLicenseService.getService().edit(driverLicense);
+//            DriverLicenseService.getService().edit(driverLicense);
             log.info("DriverLicense Edited Successfully");
         } catch (Exception e) {
             log.error("DriverLicense Edit Failed" + e.getMessage());
@@ -76,7 +76,7 @@ public class DriverLicenseController {
 
     public void delete(int id) throws Exception {
         try {
-            DriverLicenseService.getService().delete(id);
+//            DriverLicenseService.getService().delete(id);
             log.info("DriverLicense Deleted Successfully");
         } catch (Exception e) {
             log.error("DriverLicense DeleteById " + id + " Failed" + e.getMessage());
@@ -85,9 +85,9 @@ public class DriverLicenseController {
 
     public List<DriverLicense> findAll() throws Exception {
         try {
-            List<DriverLicense> driverLicenseList = DriverLicenseService.getService().findAll();
+//            List<DriverLicense> driverLicenseList = DriverLicenseService.getService().findAll();
             log.info("DriverLicense FindAll Successfully");
-            return driverLicenseList;
+            return null; //driverLicenseList;
         } catch (Exception e) {
             log.error("DriverLicense FindAll Failed" + e.getMessage());
             return null;
@@ -96,12 +96,14 @@ public class DriverLicenseController {
 
     public DriverLicense findById(int id) throws Exception {
         try {
-            DriverLicense driverLicense = DriverLicenseService.getService().findById(id);
+//            DriverLicense driverLicense = DriverLicenseService.getService().findById(id);
             log.info("DriverLicense FindByID " + id + " Successfully");
-            return driverLicense;
+//            return driverLicense;
         } catch (Exception e) {
             log.error("DriverLicense FindById " + id + " Failed" + e.getMessage());
             return null;
         }
+        return null;
+
     }
 }
