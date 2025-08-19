@@ -15,8 +15,7 @@ public class MarriageTest {
 
         MarriageRepository repo = new MarriageRepository();
 
-    public MarriageTest() throws SQLException {
-    }
+
 
 
         Marriage marriage = Marriage.builder()
