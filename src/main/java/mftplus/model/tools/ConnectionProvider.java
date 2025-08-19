@@ -26,7 +26,7 @@ public class ConnectionProvider {
 
     public int getNextId(String sequenceName) throws Exception{
 
-        ResultSet resultSet = getConnection().prepareStatement(String.format("select %s as NEXT_ID from dual", sequenceName)).executeQuery();
+        ResultSet resultSet = getConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
         resultSet.next();
         return resultSet.getInt("NEXT_ID");
     }
