@@ -4,6 +4,7 @@ import lombok.Getter;
 import mftplus.model.entity.Medical;
 import mftplus.model.repository.MedicalRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MedicalService implements Service<Medical, Integer> {
