@@ -84,7 +84,7 @@ create table military_cards
 
 );
 
-create sequence military_cards start with 1 increment by 1;
+create sequence military_card_seq start with 1 increment by 1;
 
 --
 

@@ -7,10 +7,9 @@ import java.time.LocalDateTime;
 
 
 @Log4j
-class Person {}
- class PropertyTest {
+class PropertyTest {
     public static void main(String[] args) throws Exception {
-       //       log.info("Starting Property Test");
+        //       log.info("Starting Property Test");
 //        log.error("error saving");
 //        UNIT TEST
 //        تست واحد
@@ -20,7 +19,6 @@ class Person {}
 //        System.out.println(PropertyController.getController().findAll());
 //        System.out.println(PropertyController.getController().findById(6));
 //        System.out.println(PropertyController.getController().findByName("a"));
-
 
 
 //        Property property = Property
@@ -35,8 +33,8 @@ class Person {}
 //                .build();
 //
 //        PropertyService.getService().save(property);
- //       Repository Test Passed
- //      try with resource
+        //       Repository Test Passed
+        //      try with resource
 //       try (PropertyRepository propertyRepository = new propertyRepository()) {
 
 //        test passed
