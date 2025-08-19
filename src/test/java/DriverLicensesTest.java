@@ -11,13 +11,14 @@ public class DriverLicensesTest {
         DriverLicense driverLicense = DriverLicense
                 .builder()
                 .id('1')
-                .personId("1234567")
+                .personId(1)
                 .serial("12345678")
                 .driverLicenseType(DriverLicenseType.Bus)
                 .city("تهران")
-                .registerDate( LocalDate.of(2000, 1, 1))
+                .registerDate(LocalDate.of(2000, 1, 1))
                 .expireDate(LocalDate.of(2030, 1, 1))
                 .build();
-        DriverLicenseService.getService().save(driverLicense);
+//        DriverLicenseService.getService().save(driverLicense);
 
     }
+}

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-
 public class Person {
     private int id;
     private String name;
@@ -22,7 +21,6 @@ public class Person {
     private LocalDate birthDate;
     private Role role;
     private boolean status;
-
 
     @Override
     public String toString() {
