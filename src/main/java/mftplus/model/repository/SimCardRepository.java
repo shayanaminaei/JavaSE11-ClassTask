@@ -9,14 +9,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimCardsRepository implements Repository<SimCard, Integer>, AutoCloseable {
-    private Connection connection;
+public class SimCardRepository implements Repository<SimCard, Integer>, AutoCloseable {
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private SimCardMapper simCardMapper = new SimCardMapper();
+    private final SimCardMapper simCardMapper = new SimCardMapper();
 
-    public SimCardsRepository() throws SQLException {
+    public SimCardRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
-        System.out.println("Connection ");
     }
 
     @Override
@@ -52,7 +51,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from sim_Cards where id=?"
+                "delete from sim_cards where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -62,10 +61,10 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public List<SimCard> findAll() throws Exception {
         List<SimCard> simCardList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from sim_Cards");
+        preparedStatement = connection.prepareStatement("select * from sim_cards");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            SimCard simCard = simCardMapper.SimCardMapper(resultSet);
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
             simCardList.add(simCard);
         }
         return simCardList;
@@ -75,11 +74,11 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     @Override
     public SimCard findById(Integer id) throws Exception {
         SimCard simCard = null;
-        preparedStatement = connection.prepareStatement("select * from sim_Cards where id=?");
+        preparedStatement = connection.prepareStatement("select * from sim_cards where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            simCard = simCardMapper.SimCardMapper(resultSet);
+            simCard = simCardMapper.simCardMapper(resultSet);
         }
         return simCard;
     }
@@ -88,6 +87,5 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
-        System.out.println("Connection closed");
     }
 }

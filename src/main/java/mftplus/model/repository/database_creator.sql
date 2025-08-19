@@ -11,6 +11,19 @@ create table persons
 create sequence person_seq start with 1 increment by 1;
 
 --
+create table cars
+(
+    id         number unique not null,
+    person_id  nvarchar2(20) not null,
+    name       nvarchar2(20) not null,
+    brand      nvarchar2(20) not null,
+    man_date   DATE DEFAULT SYSDATE NOT NULL,
+    color      nvarchar2(20) default 'Black',
+    plate      nvarchar2(10)
+);
+
+create sequence cars_seq start with 1 increment by 1;
+
 
 create table educations
 (
@@ -49,7 +62,7 @@ create table jobs
     id           number primary key,
     person_id references persons,
     organisation nvarchar2(20) not null,
-    job_title    nvarchar2(20) default 'Employee',
+    title    nvarchar2(20) default 'Employee',
     start_date   date          not null,
     end_date     date          not null,
     description  nvarchar2(200)
@@ -71,7 +84,7 @@ create table military_cards
 
 );
 
-create sequence military_cards start with 1 increment by 1;
+create sequence military_card_seq start with 1 increment by 1;
 
 --
 

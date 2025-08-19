@@ -6,20 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import mftplus.model.entity.enums.Doctor;
 
 import java.time.LocalDate;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
+
 
 public class Medical {
     private int id;
     private String personId;
     private String disease;
     private String medicine;
-    private String doctor;
+    private Doctor doctor;
     private LocalDate visitDate;
     private boolean status;
 

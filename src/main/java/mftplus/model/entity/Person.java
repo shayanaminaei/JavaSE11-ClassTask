@@ -9,10 +9,10 @@ import mftplus.model.entity.enums.Role;
 
 import java.time.LocalDate;
 
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 
 public class Person {
     private int id;
@@ -21,7 +21,6 @@ public class Person {
     private LocalDate birthDate;
     private Role role;
     private boolean status;
-
 
     @Override
     public String toString() {

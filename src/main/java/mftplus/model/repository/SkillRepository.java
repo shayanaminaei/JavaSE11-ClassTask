@@ -1,14 +1,11 @@
 package mftplus.model.repository;
 
-import mftplus.model.entity.Person;
 import mftplus.model.entity.Skill;
 import mftplus.model.tools.ConnectionProvider;
-import mftplus.model.tools.PersonMapper;
 import mftplus.model.tools.SkillMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SkillRepository implements Repository<Skill, Integer>, AutoCloseable {
@@ -46,7 +43,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         preparedStatement.setDate(5, Date.valueOf(skill.getRegisterDate()));
         preparedStatement.setInt(6, skill.getScore());
         preparedStatement.setInt(7, skill.getId());
-        PreparedStatement.execute();
+        preparedStatement.execute();
     }
 
     @Override
@@ -61,7 +58,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     @Override
     public List<Skill> findAll() throws Exception {
         List<Skill> skillList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from skills order by id,person_id");
+        preparedStatement = connection.prepareStatement("select * from skills order by id, person_id");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {
@@ -73,7 +70,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
 
     @Override
     public Skill findById(Integer id) throws Exception {
-        Person person= null;
+        Skill  skill= null;
 
         preparedStatement = connection.prepareStatement("select * from skills where id=?");
         preparedStatement.setInt(1, id);

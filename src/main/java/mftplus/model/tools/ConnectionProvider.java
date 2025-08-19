@@ -4,12 +4,13 @@ import lombok.Getter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionProvider {
     // Singleton
     @Getter
-    private static ConnectionProvider provider = new ConnectionProvider();
+    private final static ConnectionProvider provider = new ConnectionProvider();
 
     private ConnectionProvider() {
     }
@@ -20,5 +21,13 @@ public class ConnectionProvider {
                 "javase",
                 "java123"
         );
+    }
+
+
+    public int getNextId(String sequenceName) throws Exception{
+
+        ResultSet resultSet = getConnection().prepareStatement(String.format("select %s as NEXT_ID from dual", sequenceName)).executeQuery();
+        resultSet.next();
+        return resultSet.getInt("NEXT_ID");
     }
 }

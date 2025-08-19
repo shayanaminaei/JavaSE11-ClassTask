@@ -15,7 +15,7 @@ public class PropertyMapper {
                 .brand(resultSet.getString("brand"))
                 .serial(resultSet.getString("serial"))
                 .count(resultSet.getInt("count"))
-                .dateTime(resultSet.getTimestamp("date_time"))
+                .dateTime(resultSet.getTimestamp("date_time").toLocalDateTime())
                 .build();
     }
 }
