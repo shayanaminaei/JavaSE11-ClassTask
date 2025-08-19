@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DriverLicenseRepository implements Repository<DriverLicense, Integer>, AutoCloseable {
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private DriverLicensesMapper driverLicensesMapper = new DriverLicensesMapper();
+    private final DriverLicensesMapper driverLicensesMapper = new DriverLicensesMapper();
 
     public DriverLicenseRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
@@ -22,7 +22,7 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
         driverLicense.setId(ConnectionProvider.getProvider().getNextId("driverLicense_seq"));
 
         preparedStatement = connection.prepareStatement(
-                "insert into driver_license (id, personid, serial, licenseType, register_Date, expire_Date) values (?, ?, ?, ?, ?, ?, ?)"
+                "insert into driver_license (id, personid, serial, licenseType,city, register_Date, expire_Date) values (?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, driverLicense.getId());
         preparedStatement.setInt(2, driverLicense.getPersonId());
@@ -37,7 +37,7 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
     @Override
     public void edit(DriverLicense driverLicense) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update driver_license set personid=?, serial=?, licenseType=?, register_Date=?, expire_Date=? where id=?"
+                "update driver_license set personid=?, serial=?, licenseType=?,city=?, register_Date=?, expire_Date=? where id=?"
         );
         preparedStatement.setInt(1, driverLicense.getPersonId());
         preparedStatement.setString(2, driverLicense.getSerial());
