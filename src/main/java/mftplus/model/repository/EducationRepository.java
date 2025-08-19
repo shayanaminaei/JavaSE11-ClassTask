@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EducationRepository implements Repository<Education, Integer>, AutoCloseable {
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private EducationMapper educationMapper = new EducationMapper();
+    private final EducationMapper educationMapper = new EducationMapper();
 
     public EducationRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
@@ -19,10 +19,11 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
 
     @Override
     public void save(Education education) throws Exception {
-        education.setId(ConnectionProvider.getProvider().getNextId("education-seq"));
+        education.setId(getNextId());
 
         preparedStatement = connection.prepareStatement(
-                "insert into educations (id, person_id, university, education_grade, average, start_date, end_date) values (?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO EDUCATIONS (ID, PERSON_ID, UNIVERSITY, EDUCATION_GRADE, AVERAGE, START_DATE, END_DATE)" +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, education.getId());
         preparedStatement.setInt(2, education.getPersonId());
@@ -37,7 +38,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
     @Override
     public void edit(Education education) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update educations set university=?, education_grade=?, average=?, start_date=?, end_date=? where id=?"
+                "UPDATE EDUCATIONS SET UNIVERSITY=?, EDUCATION_GRADE=?, AVERAGE=?, START_DATE=?, END_DATE=? WHERE ID=?"
         );
         preparedStatement.setString(1, education.getUniversity());
         preparedStatement.setString(2, education.getEducationGrade().name());
@@ -51,7 +52,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from educations where id=?"
+                "DELETE FROM EDUCATIONS WHERE ID=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -62,7 +63,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         List<Education> educationList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from educations order by university, education_grade"
+                "SELECT * FROM EDUCATIONS ORDER BY UNIVERSITY AND EDUCATION_GRADE"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -78,7 +79,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         Education education = null;
 
         preparedStatement = connection.prepareStatement(
-                "select * from educations where id=?"
+                "SELECT * FROM EDUCATIONS WHERE ID=?"
         );
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -93,7 +94,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         List<Education> educationList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from educations where university like ? and education_grade like ?"
+                "SELECT * FROM EDUCATIONS WHERE UNIVERSITY LIKE ? AND EDUCATION_GRADE LIKE ?"
         );
         preparedStatement.setString(1, university + "%");
         preparedStatement.setString(2, grade + "%");
@@ -104,6 +105,12 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
             educationList.add(education);
         }
         return educationList;
+    }
+
+    public int getNextId() throws Exception {
+        ResultSet resultSet = connection.prepareStatement("SELECT EDUCATION_SEQ.nextval AS NEXTID FROM DUAL").executeQuery();
+        resultSet.next();
+        return resultSet.getInt("NEXTID");
     }
 
     @Override

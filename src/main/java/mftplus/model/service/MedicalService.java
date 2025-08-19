@@ -4,7 +4,6 @@ import lombok.Getter;
 import mftplus.model.entity.Medical;
 import mftplus.model.repository.MedicalRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class MedicalService implements Service<Medical, Integer> {
@@ -24,11 +23,11 @@ public class MedicalService implements Service<Medical, Integer> {
 
     @Override
     public void edit(Medical medical) throws Exception {
-       try (MedicalRepository medicalRepository = new MedicalRepository()) {
-    medicalRepository.edit(medical);
-       }
-
+        try(MedicalRepository medicalRepository = new MedicalRepository()) {
+            medicalRepository.save(medical);
+        }
     }
+
 
     @Override
     public void delete(Integer id) throws Exception {
@@ -37,6 +36,7 @@ public class MedicalService implements Service<Medical, Integer> {
         }
 
     }
+
 
     @Override
     public List<Medical> findAll() throws Exception {
