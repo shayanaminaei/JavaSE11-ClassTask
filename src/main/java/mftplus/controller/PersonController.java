@@ -13,7 +13,6 @@ import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PersonService;
 import mftplus.model.tools.FormLoader;
 
-import java.beans.EventHandler;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,9 +28,6 @@ public class PersonController implements Initializable {
 
     @FXML
     private ComboBox<Role> roleCombo;
-
-    @FXML
-    private ToggleGroup statusToggle;
 
     @FXML
     private RadioButton enableRadio, disableRadio;
@@ -124,20 +120,12 @@ public class PersonController implements Initializable {
             }
         });
 
-        searchNameText.setOnKeyReleased((event) -> {
-            searchByNameAndFamily();
-        });
-        searchFamilyText.setOnKeyReleased((event) -> {
-            searchByNameAndFamily();
-        });
+        searchNameText.setOnKeyReleased((event) -> searchByNameAndFamily());
+        searchFamilyText.setOnKeyReleased((event) -> searchByNameAndFamily());
 
-        personTable.setOnMouseReleased((event) -> {
-            selectFromTable();
-        });
+        personTable.setOnMouseReleased((event) -> selectFromTable());
 
-        personTable.setOnKeyReleased((event) -> {
-            selectFromTable();
-        });
+        personTable.setOnKeyReleased((event) -> selectFromTable());
 
     }
 
@@ -161,12 +149,12 @@ public class PersonController implements Initializable {
     private void showDateOnTable(List<Person> personList) {
         ObservableList<Person> observableList = FXCollections.observableList(personList);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
-        familyColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("family"));
-        birthDateColumn.setCellValueFactory(new PropertyValueFactory<Person, LocalDate>("birthDate"));
-        roleColumn.setCellValueFactory(new PropertyValueFactory<Person, Role>("role"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<Person, Boolean>("status"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        familyColumn.setCellValueFactory(new PropertyValueFactory<>("family"));
+        birthDateColumn.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         personTable.setItems(observableList);
     }
@@ -194,7 +182,7 @@ public class PersonController implements Initializable {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
             alert.show();
-            log.error("Person FindNameFamily " +searchNameText.getText() + " " + searchFamilyText.getText() + " Failed " + e.getMessage());
+            log.error("Person FindNameFamily " + searchNameText.getText() + " " + searchFamilyText.getText() + " Failed " + e.getMessage());
         }
     }
 }
