@@ -147,4 +147,21 @@ create table properties
 
 create sequence property_seq start with 1 increment by 1;
 
+---
+
+create table lessons
+(
+  id           number primary key ,
+  person_id    references persons,
+  title        nvarchar2(20)   not null ,
+  code         number not null ,
+  teacher      nvarchar2(20)  not null ,
+  unit         nvarchar2(20)  not null ,
+  start_date_time date not null
+);
+
+create sequence lesson_seq start with 1 increment by 1;
+
+---
+
 
