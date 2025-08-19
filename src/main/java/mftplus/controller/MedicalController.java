@@ -19,7 +19,7 @@ public class MedicalController {
     private MedicalController() {
     }
 
-    public void save( String personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
+    public void save( int personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
         try {
             Medical medical = Medical
                     .builder()
@@ -38,7 +38,7 @@ public class MedicalController {
     }
 
 
-    public void edit(int id, String personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
+    public void edit(int id, int personId, String disease, String medicine, Doctor doctor, LocalDate visitDate, boolean status) throws Exception {
         try {
 
             Medical medical = Medical
