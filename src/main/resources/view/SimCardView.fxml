@@ -124,7 +124,7 @@
                   <Insets left="30.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <TextArea fx:id="searchNameText" minHeight="20.0" prefHeight="1.0" prefWidth="200.0">
+            <TextArea fx:id="searchNumberText" minHeight="20.0" prefHeight="1.0" prefWidth="200.0">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
