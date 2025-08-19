@@ -66,7 +66,7 @@ public class MarriageController {
             log.info("Marriage deleted successfully");
         } catch (Exception e) {
             log.error("Marriage delete has failed" + e.getMessage());
-//            return null;      با ارور مواجه شدم
+
         }
     }
 
