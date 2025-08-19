@@ -1,6 +1,16 @@
-public class PropertyTest {
+import lombok.extern.log4j.Log4j;
+import mftplus.controller.PropertyController;
+import mftplus.model.entity.Property;
+import mftplus.model.service.PropertyService;
+
+import java.time.LocalDateTime;
+
+
+@Log4j
+class Person {}
+ class PropertyTest {
     public static void main(String[] args) throws Exception {
-        //        log.info("Starting Property Test");
+       //       log.info("Starting Property Test");
 //        log.error("error saving");
 //        UNIT TEST
 //        تست واحد
