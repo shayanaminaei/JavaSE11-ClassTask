@@ -10,25 +10,26 @@ import java.time.LocalDate;
 @Log4j
 public class MedicalTest {
     public static void main(String[] args) throws Exception {
-        // log.info("Starting Medical Test");
-        //log.error("error saving");
+        log.info("Starting Medical Test");
+        log.error("error saving");
 
-        // MedicalController.getController().save( "123","digestion","gastric pain pills",
-        //  Doctor.gastroenterologist, LocalDate.now(),true );
+        MedicalController.getController().save( 1,"digestion","gastric pain pills",
+         Doctor.gastroenterologist, LocalDate.now(),true );
 
 
-        //Medical medical = Medical
-        //      .builder()
-        //   .personId("123")
-        // .disease("digestion")
-        //           .medicine("gastric pain pills")
-        //    .doctor(Doctor.gastroenterologist)
-        //  .visitDate(LocalDate.now())
-        //    .status(true)
-        //  .build();
-//
-        //      MedicalService.getService().save(medical);
-        //   System.out.println(medical);
+                   //  Medical medical = Medical
+
+                   // .builder()
+                  //  .personId("123")
+                  //  .disease("digestion")
+                   // .medicine("gastric pain pills")
+                    //.doctor(Doctor.gastroenterologist)
+                   // .visitDate(LocalDate.now())
+                    //.status(true)
+                   // .build();
+
+            // MedicalService.getService().save(medical);
+            // System.out.println(medical);
 
     }
 }
