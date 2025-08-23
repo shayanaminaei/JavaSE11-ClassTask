@@ -89,7 +89,6 @@ public class PropertyController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error saving data" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
-
         });
         editButton.setOnAction(event -> {
             try {
@@ -117,7 +116,7 @@ public class PropertyController implements Initializable {
         });
         deleteButton.setOnAction(event -> {
             try {
-                FormLoader.getFormLoader().showStage(new Stage(), "/view/Propertyview.fxml", "Property Information");
+                FormLoader.getFormLoader().showStage(new Stage(), "/view/Property.fxml", "Property Information");
             } catch (Exception e) {
                 log.error("delete failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error deleting data" + e.getMessage(), ButtonType.OK);
