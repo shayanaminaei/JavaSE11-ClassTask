@@ -11,9 +11,9 @@ import java.util.List;
 
 public class LessonRepository implements Repository<Lesson, Integer> , AutoCloseable{
 
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private LessonMapper lessonMapper = new LessonMapper();
+    private final LessonMapper lessonMapper = new LessonMapper();
 
     public LessonRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getConnection();
@@ -23,15 +23,18 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
 
     @Override
     public void save(Lesson lesson) throws Exception {
+        lesson.setId(ConnectionProvider.getProvider().getNextId("lesson_seq"));
+
         preparedStatement = connection.prepareStatement(
-                "insert into LESSONS (id,person_id, title, code,teacher,unit,start_date_time) values (lesson_seq.nextval,?, ?, ?, ?, ?, ?)"
+                "insert into LESSONS (id, person_id, title, code, teacher, unit, start_date_time)"+
+                        "values (lesson_seq.nextval,?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, lesson.getPersonId());
         preparedStatement.setString(2, lesson.getTitle());
         preparedStatement.setInt(3, lesson.getCode());
         preparedStatement.setString(4, lesson.getTeacher());
         preparedStatement.setString(5, lesson.getUnit());
-        preparedStatement.setDate(6,Date.valueOf(lesson.getStartDataTime()));
+        preparedStatement.setDate(6,Date.valueOf(lesson.getStartDateTime()));
         preparedStatement.execute();
 
     }
@@ -40,7 +43,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public void edit(Lesson lesson) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update LESSONS set id=?,person_id=?,title=?,code=?,teacher=?,unit=?,start_date_time=? where id=?"
+                "update LESSONS set person_id=?, title=?, code=?, teacher=?, unit=?, start_date_time=? where id=?"
         );
 
         preparedStatement.setInt(1, lesson.getPersonId());
@@ -48,7 +51,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
         preparedStatement.setInt(3, lesson.getCode());
         preparedStatement.setString(4, lesson.getTeacher());
         preparedStatement.setString(5, lesson.getUnit());
-        preparedStatement.setDate(6, Date.valueOf(lesson.getStartDataTime()));
+        preparedStatement.setDate(6, Date.valueOf(lesson.getStartDateTime()));
         preparedStatement.execute();
     }
 

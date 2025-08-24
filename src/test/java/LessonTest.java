@@ -12,7 +12,7 @@ public class LessonTest {
                 .code(123)
                 .teacher("mrs.azizi")
                 .unit("first")
-                .startDataTime(LocalDate.of(2022,1,3))
+                .startDateTime(LocalDate.of(2022,1,3))
                 .build();
 
 

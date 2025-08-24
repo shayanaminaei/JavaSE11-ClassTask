@@ -20,7 +20,7 @@ public class Lesson {
     private  int code;
     private  String teacher;
     private  String unit;
-    private LocalDate startDataTime;
+    private LocalDate startDateTime;
 
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ public class LessonMapper {
                 .code(resultSet.getInt("code"))
                 .teacher(resultSet.getString("teacher"))
                 .unit(resultSet.getString("unit"))
-                .startDataTime(resultSet.getDate("start_date_time").toLocalDate())
+                .startDateTime(resultSet.getDate("start_date_time").toLocalDate())
                 .build();
     }
 }
