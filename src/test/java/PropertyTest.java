@@ -1,11 +1,24 @@
+import lombok.extern.log4j.Log4j;
+import mftplus.controller.PropertyController;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PropertyService;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
-public class PropertyTest {
+
+@Log4j
+class PropertyTest {
     public static void main(String[] args) throws Exception {
+        //       log.info("Starting Property Test");
+//        log.error("error saving");
+//        UNIT TEST
+//        تست واحد
+//        PropertyController.getController().save(1,"arian","nike","1234",2,null);
+//        PropertyController.getController().edit(1,1,"arian","nike","1234",2,null);
+//        PropertyController.getController().delete(3);
+//        System.out.println(PropertyController.getController().findAll());
+//        System.out.println(PropertyController.getController().findById(6));
+//        System.out.println(PropertyController.getController().findByName("a"));
 
 
 //        Property property = Property
@@ -20,8 +33,8 @@ public class PropertyTest {
 //                .build();
 //
 //        PropertyService.getService().save(property);
- //       Repository Test Passed
- //      try with resource
+        //       Repository Test Passed
+        //      try with resource
 //       try (PropertyRepository propertyRepository = new propertyRepository()) {
 
 //        test passed
@@ -38,7 +51,7 @@ public class PropertyTest {
 
 //        test passed
 //        System.out.println(propertyRepository.findById(1));
-//        System.out.println(propertyRepository.findById(7));
+//        System.out.println(propertyRepository.findById(5));
 
 //        test passed
 //        System.out.println(propertyRepository.findByName("r", ""));

@@ -15,7 +15,7 @@ public class ConnectionProvider {
     private ConnectionProvider() {
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
                 "javase",
@@ -25,7 +25,8 @@ public class ConnectionProvider {
 
 
     public int getNextId(String sequenceName) throws Exception{
-        ResultSet resultSet = getConnection().prepareStatement("select person_seq.nextval as NEXT_ID from dual").executeQuery();
+
+        ResultSet resultSet = getConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
         resultSet.next();
         return resultSet.getInt("NEXT_ID");
     }

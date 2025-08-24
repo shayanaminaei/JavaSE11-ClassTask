@@ -4,14 +4,20 @@ import mftplus.model.entity.Marriage;
 import mftplus.model.repository.MarriageRepository;
 
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 public class MarriageTest {
+    public static void main(String[] args) throws SQLException {
 
-    private final MarriageRepository repo = new MarriageRepository();
+        MarriageRepository repo = new MarriageRepository();
 
 
-    public void testSaveMarriage() {
+
+
         Marriage marriage = Marriage.builder()
                 .personId(1)
                 .name("Sara")
@@ -21,8 +27,8 @@ public class MarriageTest {
                 .children(2)
                 .build();
 
-//        repo.save(marriage);
-        System.out.println("Marriage saved: " + marriage.getMarriageId());
-    }
 
+        log.info("Marriage saved: " + marriage.getMarriageId());
+    }
 }
+

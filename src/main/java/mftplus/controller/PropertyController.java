@@ -1,97 +1,186 @@
 package mftplus.controller;
 
-import lombok.Getter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PropertyService;
+import mftplus.model.tools.FormLoader;
 
-
+import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Log4j
 
-public class PropertyController {
-    @Getter
-    private static PropertyController controller = new PropertyController();
+public class PropertyController implements Initializable {
 
-    private PropertyController() {
-    }
 
-    public void save(int personId, String name, String brand, String serial, int count, LocalDateTime dateTime) throws Exception {
+    @FXML
+    private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText;
+    @FXML
+    private DatePicker dateTime;
+
+    @FXML
+    private Button saveButton,editButton,deleteButton;
+
+    @FXML
+    private TableView<Property> propertyView ;
+
+    @FXML
+    private TableColumn<Property, Integer> idColumn;
+
+    @FXML
+    private TableColumn<Property, String> personIdColumn;
+
+    @FXML
+    private TableColumn<Property, String> nameColumn;
+
+    @FXML
+    private TableColumn<Property, String> brandColumn;
+
+    @FXML
+    private TableColumn<Property, String> serialColumn;
+
+    @FXML
+    private TableColumn<Property, Integer> countColumn;
+
+    @FXML
+    private TableColumn<Property, LocalDate> dateTimeColumn;
+
+    @FXML
+    private TableView<Property> propertyTable;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         try {
-            Property property =
-                    Property
-                            .builder()
-                            .personId(personId)
-                            .name(name)
-                            .brand(brand)
-                            .serial(serial)
-                            .count(count)
-                            .dateTime(dateTime)
-                            .build();
-            PropertyService.getService().save(property);
-            log.info("Property saved");
+            resetForm();
         } catch (Exception e) {
-            log.error("Property save failed" + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
         }
+        saveButton.setOnAction(event -> {
+            try {
+                Property property =
+                        Property
+                                .builder()
+                                .personId(Integer.parseInt(personIdText.getText()))
+                                .name(nameText.getText())
+                                .brand(brandText.getText())
+                                .serial(serialText.getText())
+                                .count(Integer.parseInt(countText.getText()))
+                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .build();
+                PropertyService.getService().save(property);
+                log.info("Property saved");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Property saved\n" + property, ButtonType.OK);
+                alert.show();
+                resetForm();
+            } catch (Exception e) {
+                log.error("save failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error saving data" + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
+
+        });
+        editButton.setOnAction(event -> {
+            try {
+                Property property =
+                        Property
+                                .builder()
+                                .id(Integer.parseInt(idText.getText()))
+                                .personId(Integer.parseInt(personIdText.getText()))
+                                .name(nameText.getText())
+                                .brand(brandText.getText())
+                                .serial(serialText.getText())
+                                .count(Integer.parseInt(countText.getText()))
+                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .build();
+                PropertyService.getService().edit(property);
+                log.info("Property edited");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Property edited\n" + property, ButtonType.OK);
+                alert.show();
+                resetForm();
+            } catch (Exception e) {
+                log.error("edit failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error editing data" + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
+        });
+        deleteButton.setOnAction(event -> {
+            try {
+                FormLoader.getFormLoader().showStage(new Stage(), "/view/Propertyview.fxml", "Property Information");
+            } catch (Exception e) {
+                log.error("delete failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error deleting data" + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
+        });
+        searchNameText.setOnKeyReleased((event) -> searchName());
+        propertyTable.setOnMouseReleased((event) -> selectFromTable());
+
+        propertyTable.setOnKeyReleased((event) -> selectFromTable());
     }
 
-    public void edit(int id, int personId, String name, String brand, String serial, int count, LocalDateTime dateTime) throws Exception {
+    private void resetForm() throws Exception {
+            idText.clear();
+            personIdText.clear();
+            nameText.clear();
+            brandText.clear();
+            serialText.clear();
+            countText.clear();
+            dateTime.setValue(LocalDate.now());
+
+            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
+    }
+    private void showDateOnTable(List<Property> propertyList) {
+        ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        serialColumn.setCellValueFactory(new PropertyValueFactory<>("serial"));
+        countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        dateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+
+        propertyTable.setItems(observableList);
+        }
+        public void selectFromTable() {
         try {
-            Property property =
-                    Property
-                            .builder()
-                            .id(id)
-                            .personId(personId)
-                            .name(name)
-                            .brand(brand)
-                            .serial(serial)
-                            .count(count)
-                            .dateTime(dateTime)
-                            .build();
-            PropertyService.getService().edit(property);
-            log.info("Property edited");
+            Property property = propertyTable.getSelectionModel().getSelectedItem();
+            idText.setText(String.valueOf(property.getId()));
+            personIdText.setText(String.valueOf(property.getPersonId()));
+            nameText.setText(property.getName());
+            brandText.setText(property.getBrand());
+            serialText.setText(String.valueOf(property.getSerial()));
+            countText.setText(String.valueOf(property.getCount()));
+            dateTime.setValue(LocalDate.from(property.getDateTime()));
         } catch (Exception e) {
-            log.error("Property edited failed" + e.getMessage());
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
+            alert.show();
         }
-    }
-
-    public void delete(Integer id) throws Exception {
+        }
+        public void searchName(){
         try {
-            PropertyService.getService().delete(id);
-            log.info("Property deleted");
+            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
+            log.info("Property findByName " + searchNameText.getText());
         } catch (Exception e) {
-            log.error("Property deleted failed" + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
+            alert.show();
+            log.error("Property FindByName"+searchNameText.getText()+"failed"+e.getMessage());
         }
+        }
+
     }
 
-    public List<Property> findAll() throws Exception {
-        try {
-            return PropertyService.getService().findAll();
-        } catch (Exception e) {
-            log.error("Property findAll failed" + e.getMessage());
-            return null;
-        }
-    }
 
-    public Property findById(int id) throws Exception {
-        try {
-            return PropertyService.getService().findById(id);
-        } catch (Exception e) {
-            log.error("Property findById failed" + id + "failed" + e.getMessage());
-            return null;
-        }
-    }
 
-    public List<Property> findByName(String name) throws Exception {
-        try {
-            return PropertyService.getService().findByName(name);
-        } catch (Exception e) {
-            log.error("Property findByName failed" + name + "failed" + e.getMessage());
-            return null;
-
-        }
-    }
-}

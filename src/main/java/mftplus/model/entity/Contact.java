@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
+import mftplus.model.entity.enums.ContactTitle;
 
 @SuperBuilder
 @NoArgsConstructor
@@ -14,15 +13,14 @@ import java.time.LocalDate;
 @Setter
 
 
-
-public class Car {
+public class Contact {
     private int id;
     private int personId;
-    private String name;
-    private String brand;
-    private LocalDate manDate;
-    private String color;
-    private String plate;
+    private ContactTitle title;
+    private String contactId;
+    private String contactType;
+    private String description;
+    private boolean status;
 
     @Override
     public String toString() {

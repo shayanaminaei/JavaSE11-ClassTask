@@ -4,14 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mftplus.model.tools.FormLoader;
 
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/PersonView.fxml")));
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Person Information");
-        primaryStage.show();
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/PersonView.fxml", "Person Information");
     }
 }
