@@ -2,9 +2,7 @@ package mftplus.model.service;
 
 import lombok.Getter;
 import mftplus.model.entity.Lesson;
-import mftplus.model.entity.Skill;
 import mftplus.model.repository.LessonRepository;
-import mftplus.model.repository.SkillRepository;
 
 import java.util.List;
 
