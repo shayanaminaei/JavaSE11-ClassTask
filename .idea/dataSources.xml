@@ -14,7 +14,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="mft_class" uuid="97764f06-a83f-43ac-b0fb-d3081d9c5ec5">
+    <data-source source="LOCAL" name="mft_class" uuid="76849019-78d2-4ca4-aa8e-d9dabcbeb760">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>

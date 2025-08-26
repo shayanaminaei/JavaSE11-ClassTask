@@ -13,7 +13,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
     private final CarMapper carMapper = new CarMapper();
 
     public CarRepository() throws SQLException {
-        connection= ConnectionProvider.getProvider().getConnection();
+        connection= ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

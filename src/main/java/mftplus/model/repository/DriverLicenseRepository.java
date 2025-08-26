@@ -14,7 +14,7 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
     private final DriverLicensesMapper driverLicensesMapper = new DriverLicensesMapper();
 
     public DriverLicenseRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     private JobMapper jobMapper = new JobMapper();
 
     public JobRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

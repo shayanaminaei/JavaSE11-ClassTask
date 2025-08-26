@@ -14,7 +14,7 @@ public class ContactRepository implements Repository<Contact, Integer>, AutoClos
     private final ContactMapper contactMapper = new ContactMapper();
 
     public ContactRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
