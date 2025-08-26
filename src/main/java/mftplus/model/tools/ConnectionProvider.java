@@ -18,7 +18,7 @@ public class ConnectionProvider {
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
-                "javaee",
+                "javase",
                 "java123"
         );
     }
@@ -29,5 +29,14 @@ public class ConnectionProvider {
         ResultSet resultSet = getConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
         resultSet.next();
         return resultSet.getInt("NEXT_ID");
+    }
+
+    public Connection getH2Connection() throws Exception {
+        Class.forName("org.h2.Driver");
+        return DriverManager.getConnection(
+                "jdbc:H2:file:./db/mft_class;AUTO_SERVER=TRUE;MODE=Oracle",
+                "sa",
+                ""
+        );
     }
 }
