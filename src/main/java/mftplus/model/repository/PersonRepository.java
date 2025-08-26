@@ -15,7 +15,7 @@ public class PersonRepository implements Repository<Person, Integer>, AutoClosea
     private final PersonMapper personMapper = new PersonMapper();
 
     public PersonRepository() throws Exception {
-        connection = ConnectionProvider.getProvider().getOracleConnection();
+        connection = ConnectionProvider.getProvider().getH2Connection();
     }
 
     @Override

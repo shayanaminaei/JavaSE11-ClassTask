@@ -18,7 +18,7 @@ public class ConnectionProvider {
     public Connection getOracleConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
-                "javaee",
+                "javase",
                 "java123"
         );
     }
@@ -30,8 +30,8 @@ public class ConnectionProvider {
         return resultSet.getInt("NEXT_ID");
     }
 
-    public Connection getH2Connection() throws Exception {
-        Class.forName("org.h2.Driver");
+    public Connection getH2Connection() throws SQLException {
+//        Class.forName("org.h2.Driver");
         return DriverManager.getConnection(
                 "jdbc:h2:file:./db/mft_class;AUTO_SERVER=TRUE;MODE=Oracle",
                 "sa",
