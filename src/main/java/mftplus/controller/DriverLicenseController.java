@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class DriverLicenseController  implements Initializable {
 
     @FXML
-    private TextField idText, personText,serialText, cityText, searchpersonID;
+    private TextField idText, personText,serialText, cityText, searchPersonID;
 
     @FXML
     private DatePicker registerDate,expireDate;
