@@ -38,4 +38,12 @@ public class ConnectionProvider {
                 ""
         );
     }
+
+    public  Connection getPostgresConnection() throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432/mft_class",
+                "postgres",
+                "138067sh"
+        );
+    }
 }
