@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class Education {
     private int id;
-    private int personId;
+    private Person person;
     private String university;
     private EducationGrade educationGrade;
     private double average;

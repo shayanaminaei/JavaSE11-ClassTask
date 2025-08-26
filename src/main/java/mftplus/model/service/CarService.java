@@ -2,7 +2,10 @@ package mftplus.model.service;
 
 import lombok.Getter;
 import mftplus.model.entity.Car;
+import mftplus.model.entity.Person;
 import mftplus.model.repository.CarRepository;
+import mftplus.model.repository.PersonRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -50,6 +53,12 @@ public class CarService implements Service<Car, Integer> {
     public Car findById(Integer id) throws Exception {
         try (CarRepository carRepository = new CarRepository()) {
             return carRepository.findById(id);
+        }
+    }
+
+    public List<Car> findByPersonId(int personId) throws Exception {
+        try (CarRepository carRepository = new CarRepository()) {
+            return carRepository.findByPersonId(personId);
         }
     }
 
