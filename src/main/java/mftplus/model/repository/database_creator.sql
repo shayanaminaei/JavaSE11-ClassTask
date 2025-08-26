@@ -60,9 +60,9 @@ create sequence contact_seq start with 1 increment by 1;
 create table jobs
 (
     id           number primary key,
-    person_id references persons,
+    person_id    references persons,
     organisation nvarchar2(20) not null,
-    title    nvarchar2(20) default 'Employee',
+    title        nvarchar2(20) default 'Employee',
     start_date   date          not null,
     end_date     date          not null,
     description  nvarchar2(200)

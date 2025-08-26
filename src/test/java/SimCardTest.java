@@ -2,6 +2,7 @@ import mftplus.controller.SimCardController;
 import mftplus.model.entity.SimCard;
 import mftplus.model.entity.enums.SimCardOperator;
 import mftplus.model.entity.enums.Title;
+import mftplus.model.repository.SimCardRepository;
 
 import java.time.LocalDate;
 
@@ -55,6 +56,10 @@ public class SimCardTest {
 //
 //        test passed
 //            System.out.println(simCardsRepository.findById(6));
+//
+//        test passed
+//        System.out.println(simCardRepository.findSimCardByNumber("09022222222"));
+//
 //        }
 //
 //
@@ -74,6 +79,7 @@ public class SimCardTest {
 //
 //        test passe
 //        System.out.println(SimCardService.getService().findById(2));
+
 
     }
 }

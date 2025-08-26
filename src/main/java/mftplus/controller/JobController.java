@@ -1,46 +1,184 @@
 package mftplus.controller;
 
-import lombok.Getter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Job;
 import mftplus.model.entity.enums.JobTitle;
 import mftplus.model.service.JobService;
+import mftplus.model.tools.FormLoader;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Log4j
-public class JobController {
-    @Getter
-    private static JobController controller = new JobController();
+public class JobController implements Initializable {
+    @FXML
+    private TextField idText, personIdText, organisationText, descriptionText, searchOrganisationText;
 
-    private JobController(){
-    }
+    @FXML
+    private ComboBox<JobTitle> titleCombo;
 
-    public void save (String organisation, LocalDate startDate, LocalDate endDate, JobTitle title, String description) throws Exception {
+    @FXML
+    private DatePicker startDate, endDate;
+
+    @FXML
+    private Button saveButton, editButton, deleteButton;
+
+    @FXML
+    private  TableView<Job> jobTable;
+
+    @FXML
+    private TableColumn<Job, Integer> idColumn,personIdColumn;
+
+    @FXML
+    private TableColumn<Job, String> organisationColumn,descriptionColumn;
+
+    @FXML
+    private TableColumn<Job, LocalDate> startDateColumn,endDateColumn;
+
+    @FXML
+    private TableColumn<Job, JobTitle> titleColumn;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         try {
-            Job job =
-                    Job
-                            .builder()
-                            .organisation(organisation)
-                            .startDate(startDate)
-                            .endDate(endDate)
-                            .title(title)
-                            .description(description)
-                            .build();
-            JobService.getService().edit(job);
-            log.info("Info : Job Edited Successfully");
+            resetForm();
         } catch (Exception e) {
-            log.info("Error : Job Edit Failed " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
         }
 
+        saveButton.setOnAction(event -> {
+            try {
+                Job job =
+                        Job
+                                .builder()
+                                .personId(Integer.parseInt(personIdText.getText()))
+                                .organisation(organisationText.getText())
+                                .title(titleCombo.getSelectionModel().getSelectedItem())
+                                .startDate(startDate.getValue())
+                                .endDate(endDate.getValue())
+                                .description(descriptionText.getText())
+                                .build();
+                JobService.getService().save(job);
+                log.info("Job Saved Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + job, ButtonType.OK);
+                alert.show();
+                resetForm();
+            } catch (Exception e) {
+                log.error("Job Save Failed" + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Job Save Failed" + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
+        });
+
+        editButton.setOnAction(event -> {
+           try {
+               Job job =
+                       Job
+                               .builder()
+                               .personId(Integer.parseInt(personIdText.getText()))
+                               .organisation(organisationText.getText())
+                               .title(titleCombo.getSelectionModel().getSelectedItem())
+                               .startDate(startDate.getValue())
+                               .endDate(endDate.getValue())
+                               .description(descriptionText.getText())
+                               .build();
+               JobService.getService().edit(job);
+               log.info("Job Edited Successfully");
+               Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + job, ButtonType.OK);
+               alert.show();
+               resetForm();
+           } catch (Exception e) {
+               log.error("Job Edit Failed" + e.getMessage());
+               Alert alert = new Alert(Alert.AlertType.ERROR, "Job Edit Failed" + e.getMessage(), ButtonType.OK);
+               alert.show();
+           }
+        });
+
+        deleteButton.setOnAction(event -> {
+            try {
+                FormLoader.getFormLoader().showStage(new Stage(), "/view/JobView.fxml", "Job Information");
+            } catch (Exception e) {
+                log.error("Job Delete Failed" + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Job Delete Failed " + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
+        });
+
+        searchOrganisationText.setOnKeyReleased(event -> searchByOrganisation());
+
+        jobTable.setOnMouseReleased(event -> selectFromTable());
+
+        jobTable.setOnKeyReleased((event) -> selectFromTable());
+
     }
 
-    public void delete (Integer id) throws Exception {
+    private void resetForm() throws Exception {
+        idText.clear();
+        personIdText.clear();
+        organisationText.clear();
+
+        for (JobTitle jobTitle : JobTitle.values()) {
+            titleCombo.getItems().add(jobTitle);
+        }
+        titleCombo.getSelectionModel().select(0);
+
+        startDate.setValue(LocalDate.now());
+
+        endDate.setValue(LocalDate.now());
+
+        descriptionText.clear();
+
+        showDateOnTable(JobService.getService().findAll());
+    }
+
+    private void showDateOnTable(List<Job> jobList) {
+        ObservableList<Job> observableList = FXCollections.observableList(jobList);
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
+        organisationColumn.setCellValueFactory(new PropertyValueFactory<>("organisation"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        jobTable.setItems(observableList);
+    }
+
+    public void selectFromTable() {
         try {
-            JobService.getService().delete(id);
-            log.info("Info : Job Deleted Successfully");
+            Job job = jobTable.getSelectionModel().getSelectedItem();
+            idText.setText(String.valueOf(job.getId()));
+            personIdText.setText(String.valueOf(job.getPersonId()));
+            organisationText.setText(String.valueOf(job.getOrganisation()));
+            titleCombo.getSelectionModel().select(job.getTitle());
+            startDate.setValue(job.getStartDate());
+            endDate.setValue(job.getEndDate());
+            descriptionText.setText(job.getDescription());
         }catch (Exception e) {
-            log.info("Error : Job Delete Failed " + e.getMessage());}
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
+        }
+    }
+
+    public void searchByOrganisation() {
+        try {
+            showDateOnTable(JobService.getService().findByOrganisation(searchOrganisationText.getText()));
+            log.info("Job Find By Organisation : " + searchOrganisationText.getText());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
+            alert.show();
+            log.error("Job Find By Organisation :  " + searchOrganisationText.getText() + e.getMessage());
+        }
     }
 }
