@@ -18,7 +18,7 @@ public class FormLoader {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
 
         stage.setScene(scene);
-        stage.setTitle("Person Information");
+        stage.setTitle(title);
         stage.show();
     }
 }
