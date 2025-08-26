@@ -45,7 +45,7 @@ public class JobController implements Initializable {
     private TableColumn<Job, LocalDate> startDateColumn,endDateColumn;
 
     @FXML
-    private TableColumn<Job, JobTitle> titleColumn;
+    private TableColumn<Job, JobTitle> jobTitleColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -147,7 +147,7 @@ public class JobController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
         organisationColumn.setCellValueFactory(new PropertyValueFactory<>("organisation"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        jobTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

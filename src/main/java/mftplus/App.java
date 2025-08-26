@@ -10,6 +10,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FormLoader.getFormLoader().showStage(primaryStage, "/view/PersonView.fxml", "Person Information");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/MainView.fxml", "Dashboard");
     }
 }
