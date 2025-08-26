@@ -1,11 +1,8 @@
 import lombok.extern.log4j.Log4j;
-import mftplus.controller.EducationController;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.entity.enums.Role;
-
-
 import java.time.LocalDate;
 
 @Log4j
@@ -127,7 +124,7 @@ public class EducationTest {
         // save() test:
 //        PersonService.getService().save(person1);
 //        PersonService.getService().save(person2);
-//
+
 //        EducationService.getService().save(education1);
 //        EducationService.getService().save(education2);
 //        EducationService.getService().save(education3);
