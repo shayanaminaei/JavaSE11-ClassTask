@@ -49,9 +49,10 @@ public class JobService implements Service<Job, Integer> {
         }
     }
 
-    public void findByOrganisation(String organisation) throws Exception {
+    public List<Job> findByOrganisation(String organisation) throws Exception {
         try (JobRepository jobRepository = new JobRepository()) {
             jobRepository.findByOrganisation(organisation);
         }
+        return null;
     }
 }
