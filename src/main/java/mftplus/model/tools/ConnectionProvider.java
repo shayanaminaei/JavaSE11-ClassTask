@@ -18,7 +18,7 @@ public class ConnectionProvider {
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
-                "javase",
+                "javaee",
                 "java123"
         );
     }

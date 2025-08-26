@@ -112,7 +112,11 @@ public class PersonController implements Initializable {
 
         deleteButton.setOnAction((event) -> {
             try {
-                FormLoader.getFormLoader().showStage(new Stage(), "/view/PersonView.fxml", "Person Information");
+                PersonService.getService().delete(Integer.parseInt(idText.getText()));
+                log.info("Person Deleted Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
+                alert.show();
+                resetForm();
             } catch (Exception e) {
                 log.error("Person Delete Failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Person Delete Failed " + e.getMessage(), ButtonType.OK);

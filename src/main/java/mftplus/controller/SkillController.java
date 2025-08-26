@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 @Log4j
 public class SkillController implements Initializable {
     @FXML
-    private TextField idText, personIdText, titleText, instituteText, durationText,scoreText;
+    private TextField idText, personIdText, titleText, instituteText, durationText,scoreText, searchIdText;
 
     @FXML
     private DatePicker registerDate;
@@ -35,7 +35,7 @@ public class SkillController implements Initializable {
     private TableColumn<Skill,Integer> idColumn,personIdColumn,durationColumn,scoreColumn;
 
     @FXML
-    private TableColumn<Skill,String> titlecolumn,instituteColumn;
+    private TableColumn<Skill,String> titleColumn,instituteColumn;
 
     @FXML
     private TableColumn<Skill, LocalDate> registerDateColumn;
@@ -125,7 +125,7 @@ public class SkillController implements Initializable {
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
-        titlecolumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         instituteColumn.setCellValueFactory(new PropertyValueFactory<>("institute"));
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         registerDateColumn.setCellValueFactory(new PropertyValueFactory<>("registerDate"));
