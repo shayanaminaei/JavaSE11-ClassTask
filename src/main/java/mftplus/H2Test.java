@@ -13,13 +13,13 @@ import java.sql.SQLException;
 public class H2Test {
     public static void main(String[] args) throws Exception {
 //        Server webServer = Server.createWebServer("-webAllowOthers", "-webPort", "8080");;
-//        Server webServer = Server.createWebServer("-web","-webAllowOthers", "-webPort", "8082");;
+        Server webServer = Server.createWebServer("-web","-webAllowOthers", "-webPort", "8082");;
 //
-//        Connection connection = ConnectionProvider.getProvider().getH2Connection();
+        Connection connection = ConnectionProvider.getProvider().getH2Connection();
 //
 //
 //
-//        connection.close();
+        connection.close();
 //        System.out.println(EducationService.getService().findAll().get(0).getPerson().getName());
 
         System.out.println(EducationService.getService().findByPersonId(1));

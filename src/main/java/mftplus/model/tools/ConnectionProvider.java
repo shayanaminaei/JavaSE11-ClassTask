@@ -32,9 +32,9 @@ public class ConnectionProvider {
     }
 
     public Connection getH2Connection() throws Exception {
-        Class.forName("org.h2.Driver");
+//        Class.forName("org.h2.Driver");
         return DriverManager.getConnection(
-                "jdbc:H2:file:./db/mft_class;AUTO_SERVER=TRUE;MODE=Oracle",
+                "jdbc:h2:file:./db/mft_class;AUTO_SERVER=TRUE;MODE=Oracle",
                 "sa",
                 ""
         );
