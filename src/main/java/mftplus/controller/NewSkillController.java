@@ -8,7 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
+import mftplus.model.entity.Person;
 import mftplus.model.entity.Skill;
+import mftplus.model.entity.enums.Role;
+import mftplus.model.service.PersonService;
 import mftplus.model.service.SkillService;
 import mftplus.model.tools.FormLoader;
 
@@ -17,8 +20,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @Log4j
-public class SkillController implements Initializable {
+public class NewSkillController implements Initializable {
     @FXML
     private TextField idText, personIdText, titleText, instituteText, durationText,scoreText;
 

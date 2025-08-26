@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mftplus.controller.EducationController">
    <children>
       <GridPane layoutX="14.0" layoutY="16.0" prefHeight="321.0" prefWidth="200.0">
@@ -39,8 +38,8 @@
             <Label text="average" GridPane.rowIndex="4" />
             <Label text="start date" GridPane.rowIndex="5" />
             <Label text="end date" GridPane.rowIndex="6" />
-            <TextField fx:id="idText" GridPane.columnIndex="1" />
-            <TextField fx:id="personIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="idText" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="personIdText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="universityText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="educationalGradeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="averageText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
