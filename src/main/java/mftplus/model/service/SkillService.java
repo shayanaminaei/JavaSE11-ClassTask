@@ -1,12 +1,12 @@
 package mftplus.model.service;
 
 import lombok.Getter;
-import mftplus.model.entity.SimCard;
+
 import mftplus.model.entity.Skill;
-import mftplus.model.repository.SimCardRepository;
+
 import mftplus.model.repository.SkillRepository;
 
-import java.util.Collections;
+
 import java.util.List;
 
 public class SkillService implements Service<Skill,Integer> {

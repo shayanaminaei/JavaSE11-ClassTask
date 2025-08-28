@@ -9,7 +9,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Skill;
-import mftplus.model.service.SimCardService;
 import mftplus.model.service.SkillService;
 import mftplus.model.tools.FormLoader;
 

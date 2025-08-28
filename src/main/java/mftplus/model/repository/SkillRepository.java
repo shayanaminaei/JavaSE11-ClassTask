@@ -1,6 +1,6 @@
 package mftplus.model.repository;
 
-import mftplus.model.entity.SimCard;
+
 import mftplus.model.entity.Skill;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.SkillMapper;
