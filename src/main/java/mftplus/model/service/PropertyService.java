@@ -35,7 +35,7 @@ public class PropertyService implements Service<Property, Integer> {
     }
 
     @Override
-    public List<Property> findAll() throws Exception {
+    public List<Property> findAll(String text) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             return propertyRepository.findAll();
         }

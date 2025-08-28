@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.scene.control.TextField?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mftplus.controller.DriverLicenseController">
+    <children>
+        <GridPane layoutX="35.0" layoutY="48.0" prefHeight="269.0" prefWidth="200.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PersonId" GridPane.rowIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Serial" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DriverLicenseType" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.rowIndex="4" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RegisterDate" GridPane.rowIndex="5" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ExpireDate" GridPane.rowIndex="6" />
+                <TextField fx:id="idText" GridPane.columnIndex="1" />
+                <TextField fx:id="personText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="serialText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ComboBox fx:id="driverLisenseCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="cityText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <DatePicker fx:id="registerDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <DatePicker fx:id="expireDate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            </children>
+        </GridPane>
+        <HBox layoutX="30.0" layoutY="335.0" prefHeight="43.0" prefWidth="211.0">
+            <children>
+                <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="save">
+                    <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="editButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="edit">
+                    <HBox.margin>
+                        <Insets top="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="remove">
+                    <HBox.margin>
+                        <Insets top="5.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+        <TableView fx:id="driverLicenseTable" layoutX="254.0" layoutY="89.0" prefHeight="275.0" prefWidth="340.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="51.3333740234375" text="id" />
+                <TableColumn fx:id="personIdColumn" prefWidth="57.66668701171875" text="personId" />
+                <TableColumn fx:id="serialColumn" prefWidth="42.0" text="serial" />
+                <TableColumn fx:id="driverLicenseTColumn" prefWidth="41.66668701171875" text="driverLicenseType" />
+                <TableColumn fx:id="cityColumn" prefWidth="43.33331298828125" text="city" />
+                <TableColumn fx:id="registerDateColumn" prefWidth="46.0" text="registerDate" />
+                <TableColumn fx:id="expireDateColumn" prefWidth="54.0" text="expireDate" />
+            </columns>
+        </TableView>
+        <HBox layoutX="254.0" layoutY="48.0" prefHeight="25.0" prefWidth="340.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="personId:">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                </Text>
+                <TextField fx:id="searchPersonID">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </TextField>
+            </children>
+        </HBox>
+    </children>
+</Pane>

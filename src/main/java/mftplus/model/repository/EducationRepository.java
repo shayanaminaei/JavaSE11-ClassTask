@@ -14,7 +14,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
     private final EducationMapper educationMapper = new EducationMapper();
 
     public EducationRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
                         "VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, education.getId());
-        preparedStatement.setInt(2, education.getPersonId());
+        preparedStatement.setInt(2, education.getPerson().getId());
         preparedStatement.setString(3, education.getUniversity());
         preparedStatement.setString(4, education.getEducationGrade().name());
         preparedStatement.setDouble(5, education.getAverage());
@@ -63,7 +63,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         List<Education> educationList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "SELECT * FROM EDUCATIONS ORDER BY UNIVERSITY AND EDUCATION_GRADE"
+                "SELECT * FROM EDUCATIONS ORDER BY UNIVERSITY, EDUCATION_GRADE"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -89,6 +89,23 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
         }
         return education;
     }
+
+    public List<Education> findByPersonId(int personId) throws Exception {
+        List<Education> educationList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM EDUCATIONS WHERE PERSON_ID=?"
+        );
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Education education = educationMapper.educationMapper(resultSet);
+            educationList.add(education);
+        }
+        return educationList;
+    }
+
 
     public List<Education> findByUniversityAndGrade(String university, String grade) throws Exception {
         List<Education> educationList = new ArrayList<>();

@@ -14,7 +14,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     private final SkillMapper skillMapper = new SkillMapper();
 
     public SkillRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

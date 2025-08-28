@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mftplus.controller.PropertyController">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="274.0" prefWidth="200.0">
@@ -36,29 +35,29 @@
             <Label text="serial :" GridPane.rowIndex="4" />
             <Label text="count :" GridPane.rowIndex="5" />
             <Label text="dateTime :" GridPane.rowIndex="6" />
-            <DatePicker fx:id="dateTimeColumn" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="idColumn" GridPane.columnIndex="1" />
-            <TextField fx:id="personIdColumn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="nameColumn" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="brandColumn" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="serialColumn" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="countColumn" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="dateTime" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="idText" GridPane.columnIndex="1" />
+            <TextField fx:id="personIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="nameText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="brandText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="serialText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="countText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <TableView layoutX="296.0" layoutY="67.0" prefHeight="301.0" prefWidth="378.0">
+      <TableView fx:id="propertyTable" layoutX="296.0" layoutY="67.0" prefHeight="301.0" prefWidth="378.0">
         <columns>
-          <TableColumn prefWidth="25.0" text="id" />
-          <TableColumn prefWidth="62.0" text="personId" />
-            <TableColumn minWidth="8.0" prefWidth="48.0" text="name" />
-            <TableColumn prefWidth="56.0" text="brand" />
-            <TableColumn minWidth="0.0" prefWidth="43.0" text="serial" />
-            <TableColumn maxWidth="49.0" prefWidth="49.0" text="count" />
-            <TableColumn prefWidth="94.0" text="dateTime" />
+          <TableColumn fx:id="idColumn" prefWidth="25.0" text="id" />
+          <TableColumn fx:id="personIdColumn" prefWidth="62.0" text="personId" />
+            <TableColumn fx:id="nameColumn" minWidth="8.0" prefWidth="48.0" text="name" />
+            <TableColumn fx:id="brandColumn" prefWidth="56.0" text="brand" />
+            <TableColumn fx:id="serialColumn" minWidth="0.0" prefWidth="43.0" text="serial" />
+            <TableColumn fx:id="countColumn" maxWidth="49.0" prefWidth="49.0" text="count" />
+            <TableColumn fx:id="dateTimeColumn" prefWidth="94.0" text="dateTime" />
         </columns>
       </TableView>
       <Label layoutX="296.0" layoutY="40.0" text="search:" />
       <Label layoutX="363.0" layoutY="40.0" text="name:" />
-      <TextField fx:id="searchNameColumn" layoutX="405.0" layoutY="36.0" prefHeight="25.0" prefWidth="100.0" />
+      <TextField fx:id="searchNameText" layoutX="405.0" layoutY="36.0" prefHeight="25.0" prefWidth="100.0" />
       <Button fx:id="saveButton" layoutX="25.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="save" />
       <Button fx:id="editButton" layoutX="114.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="edit" />
       <Button fx:id="deleteButton" layoutX="200.0" layoutY="326.0" mnemonicParsing="false" text="delete" />

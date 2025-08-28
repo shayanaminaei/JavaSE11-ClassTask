@@ -15,7 +15,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
     private final SimCardMapper simCardMapper = new SimCardMapper();
 
     public SimCardRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
