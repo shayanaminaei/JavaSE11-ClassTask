@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Skill;
+import mftplus.model.service.SimCardService;
 import mftplus.model.service.SkillService;
 import mftplus.model.tools.FormLoader;
 
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 @Log4j
 public class SkillController implements Initializable {
     @FXML
-    private TextField idText, personIdText, titleText, instituteText, durationText,scoreText, searchIdText;
+    private TextField idText, personIdText, titleText, instituteText, durationText,scoreText,searchTitleText;
 
     @FXML
     private DatePicker registerDate;
@@ -105,6 +106,12 @@ public class SkillController implements Initializable {
                 alert.show();
             }
         });
+        skillTable.setOnMouseReleased((event) -> selectFromTable());
+
+        skillTable.setOnKeyReleased((event) -> selectFromTable());
+
+        searchTitleText.setOnKeyReleased((event) -> searchByTitle());
+        searchTitleText.setOnKeyReleased((event) -> searchByTitle());
 
     }
     private void resetForm() throws Exception {
@@ -145,6 +152,17 @@ public class SkillController implements Initializable {
             scoreText.setText(String.valueOf(skill.getScore()));
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
+        }
+    }
+
+    public void searchByTitle() {
+        try {
+            showDateOnTable(SkillService.getService().findSkillByTitle(searchTitleText.getText()));
+            log.info("skill findSkillByTitle " + searchTitleText.getText() + " Successfully");
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            log.info("skill findSkillByTitle " + searchTitleText.getText() + " error" + e.getMessage());
             alert.show();
         }
     }
