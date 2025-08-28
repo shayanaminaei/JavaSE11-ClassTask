@@ -4,7 +4,6 @@ import mftplus.model.entity.Property;
 import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class PropertyMapper {
     public Property propertyMapper(ResultSet resultSet) throws Exception {

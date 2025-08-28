@@ -1,11 +1,10 @@
 import lombok.extern.log4j.Log4j;
-import mftplus.controller.PropertyController;
+
 import mftplus.model.entity.Person;
 import mftplus.model.entity.Property;
 import mftplus.model.entity.enums.Role;
-import mftplus.model.service.PropertyService;
 
-import java.time.LocalDateTime;
+
 
 
 @Log4j
@@ -13,7 +12,8 @@ class PropertyTest {
     public static void main(String[] args) throws Exception {
 
         Person person1=
-                Person.builder()
+                Person
+                        .builder()
                         .id(1)
                         .name("ali")
                         .family("alizade")
@@ -22,7 +22,8 @@ class PropertyTest {
                         .build();
 
         Person person2=
-                Person.builder()
+                Person
+                        .builder()
                         .id(1)
                         .name("ali")
                         .family("alizade")
@@ -31,7 +32,8 @@ class PropertyTest {
                         .build();
 
         Property property1=
-                Property.builder()
+                Property
+                        .builder()
                         .id(1)
                         .person(person1)
                         .name("ahmad")
@@ -41,7 +43,8 @@ class PropertyTest {
                         .build();
 
         Property property2=
-                Property.builder()
+                Property
+                        .builder()
                         .id(2)
                         .person(person2)
                         .name("ali")
