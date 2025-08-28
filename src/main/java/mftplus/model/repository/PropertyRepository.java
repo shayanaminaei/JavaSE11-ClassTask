@@ -23,7 +23,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         preparedStatement = connection.prepareStatement(
                 "insert into properties (id, person_id, name, brand, serial, count, date_time) values (property_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, property.getPersonId());
+        preparedStatement.setInt(1, property.getPerson().getId());
         preparedStatement.setString(2, property.getName());
         preparedStatement.setString(3, property.getBrand());
         preparedStatement.setString(4, property.getSerial());
@@ -38,7 +38,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
                 "update properties set personal_id=?, name=?, brand=?, serial=?, count=?, date_time=? where id=?"
 
         );
-        preparedStatement.setInt(1, property.getPersonId());
+        preparedStatement.setInt(1, property.getPerson().getId());
         preparedStatement.setString(2, property.getName());
         preparedStatement.setString(3, property.getBrand());
         preparedStatement.setString(4, property.getSerial());

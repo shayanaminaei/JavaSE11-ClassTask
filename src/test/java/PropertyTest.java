@@ -1,6 +1,8 @@
 import lombok.extern.log4j.Log4j;
 import mftplus.controller.PropertyController;
+import mftplus.model.entity.Person;
 import mftplus.model.entity.Property;
+import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PropertyService;
 
 import java.time.LocalDateTime;
@@ -9,6 +11,46 @@ import java.time.LocalDateTime;
 @Log4j
 class PropertyTest {
     public static void main(String[] args) throws Exception {
+
+        Person person1=
+                Person.builder()
+                        .id(1)
+                        .name("ali")
+                        .family("alizade")
+                        .role(Role.customer)
+                        .status(true)
+                        .build();
+
+        Person person2=
+                Person.builder()
+                        .id(1)
+                        .name("ali")
+                        .family("alizade")
+                        .role(Role.admin)
+                        .status(false)
+                        .build();
+
+        Property property1=
+                Property.builder()
+                        .id(1)
+                        .person(person1)
+                        .name("ahmad")
+                        .brand("Nike")
+                        .serial("123")
+                        .count(2)
+                        .build();
+
+        Property property2=
+                Property.builder()
+                        .id(2)
+                        .person(person2)
+                        .name("ali")
+                        .brand("Adidas")
+                        .serial("123")
+                        .count(3)
+                        .build();
+
+
         //       log.info("Starting Property Test");
 //        log.error("error saving");
 //        UNIT TEST
