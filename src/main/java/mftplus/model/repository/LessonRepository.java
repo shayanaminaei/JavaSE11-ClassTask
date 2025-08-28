@@ -16,7 +16,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     private final LessonMapper lessonMapper = new LessonMapper();
 
     public LessonRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
 

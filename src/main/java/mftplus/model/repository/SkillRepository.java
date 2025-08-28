@@ -9,25 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillRepository implements Repository<Skill, Integer>, AutoCloseable {
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private SkillMapper skillMapper = new SkillMapper();
+    private final SkillMapper skillMapper = new SkillMapper();
 
     public SkillRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
     public void save(Skill skill) throws Exception {
+        skill.setId(ConnectionProvider.getProvider().getNextId("skill_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into skills (id,person_id,title,institute,duration,register_date,score) values (skill_seq.nextval,?,?,?,?,?,?)"
+                "insert into SKILLS (id,PERSON_ID, TITLE, INSTITUTE,DURATION, REGISTER_DATE,score)" +
+                        " values (?, ?, ?, ?, ?, ?,?)"
         );
-        preparedStatement.setInt(1, skill.getPersonId());
-        preparedStatement.setString(2, skill.getTitle());
-        preparedStatement.setString(3, skill.getInstitute());
-        preparedStatement.setInt(4, skill.getDuration());
-        preparedStatement.setDate(5, Date.valueOf(skill.getRegisterDate()));
-        preparedStatement.setInt(6, skill.getScore());
+        preparedStatement.setInt(1, skill.getId());
+        preparedStatement.setInt(2, skill.getPersonId());
+        preparedStatement.setString(3, skill.getTitle());
+        preparedStatement.setString(4, skill.getInstitute());
+        preparedStatement.setInt(5, skill.getDuration());
+        preparedStatement.setDate(6, Date.valueOf(skill.getRegisterDate()));
+        preparedStatement.setInt(7, skill.getScore());
         preparedStatement.execute();
 }
 

@@ -47,6 +47,12 @@ public class EducationService implements Service<Education, Integer> {
         }
     }
 
+    public List<Education> findByPersonId(Integer personId) throws Exception {
+        try (EducationRepository educationRepository = new EducationRepository()) {
+            return educationRepository.findByPersonId(personId);
+        }
+    }
+
     public List<Education> findByUniversityAndGrade(String university, String educationGrade) throws Exception {
         try (EducationRepository educationRepository = new EducationRepository()) {
             return educationRepository.findByUniversityAndGrade(university, educationGrade);

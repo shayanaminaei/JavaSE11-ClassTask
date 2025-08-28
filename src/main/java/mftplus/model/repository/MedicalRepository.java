@@ -6,7 +6,6 @@ import mftplus.model.tools.MedicalMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -16,7 +15,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
     private MedicalMapper medicalMapper = new MedicalMapper();
 
     public MedicalRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
 

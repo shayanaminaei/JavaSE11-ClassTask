@@ -14,33 +14,35 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     private JobMapper jobMapper = new JobMapper();
 
     public JobRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
     public void save(Job job) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into jobs (id, organisation, title, start_date, end_date, description ) values (person_seq.nextval,?,?,?,?,?)"
+                "insert into jobs (id, person_id, organisation, title, start_date, end_date, description ) values (person_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setString(1, job.getOrganisation());
-        preparedStatement.setString(2, job.getTitle().name());
-        preparedStatement.setDate(3,Date.valueOf(job.getStartDate()));
-        preparedStatement.setDate(4,Date.valueOf(job.getEndDate()));
-        preparedStatement.setString(5, job.getDescription());
+        preparedStatement.setInt(1, job.getPersonId());
+        preparedStatement.setString(2, job.getOrganisation());
+        preparedStatement.setString(3, job.getTitle().name());
+        preparedStatement.setDate(4,Date.valueOf(job.getStartDate()));
+        preparedStatement.setDate(5,Date.valueOf(job.getEndDate()));
+        preparedStatement.setString(6, job.getDescription());
         preparedStatement.execute();
     }
 
     @Override
     public void edit(Job job) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update jobs set orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
+                "update jobs set person_id=? ,orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
         );
-        preparedStatement.setString(1, job.getOrganisation());
-        preparedStatement.setString(2, job.getTitle().name());
-        preparedStatement.setDate(3,Date.valueOf(job.getStartDate()));
-        preparedStatement.setDate(4,Date.valueOf(job.getEndDate()));
-        preparedStatement.setString(5, job.getDescription());
-        preparedStatement.setInt(6, job.getId());
+        preparedStatement.setInt(1, job.getPersonId());
+        preparedStatement.setString(2, job.getOrganisation());
+        preparedStatement.setString(3, job.getTitle().name());
+        preparedStatement.setDate(4,Date.valueOf(job.getStartDate()));
+        preparedStatement.setDate(5,Date.valueOf(job.getEndDate()));
+        preparedStatement.setString(6, job.getDescription());
+        preparedStatement.setInt(7, job.getId());
         preparedStatement.execute();
     }
 

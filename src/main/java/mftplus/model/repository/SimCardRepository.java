@@ -15,7 +15,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
     private final SimCardMapper simCardMapper = new SimCardMapper();
 
     public SimCardRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
@@ -82,6 +82,18 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
             simCard = simCardMapper.simCardMapper(resultSet);
         }
         return simCard;
+    }
+
+    public List<SimCard> findSimCardByNumber(String number) throws Exception {
+        List<SimCard> simCardList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from sim_cards where numbers like ?");
+        preparedStatement.setString(1, number + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
+            simCardList.add(simCard);
+        }
+        return simCardList;
     }
 
     @Override

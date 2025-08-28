@@ -1,12 +1,10 @@
 package mftplus.model.repository;
 
-import mftplus.model.entity.Person;
 import mftplus.model.entity.Property;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.PropertyMapper;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
 
 
     public PropertyRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

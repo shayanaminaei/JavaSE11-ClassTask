@@ -15,7 +15,7 @@ public class ConnectionProvider {
     private ConnectionProvider() {
     }
 
-    public Connection getConnection() throws SQLException {
+    public Connection getOracleConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:XE",
                 "javase",
@@ -23,11 +23,27 @@ public class ConnectionProvider {
         );
     }
 
-
     public int getNextId(String sequenceName) throws Exception{
 
-        ResultSet resultSet = getConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
+        ResultSet resultSet = getOracleConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
         resultSet.next();
         return resultSet.getInt("NEXT_ID");
+    }
+
+    public Connection getH2Connection() throws SQLException {
+//        Class.forName("org.h2.Driver");
+        return DriverManager.getConnection(
+                "jdbc:h2:file:./db/mft_class;AUTO_SERVER=TRUE;MODE=Oracle",
+                "sa",
+                ""
+        );
+    }
+
+    public  Connection getPostgresConnection() throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432/mft_class",
+                "postgres",
+                "138067sh"
+        );
     }
 }

@@ -1,98 +1,184 @@
 package mftplus.controller;
 
-import lombok.Getter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Car;
 import mftplus.model.service.CarService;
+import mftplus.model.tools.FormLoader;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Log4j
-public class CarController {
-    @Getter
-    private static CarController controller = new CarController();
-    private CarController() {
+public class CarController implements Initializable {
+  @FXML
+  private TextField idText, personIdText, nameText, brandText, colorText, plateText, searchNameText, searchIdText;
 
-    }
-    public void save( int person_id, String name, String brand, LocalDate manDate,String color, String plate)throws Exception {
-        try{
-            Car car = Car
-                    .builder()
-                    .personId(person_id)
-                    .name(name)
-                    .brand(brand)
-                    .manDate(manDate)
-                    .color(color)
-                    .plate(plate)
-                    .build();
-            CarService.getService().save(car);
-            log.info("Car saved Successfully");
-        } catch (Exception e){
-            log.error("Car Save Failed "+ e.getMessage());
-        }
-    }
+  @FXML
+  private DatePicker manDate;
 
-    public void edit( int person_id, String name, String brand, LocalDate manDate,String color, String plate)throws Exception {
-        try{
-            Car car = Car
-                    .builder()
-                    .personId(person_id)
-                    .name(name)
-                    .brand(brand)
-                    .manDate(manDate)
-                    .color(color)
-                    .plate(plate)
-                    .build();
-            CarService.getService().edit(car);
-            log.info("Car Edited Successfully");
-        } catch (Exception e){
-            log.error("Car Edit Failed " + e.getMessage());
-        }
+  @FXML
+  private Button saveButton, editButton, deleteButton;
+
+  @FXML
+  private TableView<Car> carTable;
+
+  @FXML
+  private TableColumn<Car, Integer> idColumn, personIdColumn;
+
+  @FXML
+  private TableColumn<Car, String> nameColumn, brandColumn, colorColumn, plateColumn;
+
+  @FXML
+  private TableColumn<Car, LocalDate> manDateColumn;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    try {
+      resetForm();
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+      alert.show();
     }
 
-    public void delete( Integer id )throws Exception {
-        try{
-            CarService.getService().delete(id);
-            log.info("Car Deleted Successfully");
-        } catch (Exception e){
-            log.error("Car Delete Failed " + e.getMessage());
+    saveButton.setOnAction((event) -> {
+      try {
+        Car car = Car
 
-        }
-    }
+                        .builder()
+                        .personId(Integer.parseInt(personIdText.getText()))
+                        .name(nameText.getText())
+                        .brand(brandText.getText())
+                        .manDate(manDate.getValue())
+                        .color(colorText.getText())
+                        .plate(plateText.getText())
+                        .build();
+        CarService.getService().save(car);
+        log.info("Car Saved Successfully");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + car, ButtonType.OK);
+        alert.show();
+        resetForm();
+      } catch (Exception e) {
+        log.error("Car Save Failed " + e.getMessage());
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Car Save Failed " + e.getMessage(), ButtonType.OK);
+        alert.show();
+      }
+    });
 
-    public List<Car> findAll()throws Exception{
-        try {
-            List<Car> carList = CarService.getService().findAll();
-            log.info("Cars findAll");
-            return carList;
-        } catch (Exception e) {
-            log.error("Cars findAll Failed " + e.getMessage());
-            return null;
-        }
-    }
+    editButton.setOnAction((event) -> {
+      try {
+        Car car = Car
 
-    public Car findById( Integer id )throws Exception {
-        try {
-            Car car = CarService.getService().findById(id);
-            log.info("Car findById: "+ id);
-            return car;
-        } catch (Exception e) {
-            log.error("Car FindById "+id+" Failed "+e.getMessage());
-            return null;
-        }
-    }
+                        .builder()
+                        .id(Integer.parseInt(idText.getText()))
+                        .personId(Integer.parseInt(personIdText.getText()))
+                        .name(nameText.getText())
+                        .brand(brandText.getText())
+                        .manDate(manDate.getValue())
+                        .color(colorText.getText())
+                        .plate(plateText.getText())
+                        .build();
+        CarService.getService().edit(car);
+        log.info("Car Edited Successfully");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + car, ButtonType.OK);
+        alert.show();
+        resetForm();
+      } catch (Exception e) {
+        log.error("Car Edit Failed " + e.getMessage());
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Car Edit Failed " + e.getMessage(), ButtonType.OK);
+        alert.show();
+      }
+    });
 
-    public List<Car> findByBrand(String brand)throws Exception {
-        try {
-            List<Car> carList = CarService.getService().findByBrand(brand);
-            log.info("Cars findByBrand: " + brand);
-            return carList;
-        } catch (Exception e) {
-            log.error("Cars findByBrand "+ brand +" Failed "+e.getMessage());
-            return null;
-        }
+    deleteButton.setOnAction((event) -> {
+      try {
+        FormLoader.getFormLoader().showStage(new Stage(), "/view/CarView.fxml", "Car Information");
+      } catch (Exception e) {
+        log.error("Car Delete Failed " + e.getMessage());
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Car Delete Failed " + e.getMessage(), ButtonType.OK);
+        alert.show();
+      }
+    });
+
+    searchNameText.setOnKeyReleased((event) -> searchById());
+    searchIdText.setOnKeyReleased((event) -> searchByAll());
+
+    carTable.setOnMouseReleased((event) -> selectFromTable());
+    carTable.setOnKeyReleased((event) -> selectFromTable());
+  }
+
+  private void resetForm() throws Exception {
+    idText.clear();
+    personIdText.clear();
+    nameText.clear();
+    brandText.clear();
+    colorText.clear();
+    plateText.clear();
+    manDate.setValue(LocalDate.now());
+    showDateOnTable(CarService.getService().findAll());
+  }
+
+  private void showDateOnTable(List<Car> carList) {
+    ObservableList<Car> observableList = FXCollections.observableList(carList);
+
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+    manDateColumn.setCellValueFactory(new PropertyValueFactory<>("manDate"));
+    colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
+    plateColumn.setCellValueFactory(new PropertyValueFactory<>("plate"));
+
+    carTable.setItems(observableList);
+  }
+
+  public void selectFromTable() {
+    try {
+      Car car = carTable.getSelectionModel().getSelectedItem();
+      idText.setText(String.valueOf(car.getId()));
+      personIdText.setText(String.valueOf(car.getPersonId()));
+      nameText.setText(car.getName());
+      brandText.setText(car.getBrand());
+      manDate.setValue(car.getManDate());
+      colorText.setText(car.getColor());
+      plateText.setText(car.getPlate());
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+      alert.show();
     }
+  }
+
+  public void searchById() {
+    try {
+      Car car = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
+      showDateOnTable(FXCollections.observableArrayList(car));
+      log.info("Car FindById: " + searchIdText.getText());
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
+      alert.show();
+      log.error("Car FindById " + searchIdText.getText() + " Failed " + e.getMessage());
+    }
+  }
+
+  public void searchByAll() {
+    try {
+      showDateOnTable(CarService.getService().findAll());
+      log.info("Cars FindAll Successfully");
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
+      alert.show();
+      log.error("Car FindAll Failed " + e.getMessage());
+    }
+  }
 
 
 }
+

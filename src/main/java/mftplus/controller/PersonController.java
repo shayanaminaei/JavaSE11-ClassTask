@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 
 @Log4j
 public class PersonController implements Initializable {
+    MainController mainController = new MainController();
+
     @FXML
     private TextField idText, nameText, familyText, searchNameText, searchFamilyText;
 
@@ -112,7 +114,11 @@ public class PersonController implements Initializable {
 
         deleteButton.setOnAction((event) -> {
             try {
-                FormLoader.getFormLoader().showStage(new Stage(), "/view/PersonView.fxml", "Person Information");
+                PersonService.getService().delete(Integer.parseInt(idText.getText()));
+                log.info("Person Deleted Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
+                alert.show();
+                resetForm();
             } catch (Exception e) {
                 log.error("Person Delete Failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Person Delete Failed " + e.getMessage(), ButtonType.OK);
@@ -173,6 +179,7 @@ public class PersonController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
+        mainController.changeText(2);
     }
 
     public void searchByNameAndFamily() {

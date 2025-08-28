@@ -138,7 +138,7 @@ public class PropertyController implements Initializable {
             countText.clear();
             dateTime.setValue(LocalDate.now());
 
-            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
+            showDateOnTable(PropertyService.getService().findByName(searchNameText.getText()));
     }
     private void showDateOnTable(List<Property> propertyList) {
         ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);
@@ -170,7 +170,7 @@ public class PropertyController implements Initializable {
         }
         public void searchName(){
         try {
-            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
+            showDateOnTable(PropertyService.getService().findByName(searchNameText.getText()));
             log.info("Property findByName " + searchNameText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);

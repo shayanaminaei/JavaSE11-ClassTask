@@ -1,6 +1,7 @@
 package mftplus.model.service;
 
 import lombok.Getter;
+import mftplus.model.entity.Education;
 import mftplus.model.entity.Person;
 import mftplus.model.repository.PersonRepository;
 
@@ -52,6 +53,10 @@ public class PersonService implements Service<Person, Integer> {
         try (PersonRepository personRepository = new PersonRepository()) {
             return personRepository.findById(id);
         }
+    }
+
+    public List<Education> getAllEducations(int personId) throws Exception {
+        return EducationService.getService().findByPersonId(personId);
     }
 
     public List<Person> findByNameAndFamily(String name, String family) throws Exception {
