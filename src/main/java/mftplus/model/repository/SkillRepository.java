@@ -1,5 +1,6 @@
 package mftplus.model.repository;
 
+
 import mftplus.model.entity.Skill;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.SkillMapper;
@@ -21,23 +22,21 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     public void save(Skill skill) throws Exception {
         skill.setId(ConnectionProvider.getProvider().getNextId("skill_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into SKILLS (id,PERSON_ID, TITLE, INSTITUTE,DURATION, REGISTER_DATE,score)" +
-                        " values (?, ?, ?, ?, ?, ?,?)"
+                "insert into skills (id,personId,title,institute,duration,registerDate,score) values (skill_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, skill.getId());
-        preparedStatement.setInt(2, skill.getPersonId());
-        preparedStatement.setString(3, skill.getTitle());
-        preparedStatement.setString(4, skill.getInstitute());
-        preparedStatement.setInt(5, skill.getDuration());
-        preparedStatement.setDate(6, Date.valueOf(skill.getRegisterDate()));
-        preparedStatement.setInt(7, skill.getScore());
+        preparedStatement.setInt(1, skill.getPersonId());
+        preparedStatement.setString(2, skill.getTitle());
+        preparedStatement.setString(3, skill.getInstitute());
+        preparedStatement.setInt(4, skill.getDuration());
+        preparedStatement.setDate(5, Date.valueOf(skill.getRegisterDate()));
+        preparedStatement.setInt(6, skill.getScore());
         preparedStatement.execute();
 }
 
     @Override
     public void edit(Skill skill) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update skills set id=?,person_id=?,title=?,institute=?,duration=?,register_date=?,score=? where id=?"
+                "update skills set person_id=?,title=?,institute=?,duration=?,register_date=?,score=? where id=?"
         );
         preparedStatement.setInt(1, skill.getPersonId());
         preparedStatement.setString(2, skill.getTitle());
@@ -63,7 +62,6 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         List<Skill> skillList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from skills order by id, person_id");
         ResultSet resultSet = preparedStatement.executeQuery();
-
         while(resultSet.next()) {
             Skill skill = skillMapper.skillMapper(resultSet);
             skillList.add(skill);
@@ -83,6 +81,18 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
             skill= skillMapper.skillMapper(resultSet);
         }
         return skill;
+    }
+
+    public List<Skill> findSkillByTitle(String title) throws Exception {
+        List<Skill> skillList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from skills where title like ?");
+        preparedStatement.setString(1, title + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Skill skill = skillMapper.skillMapper(resultSet);
+            skillList.add(skill);
+        }
+        return skillList;
     }
     @Override
     public void close() throws Exception {

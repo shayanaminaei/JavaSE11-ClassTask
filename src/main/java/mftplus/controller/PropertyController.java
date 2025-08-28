@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Property;
+import mftplus.model.service.PersonService;
 import mftplus.model.service.PropertyService;
 import mftplus.model.tools.FormLoader;
 
@@ -25,14 +26,12 @@ public class PropertyController implements Initializable {
 
     @FXML
     private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText;
+
     @FXML
     private DatePicker dateTime;
 
     @FXML
     private Button saveButton,editButton,deleteButton;
-
-    @FXML
-    private TableView<Property> propertyView ;
 
     @FXML
     private TableColumn<Property, Integer> idColumn;
@@ -72,7 +71,7 @@ public class PropertyController implements Initializable {
                 Property property =
                         Property
                                 .builder()
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .name(nameText.getText())
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
@@ -89,7 +88,6 @@ public class PropertyController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error saving data" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
-
         });
         editButton.setOnAction(event -> {
             try {
@@ -97,7 +95,7 @@ public class PropertyController implements Initializable {
                         Property
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .name(nameText.getText())
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
@@ -117,7 +115,12 @@ public class PropertyController implements Initializable {
         });
         deleteButton.setOnAction(event -> {
             try {
-                FormLoader.getFormLoader().showStage(new Stage(), "/view/Propertyview.fxml", "Property Information");
+                PropertyService.getService().delete(Integer.parseInt(idText.getText()));
+                log.info("Property deleted");
+                Alert alert =new Alert(Alert.AlertType.INFORMATION, "Property deleted"+idText.getText(), ButtonType.OK);
+                alert.show();
+                resetForm();
+
             } catch (Exception e) {
                 log.error("delete failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error deleting data" + e.getMessage(), ButtonType.OK);
@@ -158,7 +161,7 @@ public class PropertyController implements Initializable {
         try {
             Property property = propertyTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(property.getId()));
-            personIdText.setText(String.valueOf(property.getPersonId()));
+            personIdText.setText(String.valueOf(PersonService.getService().findById(Integer.parseInt(personIdText.getText()))));
             nameText.setText(property.getName());
             brandText.setText(property.getBrand());
             serialText.setText(String.valueOf(property.getSerial()));
