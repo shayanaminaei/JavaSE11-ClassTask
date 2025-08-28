@@ -4,7 +4,6 @@ import lombok.Getter;
 import mftplus.model.entity.SimCard;
 import mftplus.model.repository.SimCardRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimCardService implements Service<SimCard, Integer> {
@@ -55,6 +54,12 @@ public class SimCardService implements Service<SimCard, Integer> {
     public List<SimCard> findSimCardByNumber(String number) throws Exception {
         try (SimCardRepository simCardRepository = new SimCardRepository()) {
             return simCardRepository.findSimCardByNumber(number);
+        }
+    }
+
+    public List<SimCard> findByPersonId(int personId) throws Exception {
+        try (SimCardRepository simCardRepository = new SimCardRepository()) {
+            return simCardRepository.findByPersonId(personId);
         }
     }
 

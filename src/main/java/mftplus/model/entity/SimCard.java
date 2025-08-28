@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 public class SimCard {
     private int id;
-    private int personId;
+    private Person person;
     private Title title;
     private String numbers;
     private SimCardOperator simCardOperator;
