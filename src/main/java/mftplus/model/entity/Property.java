@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 public class Property {
     private int id;
-    public Person person;
+    private Person person;
     private String name;
     private String brand;
     private String serial;
