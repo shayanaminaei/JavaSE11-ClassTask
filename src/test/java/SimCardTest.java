@@ -1,18 +1,45 @@
 import mftplus.controller.SimCardController;
+import mftplus.model.entity.Person;
 import mftplus.model.entity.SimCard;
+import mftplus.model.entity.enums.Role;
 import mftplus.model.entity.enums.SimCardOperator;
 import mftplus.model.entity.enums.Title;
-import mftplus.model.repository.SimCardRepository;
+import mftplus.model.service.PersonService;
+import mftplus.model.service.SimCardService;
 
 import java.time.LocalDate;
 
 public class SimCardTest {
     public static void main(String[] args) throws Exception {
 
+//        Person person=Person
+//                .builder()
+//                .name("mobina")
+//                .family("Rahi")
+//                .birthDate(LocalDate.of(2003,10,2))
+//                .role(Role.manager)
+//                .status(true)
+//                .build();
+//
+//        PersonService.getService().save(person);
+//
+//        SimCard simCard =
+//                SimCard
+//                        .builder()
+//                        .id(2)
+//                        .person(PersonService.getService().findById(1))
+//                        .title(Title.Work)
+//                        .numbers("0902")
+//                        .simCardOperator(SimCardOperator.Irancell)
+//                        .registerDate(LocalDate.of(1404, 10, 1))
+//                        .status(true)
+//                        .build();
+//
+//
 //        test passed
 //       SimCardController.getController().save(1,Title.Work,"090000000000",SimCardOperator.Irancell
 //                ,LocalDate.of(2003,2,10),true);
-
+//
 //        test passed
 //        SimCardController.getController().edit(1,1,Title.Work,"090888888888",SimCardOperator.Irancell
 //                ,LocalDate.of(2003,2,10),true);
@@ -26,17 +53,7 @@ public class SimCardTest {
 //        test passed
 //        System.out.println(SimCardController.getController().findById(1));
 //
-//        SimCard simCard =
-//                SimCard
-//                        .builder()
 //
-//                        .personId(1)
-//                        .title(Title.Work)
-//                        .numbers("09029999999999")
-//                        .simCardOperator(SimCardOperator.Irancell)
-//                        .registerDate(LocalDate.of(1404, 10, 1))
-//                        .status(true)
-//                        .build();
 //
 //        Repository Test Passed
 //
@@ -66,20 +83,23 @@ public class SimCardTest {
 //        Service test pass
 //
 //        test passed
-//        SimCardService.getService().save(simCard);
+//       SimCardService.getService().save(simCard);
 //
 //        test passed
-//        SimCardService.getService().edit(simCard);
+//       SimCardService.getService().edit(simCard);
 //
 //        test passed
 //        SimCardService.getService().delete(12);
 //
 //        test passe
-//        System.out.println(SimCardService.getService().findAll());
+//       System.out.println(SimCardService.getService().findAll());
 //
 //        test passe
-//        System.out.println(SimCardService.getService().findById(2));
-
+//       System.out.println(SimCardService.getService().findById(2));
+//
+//        test passe
+//        System.out.println(SimCardService.getService().findByPersonId(1));
+//
 
     }
 }

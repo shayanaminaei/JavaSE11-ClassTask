@@ -108,7 +108,7 @@
             <TableColumn fx:id="numberColumn" prefWidth="108.0" text="number" />
             <TableColumn fx:id="simCardOperatorColumn" prefWidth="92.0" text="operator" />
             <TableColumn fx:id="registerDateColumn" prefWidth="102.0" text="registerDate" />
-            <TableColumn fx:id="statusColumn" prefWidth="67.0" text="statuse" />
+            <TableColumn fx:id="statusColumn" prefWidth="67.0" text="status" />
         </columns>
       </TableView>
       <HBox layoutX="310.0" layoutY="34.0" prefHeight="25.0" prefWidth="524.0">
