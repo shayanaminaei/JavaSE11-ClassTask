@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 
 @Log4j
 public class PersonController implements Initializable {
+    MainController mainController = new MainController();
+
     @FXML
     private TextField idText, nameText, familyText, searchNameText, searchFamilyText;
 
@@ -177,6 +179,7 @@ public class PersonController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
+        mainController.changeText(2);
     }
 
     public void searchByNameAndFamily() {

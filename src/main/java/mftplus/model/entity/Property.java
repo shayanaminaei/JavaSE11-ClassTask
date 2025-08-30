@@ -15,12 +15,16 @@ import java.time.LocalDateTime;
 
 public class Property {
     private int id;
-    private int personId;
+    private Person person;
     private String name;
     private String brand;
     private String serial;
     private int count;
     private LocalDateTime dateTime;
+
+    public int getPersonId() {
+        return person != null ? person.getId() : 0;
+    }
 
     @Override
     public String toString() {

@@ -31,3 +31,5 @@
 
 - -5 romina mirfatahi : lessons (id, person_id, title, code, teacher, unit, start_date_time)
   (POJO/entity/bean)
+
+- -5 hedieh khodaei : users (id, person_id, username, password, nickName, locked, register_date)

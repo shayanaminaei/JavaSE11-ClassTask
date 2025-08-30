@@ -13,7 +13,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
     private final CarMapper carMapper = new CarMapper();
 
     public CarRepository() throws SQLException {
-        connection= ConnectionProvider.getProvider().getConnection();
+        connection= ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
@@ -86,6 +86,20 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
             car = carMapper.carMapper(resultSet);
         }
         return car;
+    }
+
+    public List<Car> findByPersonId(int personId) throws Exception {
+        List<Car> carList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement("select * from CARS where person_id=?");
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Car car = carMapper.carMapper(resultSet);
+            carList.add(car);
+        }
+        return carList;
     }
 
     public List<Car> findByBrand(String brand) throws Exception {

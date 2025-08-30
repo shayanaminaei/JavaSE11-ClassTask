@@ -15,6 +15,13 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem addPersonMnu;
 
+    PersonController personController = new PersonController();
+
+    @FXML
+    public void changeText(int a){
+
+        System.out.println("Change Text");
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

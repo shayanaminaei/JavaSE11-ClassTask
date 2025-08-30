@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.service.EducationService;
+import mftplus.model.service.PersonService;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -64,7 +65,7 @@ public class EducationController implements Initializable {
                 Education education =
                         Education
                                 .builder()
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .university(universityText.getText())
                                 .educationGrade(educationalGradeCombo.getSelectionModel().getSelectedItem())
                                 .average(Double.parseDouble(averageText.getText()))
@@ -89,7 +90,7 @@ public class EducationController implements Initializable {
                         Education
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .university(universityText.getText())
                                 .educationGrade(educationalGradeCombo.getSelectionModel().getSelectedItem())
                                 .average(Double.parseDouble(averageText.getText()))

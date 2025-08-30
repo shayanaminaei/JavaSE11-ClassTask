@@ -14,7 +14,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
     private SalariesMapper salariesMapper = new SalariesMapper();
 
     public SalaryRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

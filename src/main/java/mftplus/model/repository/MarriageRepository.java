@@ -2,13 +2,11 @@ package mftplus.model.repository;
 
 
 import mftplus.model.entity.Marriage;
-import mftplus.model.entity.Person;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.MarriageMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MarriageRepository implements Repository<Marriage, Integer>, AutoCloseable {
@@ -18,7 +16,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
 
 
     public MarriageRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
 
     }
 

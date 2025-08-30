@@ -15,7 +15,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
     private final SimCardMapper simCardMapper = new SimCardMapper();
 
     public SimCardRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
         preparedStatement = connection.prepareStatement(
                 "insert into sim_Cards (id,person_id,title,numbers,operator,register_date,status) values (sim_card_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, simCard.getPersonId());
+        preparedStatement.setInt(1, simCard.getPerson().getId());
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
@@ -38,7 +38,7 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
         preparedStatement = connection.prepareStatement(
                 "update sim_Cards set person_id=?,title=?,numbers=?,operator=?,register_date=?,status=? where id=?"
         );
-        preparedStatement.setInt(1, simCard.getPersonId());
+        preparedStatement.setInt(1, simCard.getPerson().getId());
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
@@ -88,6 +88,18 @@ public class SimCardRepository implements Repository<SimCard, Integer>, AutoClos
         List<SimCard> simCardList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from sim_cards where numbers like ?");
         preparedStatement.setString(1, number + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
+            simCardList.add(simCard);
+        }
+        return simCardList;
+    }
+
+    public List<SimCard>findByPersonId(Integer personId) throws Exception {
+        List<SimCard> simCardList = new ArrayList<>();
+        preparedStatement=connection.prepareStatement("select * from sim_cards where person_id=?");
+        preparedStatement.setInt(1, personId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             SimCard simCard = simCardMapper.simCardMapper(resultSet);
