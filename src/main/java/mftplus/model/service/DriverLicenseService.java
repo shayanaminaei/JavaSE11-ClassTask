@@ -1,8 +1,11 @@
 package mftplus.model.service;
 import lombok.Getter;
 import mftplus.model.entity.DriverLicense;
+import mftplus.model.entity.Education;
+import mftplus.model.entity.SimCard;
 import mftplus.model.repository.DriverLicenseRepository;
-
+import mftplus.model.repository.EducationRepository;
+import mftplus.model.repository.SimCardRepository;
 
 
 import java.util.List;
@@ -50,4 +53,15 @@ public class DriverLicenseService implements Service<DriverLicense, Integer> {
            return driverLicenseRepository.findById(id);
        }
    }
+
+    public List<DriverLicense> findByPersonId(Integer personId) throws Exception {
+        try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
+            return driverLicenseRepository.findByPersonId(personId);
+        }
+    }
+    public List<DriverLicense> findBySerial(String Serial) throws Exception {
+        try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
+            return driverLicenseRepository.findBySerial(Serial);
+        }
+    }
 }
