@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.SimCard;
 import mftplus.model.entity.enums.SimCardOperator;
 import mftplus.model.entity.enums.Title;
+import mftplus.model.service.PersonService;
 import mftplus.model.service.SimCardService;
 
 import java.net.URL;
@@ -71,13 +72,12 @@ public class SimCardController implements Initializable {
             alert.show();
         }
 
-
         saveButton.setOnAction(event -> {
             try {
                 SimCard simCard =
                         SimCard
                                 .builder()
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .title(titleCombo.getSelectionModel().getSelectedItem())
                                 .numbers(numberText.getText())
                                 .simCardOperator(simCardOperatorCombo.getSelectionModel().getSelectedItem())
@@ -91,17 +91,19 @@ public class SimCardController implements Initializable {
                 resetForm();
 
             } catch (Exception e) {
+                log.error("SimCard Save Failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
                 alert.show();
             }
         });
+
         editButton.setOnAction(event -> {
             try {
                 SimCard simCard =
                         SimCard
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .title(titleCombo.getSelectionModel().getSelectedItem())
                                 .numbers(numberText.getText())
                                 .simCardOperator(simCardOperatorCombo.getSelectionModel().getSelectedItem())
@@ -115,22 +117,24 @@ public class SimCardController implements Initializable {
                 resetForm();
 
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "SimCard Edit Data !!!", ButtonType.OK);
                 alert.show();
             }
 
 
         });
+
         deleteButton.setOnAction(event -> {
             try {
                 SimCardService.getService().delete(Integer.parseInt(idText.getText()));
                 log.info("simCard delete Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "delete Successfully\n", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "delete Successfully\n" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
 
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+                log.error("SimCard Delete Failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "SimCard Delete Failed!!!", ButtonType.OK);
                 alert.show();
             }
         });
@@ -182,7 +186,7 @@ public class SimCardController implements Initializable {
         try {
             SimCard simCard = simCardTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(simCard.getId()));
-            personIdText.setText(String.valueOf(simCard.getPersonId()));
+            personIdText.setText(String.valueOf(simCard.getPerson().getId()));
             titleCombo.getSelectionModel().select(simCard.getTitle());
             numberText.setText(simCard.getNumbers());
             simCardOperatorCombo.getSelectionModel().select(simCard.getSimCardOperator());

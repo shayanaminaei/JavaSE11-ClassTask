@@ -161,7 +161,7 @@ public class PropertyController implements Initializable {
         try {
             Property property = propertyTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(property.getId()));
-            personIdText.setText(String.valueOf(PersonService.getService().findById(Integer.parseInt(personIdText.getText()))));
+            personIdText.setText(String.valueOf(property.getPerson().getId()));
             nameText.setText(property.getName());
             brandText.setText(property.getBrand());
             serialText.setText(String.valueOf(property.getSerial()));
