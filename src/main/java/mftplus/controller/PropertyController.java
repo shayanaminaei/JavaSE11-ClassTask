@@ -14,6 +14,7 @@ import mftplus.model.service.PropertyService;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,7 +36,7 @@ public class PropertyController implements Initializable {
     private TableColumn<Property, Integer> idColumn;
 
     @FXML
-    private TableColumn<Property, String> personIdColumn;
+    private TableColumn<Property, Integer> personIdColumn;
 
     @FXML
     private TableColumn<Property, String> nameColumn;
@@ -50,7 +51,7 @@ public class PropertyController implements Initializable {
     private TableColumn<Property, Integer> countColumn;
 
     @FXML
-    private TableColumn<Property, LocalDate> dateTimeColumn;
+    private TableColumn<Property, LocalDateTime> dateTimeColumn;
 
     @FXML
     private TableView<Property> propertyTable;

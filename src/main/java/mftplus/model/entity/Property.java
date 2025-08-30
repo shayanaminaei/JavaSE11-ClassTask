@@ -22,6 +22,10 @@ public class Property {
     private int count;
     private LocalDateTime dateTime;
 
+    public int getPersonId() {
+        return person != null ? person.getId() : 0;
+    }
+
     @Override
     public String toString() {
         Gson gson = new Gson();
