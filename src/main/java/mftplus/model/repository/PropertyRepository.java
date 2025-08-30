@@ -21,7 +21,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     @Override
     public void save(Property property) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into properties (id, person_id, name, brand, serial, count, date_time) values (property_seq.nextval,?,?,?,?,?,?)"
+                "insert into properties (id, person_id, name, brand, serial, count, date_time)" +" values (?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, property.getPerson().getId());
         preparedStatement.setString(2, property.getName());
@@ -86,11 +86,10 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     public List<Property> findByName(String name) throws Exception {
         List<Property> propertyList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from properties where name like ?");
-        preparedStatement.setString(1, name + "%");
+        preparedStatement.setString(1, "%" + name + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Property property = PropertyMapper.propertyMapper(resultSet);
-            propertyList.add(property);
+            propertyList.add(PropertyMapper.propertyMapper(resultSet));
         }
         return propertyList;
     }
