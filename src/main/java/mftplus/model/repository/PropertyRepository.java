@@ -11,7 +11,7 @@ import java.util.List;
 public class PropertyRepository implements Repository<Property, Integer>, AutoCloseable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
-    private final PropertyMapper PropertyMapper = new PropertyMapper();
+    private final PropertyMapper propertyMapper = new PropertyMapper();
 
 
     public PropertyRepository() throws SQLException {
@@ -21,21 +21,22 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     @Override
     public void save(Property property) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into properties (id, person_id, name, brand, serial, count, date_time)" +" values (?,?,?,?,?,?,?)"
+                "insert into properties (id, person_id, name, brand, serial, count, date_time)" + " values (?,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, property.getPerson().getId());
-        preparedStatement.setString(2, property.getName());
-        preparedStatement.setString(3, property.getBrand());
-        preparedStatement.setString(4, property.getSerial());
-        preparedStatement.setInt(5, property.getCount());
-        preparedStatement.setTimestamp(6, Timestamp.valueOf(property.getDateTime()));
+        preparedStatement.setInt(1, property.getId());
+        preparedStatement.setInt(2, property.getPerson().getId());
+        preparedStatement.setString(3, property.getName());
+        preparedStatement.setString(4, property.getBrand());
+        preparedStatement.setString(5, property.getSerial());
+        preparedStatement.setInt(6, property.getCount());
+        preparedStatement.setTimestamp(7, Timestamp.valueOf(property.getDateTime()));
         preparedStatement.executeUpdate();
     }
 
     @Override
     public void edit(Property property) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update properties set personal_id=?, name=?, brand=?, serial=?, count=?, date_time=? where id=?"
+                "update properties set person_id=?, name=?, brand=?, serial=?, count=?, date_time=? where id=?"
 
         );
         preparedStatement.setInt(1, property.getPerson().getId());
@@ -63,7 +64,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            Property property = PropertyMapper.propertyMapper(resultSet);
+            Property property = propertyMapper.propertyMapper(resultSet);
             propertyList.add(property);
         }
         return propertyList;
@@ -78,7 +79,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            property = PropertyMapper.propertyMapper(resultSet);
+            property = propertyMapper.propertyMapper(resultSet);
         }
         return property;
     }
@@ -89,7 +90,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
         preparedStatement.setString(1, "%" + name + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            propertyList.add(PropertyMapper.propertyMapper(resultSet));
+            propertyList.add(propertyMapper.propertyMapper(resultSet));
         }
         return propertyList;
     }

@@ -6,12 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PersonService;
 import mftplus.model.service.PropertyService;
-import mftplus.model.tools.FormLoader;
+
 
 import java.net.URL;
 import java.time.LocalDate;
