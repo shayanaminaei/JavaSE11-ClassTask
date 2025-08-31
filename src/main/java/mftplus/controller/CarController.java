@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Car;
 import mftplus.model.service.CarService;
+import mftplus.model.service.PersonService;
 import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
@@ -55,7 +56,7 @@ public class CarController implements Initializable {
         Car car = Car
 
                         .builder()
-                        .personId(Integer.parseInt(personIdText.getText()))
+                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -80,7 +81,7 @@ public class CarController implements Initializable {
 
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
-                        .personId(Integer.parseInt(personIdText.getText()))
+                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -149,7 +150,7 @@ public class CarController implements Initializable {
     try {
       Car car = carTable.getSelectionModel().getSelectedItem();
       idText.setText(String.valueOf(car.getId()));
-      personIdText.setText(String.valueOf(car.getPersonId()));
+      personIdText.setText(String.valueOf(car.getPerson().getId()));
       nameText.setText(car.getName());
       brandText.setText(car.getBrand());
       manDate.setValue(car.getManDate());
