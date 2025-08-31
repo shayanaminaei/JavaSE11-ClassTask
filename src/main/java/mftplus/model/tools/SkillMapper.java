@@ -1,16 +1,17 @@
 package mftplus.model.tools;
 
 import mftplus.model.entity.Skill;
+import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SkillMapper {
-    public Skill skillMapper(ResultSet resultSet) throws SQLException {
+    public Skill skillMapper(ResultSet resultSet) throws Exception {
         return Skill
                 .builder()
                 .id(resultSet.getInt("id"))
-                .personId(resultSet.getInt("person_id"))
+                .person(PersonService.getService().findById(resultSet.getInt("person_id")))
                 .title(resultSet.getString("title"))
                 .institute(resultSet.getString("institute"))
                 .duration(resultSet.getInt("duration"))

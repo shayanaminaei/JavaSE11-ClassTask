@@ -24,7 +24,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         preparedStatement = connection.prepareStatement(
                 "insert into skills (id,personId,title,institute,duration,registerDate,score) values (skill_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, skill.getPersonId());
+        preparedStatement.setInt(1, skill.getPerson().getId());
         preparedStatement.setString(2, skill.getTitle());
         preparedStatement.setString(3, skill.getInstitute());
         preparedStatement.setInt(4, skill.getDuration());
@@ -38,7 +38,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         preparedStatement = connection.prepareStatement(
                 "update skills set person_id=?,title=?,institute=?,duration=?,register_date=?,score=? where id=?"
         );
-        preparedStatement.setInt(1, skill.getPersonId());
+        preparedStatement.setInt(1, skill.getPerson().getId());
         preparedStatement.setString(2, skill.getTitle());
         preparedStatement.setString(3, skill.getInstitute());
         preparedStatement.setInt(4, skill.getDuration());
@@ -60,7 +60,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     @Override
     public List<Skill> findAll() throws Exception {
         List<Skill> skillList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from skills order by id, person_id");
+        preparedStatement = connection.prepareStatement("select * from skills");
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()) {
             Skill skill = skillMapper.skillMapper(resultSet);
