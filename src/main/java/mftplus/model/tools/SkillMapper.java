@@ -4,7 +4,6 @@ import mftplus.model.entity.Skill;
 import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class SkillMapper {
     public Skill skillMapper(ResultSet resultSet) throws Exception {
