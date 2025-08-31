@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class Medical {
     private int id;
-    private int personId;
+    private Person person;
     private String disease;
     private String medicine;
     private Doctor doctor;

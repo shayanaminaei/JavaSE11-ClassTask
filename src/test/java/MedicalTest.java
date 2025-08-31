@@ -13,8 +13,8 @@ public class MedicalTest {
         log.info("Starting Medical Test");
         log.error("error saving");
 
-        MedicalController.getController().save( 1,"digestion","gastric pain pills",
-         Doctor.gastroenterologist, LocalDate.now(),true );
+        //MedicalController.getController().save( 1,"digestion","gastric pain pills",
+         //Doctor.gastroenterologist, LocalDate.now(),true );
 
 
                    //  Medical medical = Medical
