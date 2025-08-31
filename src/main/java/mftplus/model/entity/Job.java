@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class Job {
     private int id;
-    private int personId;
+    private Person person;
     private String organisation;
     private JobTitle title;
     private LocalDate startDate;

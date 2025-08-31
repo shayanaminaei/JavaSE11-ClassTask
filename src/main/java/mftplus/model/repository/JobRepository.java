@@ -26,7 +26,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
                         "values (?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, job.getId());
-        preparedStatement.setInt(2, job.getPersonId());
+        preparedStatement.setInt(2, job.getPerson().getId());
         preparedStatement.setString(3, job.getOrganisation());
         preparedStatement.setString(4, job.getTitle().name());
         preparedStatement.setDate(5,Date.valueOf(job.getStartDate()));
@@ -40,7 +40,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
         preparedStatement = connection.prepareStatement(
                 "update jobs set person_id=? ,orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
         );
-        preparedStatement.setInt(1, job.getPersonId());
+        preparedStatement.setInt(1, job.getPerson().getId());
         preparedStatement.setString(2, job.getOrganisation());
         preparedStatement.setString(3, job.getTitle().name());
         preparedStatement.setDate(4,Date.valueOf(job.getStartDate()));
@@ -82,6 +82,20 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
             job = jobMapper.jobMapper(resultSet);
         }
         return job;
+    }
+
+    public List<Job> findByPersonId(int personId) throws Exception {
+        List<Job> jobList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM JOBS WHERE PERSON_ID=?"
+        );
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Job job = jobMapper.jobMapper(resultSet);
+            jobList.add(job);
+        }
+        return jobList;
     }
 
     public List<Job> findByOrganisation(String organisation) throws Exception {

@@ -50,6 +50,12 @@ public class JobService implements Service<Job, Integer> {
         }
     }
 
+    public Job findByPersonId(Integer personId) throws Exception {
+        try (JobRepository jobRepository = new JobRepository()) {
+            return jobRepository.findById(personId);
+        }
+    }
+
     public List<Job> findByOrganisation(String organisation) throws Exception {
         try (JobRepository jobRepository = new JobRepository()) {
             jobRepository.findByOrganisation(organisation);
