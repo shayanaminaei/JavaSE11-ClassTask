@@ -56,4 +56,9 @@ public class SkillService implements Service<Skill,Integer> {
             return skillRepository.findSkillByTitle(title);
         }
     }
+    public List<Skill> findByPersonId(Integer personId) throws Exception {
+        try (SkillRepository skillRepository = new SkillRepository()) {
+            return skillRepository.findByPersonId(personId);
+        }
+    }
 }

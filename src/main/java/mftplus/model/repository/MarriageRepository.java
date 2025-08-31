@@ -2,7 +2,7 @@ package mftplus.model.repository;
 
 
 import mftplus.model.entity.Marriage;
-import mftplus.model.tools.ConnectionProvider;
+import mftplus.model.tools.ConnectionProviderPostgres;
 import mftplus.model.tools.MarriageMapper;
 
 import java.sql.*;
@@ -16,7 +16,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
 
 
     public MarriageRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getOracleConnection();
+        connection = ConnectionProviderPostgres.getProvider().getConnection();
 
     }
 
@@ -26,7 +26,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         preparedStatement = connection.prepareStatement(
                 "INSERT INTO marriages(id, person_id, name, family, marriage_date, is_alive, children) VALUES (?, ?, ?, ?, ?, ?, ?) "
         );
-        preparedStatement.setInt(1, marriage.getPersonId());
+        preparedStatement.setInt(1, marriage.getPerson().getId());
         preparedStatement.setInt(2, marriage.getMarriageId());
         preparedStatement.setString(3, marriage.getName());
         preparedStatement.setString(4, marriage.getFamily());
@@ -43,7 +43,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         preparedStatement = connection.prepareStatement(
                 "UPDATE marriages SET person_id=?, name=?, family=?, is_alive=?, children=?, marriage_date=? WHERE id=?"
         );
-        preparedStatement.setInt(1, marriage.getPersonId());
+        preparedStatement.setInt(1, marriage.getPerson().getId());
         preparedStatement.setString(2, marriage.getName());
         preparedStatement.setString(3, marriage.getFamily());
         preparedStatement.setDate(4, Date.valueOf(marriage.getMarriageDate()));
@@ -57,7 +57,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "DELETE FROM marriages WHERE id = ?");
+                "DELETE  FROM marriages WHERE id = ?");
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
 
@@ -109,10 +109,43 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         return marriageList;
     }
 
+
+    public List<Marriage> findByPersonId(Integer personId) throws Exception {
+        List<Marriage> marriageList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM marriages WHERE person_id=?"
+        );
+
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
+            marriageList.add(marriage);
+        }
+        return marriageList;
+    }
+
+    public List<Marriage> findByNameAndFamily(String name , String family) throws Exception {
+        List<Marriage> marriageList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement("SELECT * FROM marriages WHERE name LIKE ? AND family LIKE ?");
+        preparedStatement.setString(1, "%"+name+"%");
+        preparedStatement.setString(2, "%"+family+"%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
+            marriageList.add(marriage);
+        }
+        return marriageList;
+    }
+
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
     }
-
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class Marriage {
     private int marriageId;
-    private int personId;
+    private Person person;
     private String name;
     private String family;
     private LocalDate marriageDate;
