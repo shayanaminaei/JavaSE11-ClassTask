@@ -56,11 +56,19 @@ public class CarService implements Service<Car, Integer> {
         }
     }
 
-    public List<Car> findByPersonId(int personId) throws Exception {
+
+
+    public List<Car> findByPersonId(Integer personId) throws Exception {
         try (CarRepository carRepository = new CarRepository()) {
             return carRepository.findByPersonId(personId);
         }
     }
+    /*
+    public List<Car> findByPersonId(Person person) throws Exception {
+        try (CarRepository carRepository = new CarRepository()) {
+            return carRepository.findByPersonId(person.getId());
+        }
+    }*/
 
     public List<Car> findByBrand ( String brand) throws Exception {
         try (CarRepository carRepository = new CarRepository()) {

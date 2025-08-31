@@ -60,7 +60,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     public List<Property> findAll() throws Exception {
         List<Property> propertyList = new ArrayList<>();
 
-        preparedStatement = connection.prepareStatement("select * from properties order by id");
+        preparedStatement = connection.prepareStatement("select * from properties");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {

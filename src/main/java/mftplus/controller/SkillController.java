@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Skill;
+import mftplus.model.service.PersonService;
 import mftplus.model.service.SkillService;
 
 import java.net.URL;
@@ -50,7 +51,7 @@ public class SkillController implements Initializable {
                 Skill skill  =
                         Skill
                                 .builder()
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 . title(titleText.getText())
                                 . institute(instituteText.getText())
                                 .duration(Integer.parseInt(durationText.getText()))
@@ -75,7 +76,7 @@ public class SkillController implements Initializable {
                         Skill
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
-                                .personId(Integer.parseInt(personIdText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 . title(titleText.getText())
                                 . institute(instituteText.getText())
                                 .duration(Integer.parseInt(durationText.getText()))
@@ -145,7 +146,7 @@ public class SkillController implements Initializable {
         try {
             Skill skill  = skillTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(skill.getId()));
-            personIdText.setText(String.valueOf(skill.getPersonId()));
+            personIdText.setText(String.valueOf(skill.getPerson().getId()));
             titleText.setText(skill.getTitle());
             instituteText.setText(skill.getInstitute());
             durationText.setText(String.valueOf(skill.getDuration()));

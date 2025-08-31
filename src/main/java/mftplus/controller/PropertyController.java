@@ -141,7 +141,7 @@ public class PropertyController implements Initializable {
             countText.clear();
             dateTime.setValue(LocalDate.now());
 
-            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
+            showDateOnTable(PropertyService.getService().findAll());
     }
     private void showDateOnTable(List<Property> propertyList) {
         ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Car;
 import mftplus.model.service.CarService;
+import mftplus.model.service.PersonService;
 import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 
 @Log4j
 public class CarController implements Initializable {
+  MainController mainController = new MainController();
   @FXML
   private TextField idText, personIdText, nameText, brandText, colorText, plateText, searchNameText, searchIdText;
 
@@ -54,7 +56,7 @@ public class CarController implements Initializable {
         Car car = Car
 
                         .builder()
-                        .personId(Integer.parseInt(personIdText.getText()))
+                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -79,7 +81,7 @@ public class CarController implements Initializable {
 
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
-                        .personId(Integer.parseInt(personIdText.getText()))
+                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -100,7 +102,11 @@ public class CarController implements Initializable {
 
     deleteButton.setOnAction((event) -> {
       try {
-        FormLoader.getFormLoader().showStage(new Stage(), "/view/CarView.fxml", "Car Information");
+        CarService.getService().delete(Integer.parseInt(idText.getText()));
+        log.info("Car Deleted Successfully");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Deleted successfully\n" + idText.getText(), ButtonType.OK);
+        alert.show();
+        resetForm();
       } catch (Exception e) {
         log.error("Car Delete Failed " + e.getMessage());
         Alert alert = new Alert(Alert.AlertType.ERROR, "Car Delete Failed " + e.getMessage(), ButtonType.OK);
@@ -144,7 +150,7 @@ public class CarController implements Initializable {
     try {
       Car car = carTable.getSelectionModel().getSelectedItem();
       idText.setText(String.valueOf(car.getId()));
-      personIdText.setText(String.valueOf(car.getPersonId()));
+      personIdText.setText(String.valueOf(car.getPerson().getId()));
       nameText.setText(car.getName());
       brandText.setText(car.getBrand());
       manDate.setValue(car.getManDate());
@@ -154,6 +160,7 @@ public class CarController implements Initializable {
       Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
       alert.show();
     }
+    mainController.changeText(2);
   }
 
   public void searchById() {

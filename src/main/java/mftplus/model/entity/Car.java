@@ -17,12 +17,13 @@ import java.time.LocalDate;
 
 public class Car {
     private int id;
-    private int personId;
+    private Person person;
     private String name;
     private String brand;
     private LocalDate manDate;
     private String color;
     private String plate;
+
 
     @Override
     public String toString() {

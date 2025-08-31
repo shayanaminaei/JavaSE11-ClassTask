@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class Salary {
     private int id;
-    private int personId;
+    private Person person;
     private int weeklyHour;
     private int payPerHour;
     private LocalDate startDate;
