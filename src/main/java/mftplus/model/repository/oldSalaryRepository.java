@@ -8,13 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalaryRepository implements Repository<Salary, Integer>, AutoCloseable {
+public class oldSalaryRepository implements Repository<Salary, Integer>, AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private SalariesMapper salariesMapper = new SalariesMapper();
 
-    public SalaryRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getOracleConnection();
+    public oldSalaryRepository() throws SQLException {
+        connection = ConnectionProvider.getProvider().getConnection();
     }
 
     @Override
@@ -22,7 +22,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
         preparedStatement = connection.prepareStatement(
                 "INSERT INTO salaries (person_id, weekly_hour, pay_per_hour, start_date, end_date, employee_type) VALUES (?, ?, ?, ?, ?, ?)"
         );
-        preparedStatement.setInt(1, salary.getPerson().getId());
+        preparedStatement.setInt(1, salary.getPersonId());
         preparedStatement.setInt(2, salary.getWeeklyHour());
         preparedStatement.setInt(3, salary.getPayPerHour());
         preparedStatement.setDate(4, Date.valueOf(salary.getStartDate()));
@@ -36,7 +36,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
         preparedStatement = connection.prepareStatement(
                 "UPDATE salaries SET person_id=?, weekly_hour=?, pay_per_hour=?, start_date=?, end_date=?, employee_type=? WHERE id=?"
         );
-        preparedStatement.setInt(1, salary.getPerson().getId());
+        preparedStatement.setInt(1, salary.getPersonId());
         preparedStatement.setInt(2, salary.getWeeklyHour());
         preparedStatement.setInt(3, salary.getPayPerHour());
         preparedStatement.setDate(4, Date.valueOf(salary.getStartDate()));
@@ -74,20 +74,6 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
             salary = salariesMapper.salaryMapper(rs);
         }
         return salary;
-    }
-    public List<Salary> findByPersonId(Integer personId) throws Exception {
-        List<Salary> salaryList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("SELECT * FROM salaries WHERE person_id=?");
-        preparedStatement.setInt(1, personId);
-        ResultSet resultSets = preparedStatement.executeQuery();
-        while (resultSets.next()) {
-            Salary salary = salariesMapper.salaryMapper(resultSets);
-            salaryList.add(salary);
-
-        }
-        return salaryList;
-
-
     }
 
 

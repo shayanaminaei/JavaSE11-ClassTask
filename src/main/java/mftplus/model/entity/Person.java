@@ -9,6 +9,7 @@ import mftplus.model.entity.enums.Role;
 import mftplus.model.service.CarService;
 import mftplus.model.service.EducationService;
 import mftplus.model.service.MarriageService;
+import mftplus.model.service.SalaryService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +37,9 @@ public class Person {
 
     public List<Marriage> getMarriageList() throws Exception {
         return MarriageService.getService().findByPersonId(id);
+    }
+    public List<Salary> getSalaryList() throws Exception {
+        return SalaryService.getService().findByPersonId(id);
     }
 
     @Override

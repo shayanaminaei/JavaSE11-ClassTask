@@ -11,7 +11,7 @@ public class SalariesMapper {
     public Salary salaryMapper(ResultSet rs) throws SQLException {
         Salary.SalaryBuilder builder = Salary.builder()
                 .id(rs.getInt("id"))
-                .personId(rs.getInt("person_id"))
+                .person(rs.getInt("person_id"))
                 .weeklyHour(rs.getInt("weekly_hour"))
                 .payPerHour(rs.getInt("pay_per_hour"))
                 .startDate(rs.getDate("start_date").toLocalDate())

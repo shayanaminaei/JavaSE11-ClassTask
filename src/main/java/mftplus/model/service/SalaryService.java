@@ -21,6 +21,11 @@ public class SalaryService implements Service<Salary, Integer> {
             } else {
                 throw new Exception("Pay per hour must be positive!");
             }
+            if (salary.getEndDate().isAfter(salary.getStartDate())) {
+                salaryRepository.save(salary);
+            }else  {
+                throw new Exception("Start date must be greater than end date!");
+            }
         }
     }
 
@@ -49,6 +54,12 @@ public class SalaryService implements Service<Salary, Integer> {
     public Salary findById(Integer id) throws Exception {
         try (SalaryRepository salaryRepository = new SalaryRepository()) {
             return salaryRepository.findById(id);
+        }
+    }
+    @Override
+    public Salary findByPersonId(Integer personId)throws Exception {
+        try (SalaryRepository salaryRepository = new SalaryRepository()) {
+            return salaryRepository.findByPersonId(personId);
         }
     }
 
