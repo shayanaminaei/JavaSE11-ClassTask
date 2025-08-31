@@ -41,11 +41,4 @@ public class CarTest {
     }
 
 }
-/*
-موقع ران گرفتن فقط ارور رو میداد
-src\main\java\mftplus\controller\SkillController.java:32:16
-java: cannot find symbol
-  symbol:   variable info
-  location: variable log of type org.apache.log4j.Logger
 
- */
