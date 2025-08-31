@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class Medical {
     private int id;
-    private int personId;
+    private Person person;
     private String disease;
     private String medicine;
     private Doctor doctor;
@@ -27,6 +27,7 @@ public class Medical {
 
 
     @Override
+
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);

@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 @Log4j
 public class CarController implements Initializable {
+  MainController mainController = new MainController();
   @FXML
   private TextField idText, personIdText, nameText, brandText, colorText, plateText, searchNameText, searchIdText;
 
@@ -100,7 +101,11 @@ public class CarController implements Initializable {
 
     deleteButton.setOnAction((event) -> {
       try {
-        FormLoader.getFormLoader().showStage(new Stage(), "/view/CarView.fxml", "Car Information");
+        CarService.getService().delete(Integer.parseInt(idText.getText()));
+        log.info("Car Deleted Successfully");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Deleted successfully\n" + idText.getText(), ButtonType.OK);
+        alert.show();
+        resetForm();
       } catch (Exception e) {
         log.error("Car Delete Failed " + e.getMessage());
         Alert alert = new Alert(Alert.AlertType.ERROR, "Car Delete Failed " + e.getMessage(), ButtonType.OK);
@@ -154,6 +159,7 @@ public class CarController implements Initializable {
       Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
       alert.show();
     }
+    mainController.changeText(2);
   }
 
   public void searchById() {

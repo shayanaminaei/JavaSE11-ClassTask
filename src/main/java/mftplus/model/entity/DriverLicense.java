@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class DriverLicense {
     private int id;
-    private int personId;
+    private Person person;
     private String serial;
     private DriverLicenseType driverLicenseType;
     private String city;

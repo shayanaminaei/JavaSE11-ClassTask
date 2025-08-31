@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private JobMapper jobMapper = new JobMapper();
+    private final JobMapper jobMapper = new JobMapper();
 
     public JobRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
@@ -19,15 +19,19 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
 
     @Override
     public void save(Job job) throws Exception {
+        job.setId(ConnectionProvider.getProvider().getNextId("job_seq"));
+
         preparedStatement = connection.prepareStatement(
-                "insert into jobs (id, person_id, organisation, title, start_date, end_date, description ) values (person_seq.nextval,?,?,?,?,?,?)"
+                "insert into jobs (id, person_id, organisation, title, start_date, end_date, description ) " +
+                        "values (?,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, job.getPersonId());
-        preparedStatement.setString(2, job.getOrganisation());
-        preparedStatement.setString(3, job.getTitle().name());
-        preparedStatement.setDate(4,Date.valueOf(job.getStartDate()));
-        preparedStatement.setDate(5,Date.valueOf(job.getEndDate()));
-        preparedStatement.setString(6, job.getDescription());
+        preparedStatement.setInt(1, job.getId());
+        preparedStatement.setInt(2, job.getPersonId());
+        preparedStatement.setString(3, job.getOrganisation());
+        preparedStatement.setString(4, job.getTitle().name());
+        preparedStatement.setDate(5,Date.valueOf(job.getStartDate()));
+        preparedStatement.setDate(6,Date.valueOf(job.getEndDate()));
+        preparedStatement.setString(7, job.getDescription());
         preparedStatement.execute();
     }
 
@@ -58,6 +62,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public List<Job> findAll() throws Exception {
         List<Job> jobList = new ArrayList<>();
+
         preparedStatement  = connection.prepareStatement("select * from job order by organisation");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
