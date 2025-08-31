@@ -146,7 +146,7 @@ public class SkillController implements Initializable {
         try {
             Skill skill  = skillTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(skill.getId()));
-            personIdText.setText(String.valueOf(skill.getPersonId()));
+            personIdText.setText(String.valueOf(skill.getPerson().getId()));
             titleText.setText(skill.getTitle());
             instituteText.setText(skill.getInstitute());
             durationText.setText(String.valueOf(skill.getDuration()));
