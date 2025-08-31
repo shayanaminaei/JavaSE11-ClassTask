@@ -1,7 +1,11 @@
 import mftplus.controller.DriverLicenseController;
 import mftplus.model.entity.DriverLicense;
+import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.DriverLicenseType;
+import mftplus.model.entity.enums.Role;
+import mftplus.model.repository.DriverLicenseRepository;
 import mftplus.model.service.DriverLicenseService;
+import mftplus.model.service.PersonService;
 
 import java.time.LocalDate;
 
@@ -9,17 +13,23 @@ public class DriverLicensesTest {
 
 
     public static void main(String[] args) throws Exception {
-        DriverLicenseController.getController().save(1, 2, "123456", DriverLicenseType.Car, "تهران", LocalDate.of(2010, 1, 1), LocalDate.of(2020, 1, 1));
-        DriverLicenseController.getController().edit(2, 3, "234567", DriverLicenseType.Truck, "رشت", LocalDate.of(2010, 1, 1), LocalDate.of(2020, 1, 1));
-        DriverLicenseController.getController().delete(7);
-        System.out.println(DriverLicenseController.getController().findAll());
-        System.out.println(DriverLicenseController.getController().findById(6));
+
+        Person person =
+                Person
+                        .builder()
+                        .name("zahra")
+                        .family("moradiNejad")
+                        .birthDate(LocalDate.of(1994, 2, 10))
+                        .role(Role.admin)
+                        .status(true)
+                        .build();
+        PersonService.getService().save(person);
 
 
         DriverLicense driverLicense = DriverLicense
                 .builder()
                 .id('1')
-                .personId('2')
+                .person(PersonService.getService().findById(1))
                 .serial("12345678")
                 .driverLicenseType(DriverLicenseType.Bus)
                 .city("تهران")
@@ -27,6 +37,9 @@ public class DriverLicensesTest {
                 .expireDate(LocalDate.of(2030, 1, 1))
                 .build();
         DriverLicenseService.getService().save(driverLicense);
+
+
+
     }
 }
 

@@ -6,12 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PersonService;
 import mftplus.model.service.PropertyService;
-import mftplus.model.tools.FormLoader;
+
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -37,7 +36,7 @@ public class PropertyController implements Initializable {
     private TableColumn<Property, Integer> idColumn;
 
     @FXML
-    private TableColumn<Property, String> personIdColumn;
+    private TableColumn<Property, Integer> personIdColumn;
 
     @FXML
     private TableColumn<Property, String> nameColumn;
@@ -52,7 +51,7 @@ public class PropertyController implements Initializable {
     private TableColumn<Property, Integer> countColumn;
 
     @FXML
-    private TableColumn<Property, LocalDate> dateTimeColumn;
+    private TableColumn<Property, LocalDateTime> dateTimeColumn;
 
     @FXML
     private TableView<Property> propertyTable;
@@ -76,7 +75,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .dateTime(dateTime.getValue().atStartOfDay())
                                 .build();
                 PropertyService.getService().save(property);
                 log.info("Property saved");
@@ -100,7 +99,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .dateTime(dateTime.getValue().atStartOfDay())
                                 .build();
                 PropertyService.getService().edit(property);
                 log.info("Property edited");
@@ -142,7 +141,7 @@ public class PropertyController implements Initializable {
             countText.clear();
             dateTime.setValue(LocalDate.now());
 
-            showDateOnTable(PropertyService.getService().findByName(searchNameText.getText()));
+            showDateOnTable(PropertyService.getService().findAll(searchNameText.getText()));
     }
     private void showDateOnTable(List<Property> propertyList) {
         ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);
@@ -166,7 +165,7 @@ public class PropertyController implements Initializable {
             brandText.setText(property.getBrand());
             serialText.setText(String.valueOf(property.getSerial()));
             countText.setText(String.valueOf(property.getCount()));
-            dateTime.setValue(LocalDate.from(property.getDateTime()));
+            dateTime.setValue(property.getDateTime().toLocalDate());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();

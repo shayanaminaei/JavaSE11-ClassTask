@@ -1,6 +1,8 @@
 package mftplus.model.repository;
 
 import mftplus.model.entity.DriverLicense;
+import mftplus.model.entity.Education;
+import mftplus.model.entity.SimCard;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.DriverLicensesMapper;
 
@@ -19,13 +21,13 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
 
     @Override
     public void save(DriverLicense driverLicense) throws Exception {
-        driverLicense.setId(ConnectionProvider.getProvider().getNextId("driverLicense_seq"));
+        driverLicense.setId(ConnectionProvider.getProvider().getNextId("License_seq"));
 
         preparedStatement = connection.prepareStatement(
-                "insert into driver_license (id, personid, serial, licenseType,city, register_Date, expire_Date) values (?, ?, ?, ?, ?, ?, ?)"
+                "insert into driver_license (id, person_id, serial, license_type,city, register_date, expire_date) values (?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, driverLicense.getId());
-        preparedStatement.setInt(2, driverLicense.getPersonId());
+        preparedStatement.setInt(2, driverLicense.getPerson().getId());
         preparedStatement.setString(3, driverLicense.getSerial());
         preparedStatement.setString(4, driverLicense.getDriverLicenseType().name());
         preparedStatement.setString(5, driverLicense.getCity());
@@ -37,9 +39,9 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
     @Override
     public void edit(DriverLicense driverLicense) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update driver_license set personid=?, serial=?, licenseType=?,city=?, register_Date=?, expire_Date=? where id=?"
+                "update driver_license set person_id=?, serial=?, license_type=?,city=?, register_date=?, expire_date=? where id=?"
         );
-        preparedStatement.setInt(1, driverLicense.getPersonId());
+        preparedStatement.setInt(1, driverLicense.getPerson().getId());
         preparedStatement.setString(2, driverLicense.getSerial());
         preparedStatement.setString(3, driverLicense.getDriverLicenseType().name());
         preparedStatement.setString(4, driverLicense.getCity());
@@ -63,7 +65,7 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
         List<DriverLicense> driverLicenseList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from driver_License order by id, personId"
+                "select * from driver_License order by id, PERSON_ID"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -90,9 +92,48 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
         return driverLicense;
     }
 
+
+    public List<DriverLicense> findByPersonId(int personId) throws Exception {
+        List<DriverLicense> driverLicenseList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM driver_License WHERE PERSON_ID=?"
+        );
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            DriverLicense driverLicense = driverLicensesMapper.driverLicensesMapper(resultSet);
+            driverLicenseList.add(driverLicense);
+        }
+        return driverLicenseList;
+    }
+
+
+    public List<DriverLicense> findBySerial(String Serial) throws Exception {
+        List<DriverLicense> driverLicenseList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from driver_License where Serial like ?");
+        preparedStatement.setString(1, Serial + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            DriverLicense driverLicense = driverLicensesMapper.driverLicensesMapper(resultSet);
+            driverLicenseList.add(driverLicense);
+        }
+        return driverLicenseList;
+    }
+
+    public int getNextId() throws Exception {
+        ResultSet resultSet = connection.prepareStatement("SELECT license_seq.nextval AS NEXTID FROM DUAL").executeQuery();
+        resultSet.next();
+        return resultSet.getInt("NEXTID");
+    }
+
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
     }
+
+
 }

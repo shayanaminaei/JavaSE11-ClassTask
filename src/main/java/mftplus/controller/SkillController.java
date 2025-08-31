@@ -6,11 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Skill;
 import mftplus.model.service.SkillService;
-import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -98,7 +96,11 @@ public class SkillController implements Initializable {
 
         deleteButton.setOnAction((event) -> {
             try {
-                FormLoader.getFormLoader().showStage(new Stage(), "/view/SkillView.fxml", "Skill Information");
+                SkillService.getService().delete(Integer.parseInt(idText.getText()));
+                log.info("Skill Deleted Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
+                alert.show();
+                resetForm();
             } catch (Exception e) {
                 log.error("Skill Delete Failed " + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Skill Delete Failed " + e.getMessage(), ButtonType.OK);
