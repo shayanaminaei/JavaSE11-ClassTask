@@ -24,6 +24,7 @@ public class Car {
     private String color;
     private String plate;
 
+
     @Override
     public String toString() {
         Gson gson = new Gson();

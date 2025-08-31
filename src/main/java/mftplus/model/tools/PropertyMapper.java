@@ -3,6 +3,7 @@ package mftplus.model.tools;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PersonService;
 
+
 import java.sql.ResultSet;
 
 public class PropertyMapper {

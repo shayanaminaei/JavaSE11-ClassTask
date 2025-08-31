@@ -12,7 +12,7 @@ import java.util.List;
 public class MarriageService implements Service<Marriage, Integer> {
 
     @Getter
-    private static MarriageService marriageService = new MarriageService();
+    private static MarriageService Service = new MarriageService();
 
 
     public MarriageService() {
@@ -58,6 +58,18 @@ public class MarriageService implements Service<Marriage, Integer> {
     public Marriage findById(Integer id) throws Exception {
         try(MarriageRepository marriageRepository = new MarriageRepository() ) {
             return marriageRepository.findById(id);
+        }
+    }
+
+    public List<Marriage> findByPersonId(Integer personId) throws Exception {
+        try(MarriageRepository marriageRepository = new MarriageRepository() ) {
+            return marriageRepository.findByPersonId(personId);
+        }
+    }
+
+    public List<Marriage> findByNameAndFamily(String name, String family) throws Exception {
+        try(MarriageRepository marriageRepository = new MarriageRepository() ) {
+            return marriageRepository.findByNameAndFamily(name, family);
         }
     }
 }
