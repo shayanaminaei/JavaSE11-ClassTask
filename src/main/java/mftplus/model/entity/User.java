@@ -17,7 +17,7 @@ public class User {
     private Person person;
     private String name;
     private String family;
-    private  String username;
+    private String username;
     private String password;
     private String nickname;
     private Boolean locked;

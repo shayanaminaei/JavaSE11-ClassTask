@@ -1,6 +1,7 @@
 package mftplus.controller.api;
 
 import mftplus.model.entity.Person;
+import mftplus.model.service.PersonService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,9 +19,16 @@ public class PersonApi {
         return Response.status(Response.Status.FORBIDDEN).build();
     }
 
-//    @POST
-//    public String save(@QueryParam("name") String name, @QueryParam("family") String family){
-//        Person person = new Person(1, name, family);
-//        return person.toString();
-//    }
+    @POST
+    public Response save(@QueryParam("name") String name, @QueryParam("family") String family){
+        try {
+            Person person = null; // new Person(1, name, family);
+            PersonService.getService().save(person);
+//            log.info();
+            return Response.ok(person).build();
+        }catch (Exception e){
+//            log.error();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
 }

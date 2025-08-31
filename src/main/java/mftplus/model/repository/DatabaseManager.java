@@ -1,5 +1,6 @@
 package mftplus.model.repository;
 
+import lombok.extern.log4j.Log4j;
 import mftplus.model.tools.ConnectionProvider;
 
 import java.io.File;
@@ -7,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+@Log4j
 public class DatabaseManager {
     public static void createDatabase() throws FileNotFoundException, SQLException {
 
@@ -19,12 +21,12 @@ public class DatabaseManager {
         String[] sqlCommands = sqlCommand.split(";");
 
         for (String command : sqlCommands) {
-            System.out.println(command);
+            log.info(command);
             try {
                 ConnectionProvider.getProvider().getOracleConnection().prepareStatement(command).execute();
-                System.out.println("Created");
+                log.info("Created");
             }catch (SQLException e){
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
 
             System.out.println("-------------------------------------------------------");
