@@ -59,7 +59,7 @@ public class SalaryService implements Service<Salary, Integer> {
     @Override
     public Salary findByPersonId(Integer personId)throws Exception {
         try (SalaryRepository salaryRepository = new SalaryRepository()) {
-            return salaryRepository.findByPersonId(personId);
+            return (Salary) salaryRepository.findByPersonId(personId);
         }
     }
 

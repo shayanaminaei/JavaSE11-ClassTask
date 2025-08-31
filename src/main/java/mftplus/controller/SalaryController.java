@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.Salary;
 import mftplus.model.entity.enums.EmployeeType;
+import mftplus.model.service.PersonService;
 import mftplus.model.service.SalaryService;
 
 import java.net.URL;
@@ -57,7 +58,7 @@ public class SalaryController implements Initializable {
                 Salary salary =
                         Salary
                                 .builder()
-                            .person(new Person(Integer.parseInt(personIdText.getText())))
+                            .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                             .weeklyHour(Integer.parseInt(weeklyHourText.getText()))
                             .payPerHour(Integer.parseInt(payPerHourText.getText()))
                             .startDate(startDate.getValue())
