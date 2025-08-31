@@ -23,7 +23,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
                 "insert into cars(id, person_id, name, brand, man_date,color,plate) values(?, ?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, car.getId());
-        preparedStatement.setInt(2, car.getPersonId());
+        preparedStatement.setInt(2, car.getPerson().getId());
         preparedStatement.setString(3,car.getName());
         preparedStatement.setString(4, car.getBrand());
         preparedStatement.setDate(5, Date.valueOf(car.getManDate()));
@@ -39,7 +39,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
                 "update cars set  person_id =?, name = ?, brand=?, man_date=?,color=?,plate=? where id=?"
         );
 
-        preparedStatement.setInt(1, car.getPersonId());
+        preparedStatement.setInt(1, car.getPerson().getId());
         preparedStatement.setString(2,car.getName());
         preparedStatement.setString(3, car.getBrand());
         preparedStatement.setDate(4, Date.valueOf(car.getManDate()));
@@ -101,6 +101,20 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
         }
         return carList;
     }
+   /* public List<Car> findPersonById(int personId) throws Exception {
+        List<Car> carList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement("select * from CARS where person_id=?");
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Car car = carMapper.carMapper(resultSet);
+            carList.add(car);
+        }
+        return carList;
+    }
+    */
 
     public List<Car> findByBrand(String brand) throws Exception {
         List<Car> carList = new ArrayList<>();
