@@ -156,4 +156,21 @@ create table properties
 
 create sequence property_seq start with 1 increment by 1;
 
+--
 
+create table driver_license
+(
+    id            number primary key,
+    person_id      number,
+    serial        nvarchar2(20)        not null,
+    license_type   nvarchar2(20)       not null,
+    city          nvarchar2(20)        not null,
+    register_date date,
+    expire_date   date,
+    constraint fk_license_person FOREIGN KEY (person_id) references persons (id)
+
+);
+
+create sequence license_seq start with 1 increment by 1;
+
+--

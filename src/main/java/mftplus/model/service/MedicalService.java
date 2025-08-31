@@ -14,6 +14,7 @@ public class MedicalService implements Service<Medical, Integer> {
     }
 
     @Override
+
     public void save(Medical medical) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.save(medical);
@@ -50,6 +51,11 @@ public class MedicalService implements Service<Medical, Integer> {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             return medicalRepository.findById(id);
         }
+    }
 
+    public List<Medical> findByPersonId(Integer personId) throws Exception {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            return medicalRepository.findAllByPersonId(personId);
+        }
     }
 }

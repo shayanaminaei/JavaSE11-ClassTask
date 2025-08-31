@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.DriverLicense;
 import mftplus.model.entity.enums.DriverLicenseType;
 import mftplus.model.service.DriverLicenseService;
+import mftplus.model.service.PersonService;
+import mftplus.model.service.SimCardService;
 import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
@@ -21,7 +23,7 @@ import java.util.ResourceBundle;
 public class DriverLicenseController  implements Initializable {
 
     @FXML
-    private TextField idText, personText,serialText, cityText, searchPersonID;
+    private TextField idText, personText,serialText, cityText, searchSerial;
 
     @FXML
     private DatePicker registerDate,expireDate;
@@ -63,7 +65,7 @@ public class DriverLicenseController  implements Initializable {
                 DriverLicense driverLicense =
                         DriverLicense
                                 .builder()
-                                .personId(Integer.parseInt(personText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personText.getText())))
                                 .serial(serialText.getText())
                                 .driverLicenseType(driverLisenseCombo.getSelectionModel().getSelectedItem())
                                 .city(cityText.getText())
@@ -87,7 +89,7 @@ public class DriverLicenseController  implements Initializable {
                 DriverLicense driverLicense =
                         DriverLicense
                                 .builder()
-                                .personId(Integer.parseInt(personText.getText()))
+                                .person(PersonService.getService().findById(Integer.parseInt(personText.getText())))
                                 .serial(serialText.getText())
                                 .driverLicenseType(driverLisenseCombo.getSelectionModel().getSelectedItem())
                                 .city(cityText.getText())
@@ -159,7 +161,7 @@ public class DriverLicenseController  implements Initializable {
         try {
             DriverLicense driverLicense = driverLicenseTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(driverLicense.getId()));
-            personText.setText(String.valueOf(driverLicense.getPersonId()));
+            personIdColumn.setText(String.valueOf(driverLicense.getPerson().getId()));
             serialText.setText(driverLicense.getSerial());
             driverLisenseCombo.getSelectionModel().select(driverLicense.getDriverLicenseType());
             cityText.setText(driverLicense.getCity());
@@ -167,6 +169,16 @@ public class DriverLicenseController  implements Initializable {
             expireDate.setValue(driverLicense.getExpireDate());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            alert.show();
+        }
+    }
+    public void findBySerial() {
+        try {
+            showDateOnTable(DriverLicenseService.getService().findBySerial(searchSerial.getText()));
+            log.info("DriverLicense findBySerial " + searchSerial.getText() + " Successfully");
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            log.info("DriverLicense findBySerial " + searchSerial.getText() + " error" + e.getMessage());
             alert.show();
         }
     }
