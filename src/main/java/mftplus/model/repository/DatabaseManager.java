@@ -20,7 +20,13 @@ public class DatabaseManager {
 
         for (String command : sqlCommands) {
             System.out.println(command);
-            ConnectionProvider.getProvider().getOracleConnection().prepareStatement(command).execute();
+            try {
+                ConnectionProvider.getProvider().getOracleConnection().prepareStatement(command).execute();
+                System.out.println("Created");
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+
             System.out.println("-------------------------------------------------------");
         }
     }

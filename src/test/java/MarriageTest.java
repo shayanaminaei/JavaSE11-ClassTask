@@ -19,7 +19,7 @@ public class MarriageTest {
 
 
         Marriage marriage = Marriage.builder()
-                .personId(1)
+//                .personId(1)
                 .name("Sara")
                 .family("Ahmadi")
                 .marriageDate(LocalDate.of(2020, 5, 15))

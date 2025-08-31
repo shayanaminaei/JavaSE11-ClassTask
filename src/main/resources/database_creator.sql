@@ -11,6 +11,23 @@ create table persons
 create sequence person_seq start with 1 increment by 1;
 
 
+create table users
+(
+    id            number primary key,
+    person_id     number,
+    name          nvarchar2(20) not null,
+    family        nvarchar2(20) not null,
+    username      nvarchar2(20) not null unique,
+    password      nvarchar2(20) not null,
+    nick_name     nvarchar2(20) not null,
+    locked        number(1) default 0,
+    register_date date default sysdate,
+    constraint fk_user_person FOREIGN KEY (person_id) references persons (id)
+
+);
+
+create sequence user_seq start with 1 increment by 1;
+
 create table cars
 (
     id        number unique                 not null,
@@ -135,7 +152,7 @@ create sequence sim_card_seq start with 1 increment by 1;
 create table properties
 (
     id        number primary key,
-    person_id     number,
+    person_id number,
     name      nvarchar2(20)        not null,
     brand     nvarchar2(20)        not null,
     serial    nvarchar2(20) unique not null,
@@ -150,10 +167,10 @@ create sequence property_seq start with 1 increment by 1;
 create table driver_license
 (
     id            number primary key,
-    person_id      number,
-    serial        nvarchar2(20)        not null,
-    license_type   nvarchar2(20)       not null,
-    city          nvarchar2(20)        not null,
+    person_id     number,
+    serial        nvarchar2(20) not null,
+    license_type  nvarchar2(20) not null,
+    city          nvarchar2(20) not null,
     register_date date,
     expire_date   date,
     constraint fk_license_person FOREIGN KEY (person_id) references persons (id)

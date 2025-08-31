@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 
-public class Users {
+public class User {
     private int id;
     private Person person;
     private String name;

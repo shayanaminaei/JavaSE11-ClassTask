@@ -12,12 +12,12 @@ import java.sql.SQLException;
 
 public class FxApp extends Application {
     public static void main(String[] args) throws SQLException, IOException {
-//        DatabaseManager.createDatabase();
+        DatabaseManager.createDatabase();
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FormLoader.getFormLoader().showStage(primaryStage, "/view/PersonView.fxml", "Person Information");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
     }
 }
