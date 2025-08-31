@@ -1,10 +1,4 @@
 import lombok.extern.log4j.Log4j;
-import mftplus.model.entity.Person;
-import mftplus.model.entity.Skill;
-import mftplus.model.entity.enums.Role;
-
-
-import java.time.LocalDate;
 @Log4j
 public class SkillTest {
     public static void main(String[] args) throws Exception {
@@ -17,8 +11,8 @@ public class SkillTest {
 //        System.out.println(SkillController.getController().findAll());
 //
 //        System.out.println(SkillController.getController().findById(6));
-        Person person1 =
-                Person
+/*        Person person1 =
+               Person
                         .builder()
                         .name("ali")
                         .family("alipour")
@@ -66,8 +60,8 @@ public class SkillTest {
 //                .registerDate(LocalDate.of(1404, 5, 1))
 //                .score(100)
 //                .build();
-//
-//        SkillService.getService().save(skill);
-//    }
+// SkillService.getService().save(skill);
+*/
+   }
 
 }
