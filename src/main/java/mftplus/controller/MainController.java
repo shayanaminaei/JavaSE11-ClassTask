@@ -15,7 +15,7 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem addPersonMnu;
 
-    PersonController personController = new PersonController();
+//    PersonController personController = new PersonController();
 
     @FXML
     public void changeText(int a){
