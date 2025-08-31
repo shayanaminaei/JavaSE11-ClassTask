@@ -38,7 +38,7 @@ public class Person {
     public List<Marriage> getMarriageList() throws Exception {
         return MarriageService.getService().findByPersonId(id);
     }
-    public List<Salary> getSalaryList() throws Exception {
+    public Salary getSalaryList() throws Exception {
         return SalaryService.getService().findByPersonId(id);
     }
 

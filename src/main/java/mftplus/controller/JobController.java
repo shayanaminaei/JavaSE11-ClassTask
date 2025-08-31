@@ -63,7 +63,7 @@ public class JobController implements Initializable {
                 Job job =
                         Job
                                 .builder()
-                                .personId(Integer.parseInt(personIdText.getText()))
+//                                .personId(Integer.parseInt(personIdText.getText()))
                                 .organisation(organisationText.getText())
                                 .title(titleCombo.getSelectionModel().getSelectedItem())
                                 .startDate(startDate.getValue())
@@ -87,7 +87,7 @@ public class JobController implements Initializable {
                Job job =
                        Job
                                .builder()
-                               .personId(Integer.parseInt(personIdText.getText()))
+//                               .personId(Integer.parseInt(personIdText.getText()))
                                .organisation(organisationText.getText())
                                .title(titleCombo.getSelectionModel().getSelectedItem())
                                .startDate(startDate.getValue())
@@ -165,7 +165,7 @@ public class JobController implements Initializable {
         try {
             Job job = jobTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(job.getId()));
-            personIdText.setText(String.valueOf(job.getPersonId()));
+//            personIdText.setText(String.valueOf(job.getPersonId()));
             organisationText.setText(String.valueOf(job.getOrganisation()));
             titleCombo.getSelectionModel().select(job.getTitle());
             startDate.setValue(job.getStartDate());
