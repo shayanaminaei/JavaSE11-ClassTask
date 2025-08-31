@@ -188,6 +188,7 @@ public class MedicalController implements Initializable {
         }
        // mainController.changeText(2);
     }
+
     public void searchById() {
         try {
             showDateOnTable(Collections.singletonList(MedicalService.getService().findById(Integer.valueOf(searchIdText.getText()))));

@@ -14,6 +14,7 @@ public class MedicalService implements Service<Medical, Integer> {
     }
 
     @Override
+
     public void save(Medical medical) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.save(medical);

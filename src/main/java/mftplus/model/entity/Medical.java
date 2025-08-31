@@ -27,6 +27,7 @@ public class Medical {
 
 
     @Override
+
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);

@@ -20,6 +20,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
 
 
     @Override
+
     public void save(Medical medical) throws Exception {
         medical.setId(ConnectionProvider.getProvider().getNextId("medical_seq"));
 

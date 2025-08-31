@@ -7,6 +7,7 @@ import mftplus.model.service.PersonService;
 import java.sql.ResultSet;
 
 public class MedicalMapper {
+
     public Medical medicalMapper(ResultSet resultSet) throws Exception {
         return Medical
                 .builder()
