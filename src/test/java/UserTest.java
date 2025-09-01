@@ -1,10 +1,8 @@
-import mftplus.model.entity.User;
 import mftplus.model.service.UserService;
 //import mftplus.model.repository.UsersRepository;
 
-import java.time.LocalDate;
 
-public class UsersTest {
+public class UserTest {
     public static void main(String[] args) throws Exception {
 
         System.out.println(UserService.getService().findUsersByUsernameAndPassword("ahmad", "ahmad123"));
