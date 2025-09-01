@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 @Log4j
 
-@Path("/propertiess")
+@Path("/properties")
 public class PropertyApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
