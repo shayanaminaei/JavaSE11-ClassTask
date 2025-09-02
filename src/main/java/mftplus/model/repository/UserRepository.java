@@ -29,14 +29,14 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());
-        preparedStatement.setDate(7, Date.valueOf(user.getRegisterDate()));
+        preparedStatement.setDate(7, Date.valueOf(user.getBirthdate()));
         preparedStatement.execute();
     }
 
     @Override
     public void edit(User user) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update Users set person_id=?,username=?,password=?,nickName=?, locked=?,register_date=?  where id=?"
+                "update Users set person_id=?,username=?,password=?,nickName=?, locked=?,birthdate_date=?  where id=?"
         );
         preparedStatement.setInt(1, user.getId());
         preparedStatement.setInt(2, user.getPerson().getId());
@@ -44,7 +44,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());
-        preparedStatement.setDate(7, Date.valueOf(user.getRegisterDate()));
+        preparedStatement.setDate(7, Date.valueOf(user.getBirthdate()));
         preparedStatement.execute();
     }
 
