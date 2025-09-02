@@ -10,9 +10,9 @@ import java.util.List;
 
 
 public class MedicalRepository implements Repository <Medical, Integer> ,AutoCloseable{
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private MedicalMapper medicalMapper = new MedicalMapper();
+    private final MedicalMapper medicalMapper = new MedicalMapper();
 
     public MedicalRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
@@ -20,7 +20,6 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
 
 
     @Override
-
     public void save(Medical medical) throws Exception {
         medical.setId(ConnectionProvider.getProvider().getNextId("medical_seq"));
 
@@ -41,14 +40,15 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
     @Override
     public void edit(Medical medical) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update medicals set  , disease=? , medicine? , doctor=?, visit_date=?, status=? where id=?"
+                "update medicals set  person_id=?, disease=? , medicine=? , doctor=?, visit_date=?, status=? where id=?"
         );
-        preparedStatement.setString(1, medical.getDisease());
-        preparedStatement.setString(2, medical.getMedicine());
-        preparedStatement.setString(3, medical.getDoctor().name());
-        preparedStatement.setDate(4, Date.valueOf(medical.getVisitDate()));
-        preparedStatement.setBoolean(5, medical.isStatus());
-        preparedStatement.setInt(6, medical.getId());
+        preparedStatement.setInt(1, medical.getPerson().getId());
+        preparedStatement.setString(2, medical.getDisease());
+        preparedStatement.setString(3, medical.getMedicine());
+        preparedStatement.setString(4, medical.getDoctor().name());
+        preparedStatement.setDate(5, Date.valueOf(medical.getVisitDate()));
+        preparedStatement.setBoolean(6, medical.isStatus());
+        preparedStatement.setInt(7, medical.getId());
         preparedStatement.execute();
 
     }

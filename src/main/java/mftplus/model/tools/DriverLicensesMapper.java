@@ -15,10 +15,10 @@ public class DriverLicensesMapper {
                 .id(resultSet.getInt("id"))
                 .person(PersonService.getService().findById(resultSet.getInt("person_id")))
                 .serial(resultSet.getString("serial"))
-                .driverLicenseType(DriverLicenseType.valueOf(resultSet.getString("licenseType")))
+                .driverLicenseType(DriverLicenseType.valueOf(resultSet.getString("license_type")))
                 .city(resultSet.getString("city"))
-                .registerDate(resultSet.getDate("registerDate").toLocalDate())
-                .expireDate(resultSet.getDate("expireDate").toLocalDate())
+                .registerDate(resultSet.getDate("register_date").toLocalDate())
+                .expireDate(resultSet.getDate("expire_date").toLocalDate())
                 .build();
     }
 }

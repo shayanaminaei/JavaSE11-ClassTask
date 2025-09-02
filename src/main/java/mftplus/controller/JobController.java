@@ -17,9 +17,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 public class JobController implements Initializable {
-    //MainController mainController = new MainController();
 
     @FXML
     private TextField idText, personIdText, organisationText, descriptionText, searchOrganisationText;
@@ -177,7 +176,6 @@ public class JobController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
-        //mainController.changeText(1);
     }
 
     public void searchByOrganisation() {

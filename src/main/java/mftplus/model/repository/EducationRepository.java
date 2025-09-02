@@ -15,7 +15,7 @@ public class EducationRepository implements Repository<Education, Integer>, Auto
     private final EducationMapper educationMapper = new EducationMapper();
 
     public EducationRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getH2Connection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override

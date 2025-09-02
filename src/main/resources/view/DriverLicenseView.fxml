@@ -43,7 +43,7 @@
                 <TextField fx:id="idText" GridPane.columnIndex="1" />
                 <TextField fx:id="personText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="serialText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ComboBox fx:id="driverLisenseCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ComboBox fx:id="driverLicenseCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="cityText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <DatePicker fx:id="registerDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <DatePicker fx:id="expireDate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -72,7 +72,7 @@
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="51.3333740234375" text="id" />
                 <TableColumn fx:id="personIdColumn" prefWidth="57.66668701171875" text="personId" />
-                <TableColumn fx:id="serialColumn" prefWidth="42.0" text="serial" />
+                <TableColumn fx:id="serialIdColumn" prefWidth="42.0" text="serial" />
                 <TableColumn fx:id="driverLicenseTColumn" prefWidth="41.66668701171875" text="driverLicenseType" />
                 <TableColumn fx:id="cityColumn" prefWidth="43.33331298828125" text="city" />
                 <TableColumn fx:id="registerDateColumn" prefWidth="46.0" text="registerDate" />

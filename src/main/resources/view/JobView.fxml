@@ -41,12 +41,9 @@
             <Label layoutX="10.0" layoutY="179.0" />
             <Label layoutX="10.0" layoutY="257.0" text="Id" />
             <TextField fx:id="idText" GridPane.columnIndex="1" />
-            <TextField fx:id="personIdText" GridPane.columnIndex="2"/>
-            <TextField fx:id="organisationText" GridPane.columnIndex="3"/>
             <ComboBox fx:id="titleCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="descriptionText" GridPane.columnIndex="3"/>
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />

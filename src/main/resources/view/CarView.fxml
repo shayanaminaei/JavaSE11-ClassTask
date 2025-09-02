@@ -31,15 +31,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label id="idText" text="id" />
-            <Label id="personIdText" text="personId" GridPane.rowIndex="1" />
+            <Label  text="id" />
+            <Label text="personId" GridPane.rowIndex="1" />
             <Label id="nameText" text="name" GridPane.rowIndex="2" />
             <Label id="brandText" text="brand" GridPane.rowIndex="3" />
             <Label id="manDateId" text="manDate" GridPane.rowIndex="4" />
             <Label id="colorText" text="color" GridPane.rowIndex="5" />
             <Label id="plateText" text="plate" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField id="idText" GridPane.columnIndex="1" />
+            <TextField  id="personIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />

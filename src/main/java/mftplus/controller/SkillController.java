@@ -19,25 +19,26 @@ import java.util.ResourceBundle;
 @Log4j2
 public class SkillController implements Initializable {
     @FXML
-    private TextField idText, personIdText, titleText, instituteText, durationText,scoreText,searchTitleText;
+    private TextField idText, personIdText, titleText, instituteText, durationText, scoreText, searchTitleText;
 
     @FXML
     private DatePicker registerDate;
 
     @FXML
-    private Button saveButton,editButton,deleteButton;
+    private Button saveButton, editButton, deleteButton;
 
     @FXML
     private TableView<Skill> skillTable;
 
     @FXML
-    private TableColumn<Skill,Integer> idColumn,personIdColumn,durationColumn,scoreColumn;
+    private TableColumn<Skill, Integer> idColumn, personIdColumn, durationColumn, scoreColumn;
 
     @FXML
-    private TableColumn<Skill,String> titleColumn,instituteColumn;
+    private TableColumn<Skill, String> titleColumn, instituteColumn;
 
     @FXML
     private TableColumn<Skill, LocalDate> registerDateColumn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -48,12 +49,12 @@ public class SkillController implements Initializable {
         }
         saveButton.setOnAction((event) -> {
             try {
-                Skill skill  =
+                Skill skill =
                         Skill
                                 .builder()
                                 .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
-                                . title(titleText.getText())
-                                . institute(instituteText.getText())
+                                .title(titleText.getText())
+                                .institute(instituteText.getText())
                                 .duration(Integer.parseInt(durationText.getText()))
                                 .registerDate(registerDate.getValue())
                                 .score(Integer.parseInt(scoreText.getText()))
@@ -77,8 +78,8 @@ public class SkillController implements Initializable {
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
                                 .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
-                                . title(titleText.getText())
-                                . institute(instituteText.getText())
+                                .title(titleText.getText())
+                                .institute(instituteText.getText())
                                 .duration(Integer.parseInt(durationText.getText()))
                                 .registerDate(registerDate.getValue())
                                 .score(Integer.parseInt(scoreText.getText()))
@@ -116,6 +117,7 @@ public class SkillController implements Initializable {
         searchTitleText.setOnKeyReleased((event) -> searchByTitle());
 
     }
+
     private void resetForm() throws Exception {
         idText.clear();
         personIdText.clear();
@@ -129,6 +131,7 @@ public class SkillController implements Initializable {
 
         showDateOnTable(SkillService.getService().findAll());
     }
+
     private void showDateOnTable(List<Skill> skillList) {
         ObservableList<Skill> observableList = FXCollections.observableList(skillList);
 
@@ -144,7 +147,7 @@ public class SkillController implements Initializable {
 
     public void selectFromTable() {
         try {
-            Skill skill  = skillTable.getSelectionModel().getSelectedItem();
+            Skill skill = skillTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(skill.getId()));
             personIdText.setText(String.valueOf(skill.getPerson().getId()));
             titleText.setText(skill.getTitle());

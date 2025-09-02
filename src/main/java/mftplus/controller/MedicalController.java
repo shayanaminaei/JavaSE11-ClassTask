@@ -22,9 +22,6 @@ import java.util.ResourceBundle;
 
 @Log4j2
 public class MedicalController implements Initializable {
-
-    MainController mainController = new MainController();
-
     @FXML
     private TextField idText, personIdText, diseaseText, medicineText, searchIdText;
 
@@ -186,7 +183,6 @@ public class MedicalController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
-       // mainController.changeText(2);
     }
 
     public void searchById() {

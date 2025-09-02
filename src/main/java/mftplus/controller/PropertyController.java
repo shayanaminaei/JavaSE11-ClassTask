@@ -24,13 +24,13 @@ public class PropertyController implements Initializable {
 
 
     @FXML
-    private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText;
+    private TextField idText, personIdText, nameText, brandText, serialText, countText, searchNameText;
 
     @FXML
     private DatePicker dateTime;
 
     @FXML
-    private Button saveButton,editButton,deleteButton;
+    private Button saveButton, editButton, deleteButton;
 
     @FXML
     private TableColumn<Property, Integer> idColumn;
@@ -116,7 +116,7 @@ public class PropertyController implements Initializable {
             try {
                 PropertyService.getService().delete(Integer.parseInt(idText.getText()));
                 log.info("Property deleted");
-                Alert alert =new Alert(Alert.AlertType.INFORMATION, "Property deleted"+idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Property deleted" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
 
@@ -133,16 +133,17 @@ public class PropertyController implements Initializable {
     }
 
     private void resetForm() throws Exception {
-            idText.clear();
-            personIdText.clear();
-            nameText.clear();
-            brandText.clear();
-            serialText.clear();
-            countText.clear();
-            dateTime.setValue(LocalDate.now());
+        idText.clear();
+        personIdText.clear();
+        nameText.clear();
+        brandText.clear();
+        serialText.clear();
+        countText.clear();
+        dateTime.setValue(LocalDate.now());
 
-            showDateOnTable(PropertyService.getService().findAll());
+        showDateOnTable(PropertyService.getService().findAll());
     }
+
     private void showDateOnTable(List<Property> propertyList) {
         ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);
 
@@ -155,8 +156,9 @@ public class PropertyController implements Initializable {
         dateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
 
         propertyTable.setItems(observableList);
-        }
-        public void selectFromTable() {
+    }
+
+    public void selectFromTable() {
         try {
             Property property = propertyTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(property.getId()));
@@ -170,19 +172,20 @@ public class PropertyController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();
         }
-        }
-        public void searchName(){
+    }
+
+    public void searchName() {
         try {
             showDateOnTable(PropertyService.getService().findByName(searchNameText.getText()));
             log.info("Property findByName " + searchNameText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();
-            log.error("Property FindByName"+searchNameText.getText()+"failed"+e.getMessage());
+            log.error("Property FindByName" + searchNameText.getText() + "failed" + e.getMessage());
         }
-        }
-
     }
+
+}
 
 
 
