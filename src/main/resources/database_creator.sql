@@ -15,8 +15,6 @@ create table users
 (
     id            number primary key,
     person_id     number,
-    name          nvarchar2(20) not null,
-    family        nvarchar2(20) not null,
     username      nvarchar2(20) not null unique,
     password      nvarchar2(20) not null,
     nick_name     nvarchar2(20) not null,
@@ -179,3 +177,16 @@ create table driver_license
 
 create sequence license_seq start with 1 increment by 1;
 
+CREATE TABLE marriages (
+        id             number PRIMARY KEY,
+        person_id      number      ,
+        name           VARCHAR(50) NOT NULL,
+        family         VARCHAR(50) NOT NULL,
+        marriage_date  DATE        NOT NULL,
+        is_alive       number(1)    ,
+        children       INTEGER     ,
+        constraint fk_marriage_person FOREIGN KEY (person_id) references persons (id)
+
+);
+
+create sequence marriage_seq start with 1 increment by 1;

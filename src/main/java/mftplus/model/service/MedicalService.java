@@ -19,7 +19,6 @@ public class MedicalService implements Service<Medical, Integer> {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.save(medical);
         }
-
     }
 
     @Override
@@ -35,7 +34,6 @@ public class MedicalService implements Service<Medical, Integer> {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.delete(id);
         }
-
     }
 
 

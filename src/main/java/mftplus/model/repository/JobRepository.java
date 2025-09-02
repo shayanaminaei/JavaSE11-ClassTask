@@ -38,7 +38,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public void edit(Job job) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update jobs set person_id=? ,orgnisation=?,jobTitle=?,startDate=?,endDate=?,description=? where id=?"
+                "update jobs set person_id=? ,organisation=?,title=?,start_date=?,end_date=?,description=? where id=?"
         );
         preparedStatement.setInt(1, job.getPerson().getId());
         preparedStatement.setString(2, job.getOrganisation());
@@ -53,7 +53,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from job where id=?"
+                "delete from jobs where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -63,7 +63,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     public List<Job> findAll() throws Exception {
         List<Job> jobList = new ArrayList<>();
 
-        preparedStatement  = connection.prepareStatement("select * from job order by organisation");
+        preparedStatement  = connection.prepareStatement("select * from jobs order by organisation");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Job job = jobMapper.jobMapper(resultSet);
@@ -75,7 +75,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public Job findById(Integer id) throws Exception {
         Job job = null;
-        preparedStatement = connection.prepareStatement("select * from job where id=?");
+        preparedStatement = connection.prepareStatement("select * from jobs where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -100,7 +100,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
 
     public List<Job> findByOrganisation(String organisation) throws Exception {
         List<Job> jobList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from job where organisation like ?");
+        preparedStatement = connection.prepareStatement("select * from jobs where organisation like ?");
         preparedStatement.setString(1, "%" + organisation + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 

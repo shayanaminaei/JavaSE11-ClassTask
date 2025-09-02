@@ -1,11 +1,8 @@
 package mftplus.model.service;
+
 import lombok.Getter;
 import mftplus.model.entity.DriverLicense;
-import mftplus.model.entity.Education;
-import mftplus.model.entity.SimCard;
 import mftplus.model.repository.DriverLicenseRepository;
-import mftplus.model.repository.EducationRepository;
-import mftplus.model.repository.SimCardRepository;
 
 
 import java.util.List;
@@ -19,46 +16,47 @@ public class DriverLicenseService implements Service<DriverLicense, Integer> {
     }
 
 
-   @Override
-   public void save(DriverLicense driverLicense) throws Exception {
+    @Override
+    public void save(DriverLicense driverLicense) throws Exception {
         try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
-           driverLicenseRepository.save(driverLicense);
-      }
-   }
+            driverLicenseRepository.save(driverLicense);
+        }
+    }
 
     @Override
     public void edit(DriverLicense driverLicense) throws Exception {
-      try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
+        try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
             driverLicenseRepository.edit(driverLicense);
         }
-   }
+    }
 
-   @Override
+    @Override
     public void delete(Integer id) throws Exception {
         try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
             driverLicenseRepository.delete(id);
-       }
+        }
     }
 
     @Override
     public List<DriverLicense> findAll() throws Exception {
         try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
-           return driverLicenseRepository.findAll();
+            return driverLicenseRepository.findAll();
         }
     }
 
     @Override
-   public DriverLicense findById(Integer id) throws Exception {
-       try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
-           return driverLicenseRepository.findById(id);
-       }
-   }
+    public DriverLicense findById(Integer id) throws Exception {
+        try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
+            return driverLicenseRepository.findById(id);
+        }
+    }
 
     public List<DriverLicense> findByPersonId(Integer personId) throws Exception {
         try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
             return driverLicenseRepository.findByPersonId(personId);
         }
     }
+
     public List<DriverLicense> findBySerial(String Serial) throws Exception {
         try (DriverLicenseRepository driverLicenseRepository = new DriverLicenseRepository()) {
             return driverLicenseRepository.findBySerial(Serial);

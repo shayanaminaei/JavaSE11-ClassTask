@@ -101,20 +101,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
         }
         return carList;
     }
-   /* public List<Car> findPersonById(int personId) throws Exception {
-        List<Car> carList = new ArrayList<>();
 
-        preparedStatement = connection.prepareStatement("select * from CARS where person_id=?");
-        preparedStatement.setInt(1, personId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            Car car = carMapper.carMapper(resultSet);
-            carList.add(car);
-        }
-        return carList;
-    }
-    */
 
     public List<Car> findByBrand(String brand) throws Exception {
         List<Car> carList = new ArrayList<>();

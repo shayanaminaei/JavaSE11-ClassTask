@@ -122,13 +122,6 @@ public class DriverLicenseRepository implements Repository<DriverLicense, Intege
         return driverLicenseList;
     }
 
-    public int getNextId() throws Exception {
-        ResultSet resultSet = connection.prepareStatement("SELECT license_seq.nextval AS NEXTID FROM DUAL").executeQuery();
-        resultSet.next();
-        return resultSet.getInt("NEXTID");
-    }
-
-
     @Override
     public void close() throws Exception {
         preparedStatement.close();

@@ -1,13 +1,13 @@
 package mftplus.controller.api;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PropertyService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-@Log4j
+@Log4j2
 
 @Path("/properties")
 public class PropertyApi {
@@ -28,7 +28,7 @@ public class PropertyApi {
         try {
             Property property = new Property();
             PropertyService.getService().save(property);
-            log.info(property.toString());
+            log.info("Property Saved");
             return Response.ok(property).build();
         }catch (Exception e){
             log.error(e.getMessage());

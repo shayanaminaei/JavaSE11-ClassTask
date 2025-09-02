@@ -4,7 +4,6 @@ import mftplus.model.entity.Marriage;
 import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class MarriageMapper {

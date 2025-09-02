@@ -1,7 +1,7 @@
 package mftplus.controller;
 
 import lombok.Getter;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.enums.Role;
 import mftplus.model.service.PersonService;
@@ -9,7 +9,7 @@ import mftplus.model.service.PersonService;
 import java.time.LocalDate;
 import java.util.List;
 
-@Log4j
+@Log4j2
 public class OldPersonController {
     @Getter
     private static OldPersonController controller = new OldPersonController();

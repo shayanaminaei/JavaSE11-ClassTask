@@ -1,6 +1,6 @@
 package mftplus.model.repository;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.tools.ConnectionProvider;
 
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-@Log4j
+@Log4j2
 public class DatabaseManager {
     public static void createDatabase() throws FileNotFoundException, SQLException {
 
