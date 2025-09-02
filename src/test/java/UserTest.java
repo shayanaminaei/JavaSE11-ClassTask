@@ -12,8 +12,6 @@ public class UserTest {
 //
 //                .builder()
 //              //  .id()
-//                .name("Hedie")
-//                .family("khdaei")
 //                .username("hedie")
 //                .password("hedie123")
 //                .nickname("hedii")
