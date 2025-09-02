@@ -13,7 +13,6 @@ import mftplus.model.service.PropertyService;
 
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,10 +23,7 @@ public class PropertyController implements Initializable {
 
 
     @FXML
-    private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText;
-
-    @FXML
-    private DatePicker dateTime;
+    private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText,dateTimeText;
 
     @FXML
     private Button saveButton,editButton,deleteButton;
@@ -75,7 +71,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .dateTime(LocalDateTime.parse(dateTimeText.getText()))
                                 .build();
                 PropertyService.getService().save(property);
                 log.info("Property saved");
@@ -99,7 +95,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(LocalDateTime.from(dateTime.getValue()))
+                                .dateTime(LocalDateTime.parse(dateTimeText.getText()))
                                 .build();
                 PropertyService.getService().edit(property);
                 log.info("Property edited");
@@ -139,7 +135,7 @@ public class PropertyController implements Initializable {
             brandText.clear();
             serialText.clear();
             countText.clear();
-            dateTime.setValue(LocalDate.now());
+            dateTimeText.clear();
 
             showDateOnTable(PropertyService.getService().findAll());
     }
@@ -165,7 +161,7 @@ public class PropertyController implements Initializable {
             brandText.setText(property.getBrand());
             serialText.setText(String.valueOf(property.getSerial()));
             countText.setText(String.valueOf(property.getCount()));
-            dateTime.setValue(property.getDateTime().toLocalDate());
+            dateTimeText.setText(property.getDateTime().toString());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();
