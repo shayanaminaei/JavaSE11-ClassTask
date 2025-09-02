@@ -175,7 +175,7 @@ public class MedicalController implements Initializable {
         try {
             Medical medical = medicalTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(medical.getId()));
-            personIdText.setText(String.valueOf(medical.getPerson().getId()));
+            personIdText.setText(String.valueOf( medical.getPerson().getId()));
             diseaseText.setText(medical.getDisease());
             medicineText.setText(medical.getMedicine());
             doctorCombo.getSelectionModel().select(medical.getDoctor());
