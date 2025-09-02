@@ -6,7 +6,7 @@ import mftplus.model.service.DriverLicenseService;
 import javax.xml.ws.Response;
 import java.time.LocalDate;
 
-import static com.sun.xml.internal.ws.api.message.Packet.Status.Response;
+
 @Log4j
 @Path("/DriverLicenses")
 public class DriverLicenseApi {
