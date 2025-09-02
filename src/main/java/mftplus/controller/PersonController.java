@@ -66,27 +66,26 @@ public class PersonController implements Initializable {
         }
 
         saveButton.setOnAction((event) -> {
-            nameText.setText(AppState.loggedInUser.getName());
-//            try {
-//                Person person =
-//                        Person
-//                                .builder()
-//                                .name(nameText.getText())
-//                                .family(familyText.getText())
-//                                .birthDate(birthDate.getValue())
-//                                .role(roleCombo.getSelectionModel().getSelectedItem())
-//                                .status(enableRadio.isSelected())
-//                                .build();
-//                PersonService.getService().save(person);
-//                log.info("Person Saved Successfully");
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + person, ButtonType.OK);
-//                alert.show();
-//                resetForm();
-//            } catch (Exception e) {
-//                log.error("Person Save Failed " + e.getMessage());
-//                Alert alert = new Alert(Alert.AlertType.ERROR, "Person Save Failed " + e.getMessage(), ButtonType.OK);
-//                alert.show();
-//            }
+            try {
+                Person person =
+                        Person
+                                .builder()
+                                .name(nameText.getText())
+                                .family(familyText.getText())
+                                .birthDate(birthDate.getValue())
+                                .role(roleCombo.getSelectionModel().getSelectedItem())
+                                .status(enableRadio.isSelected())
+                                .build();
+                PersonService.getService().save(person);
+                log.info("Person Saved Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + person, ButtonType.OK);
+                alert.show();
+                resetForm();
+            } catch (Exception e) {
+                log.error("Person Save Failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Person Save Failed " + e.getMessage(), ButtonType.OK);
+                alert.show();
+            }
         });
 
         editButton.setOnAction((event) -> {

@@ -24,7 +24,6 @@ public class ConnectionProvider {
     }
 
     public int getNextId(String sequenceName) throws Exception{
-
         ResultSet resultSet = getOracleConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
         resultSet.next();
         return resultSet.getInt("NEXT_ID");

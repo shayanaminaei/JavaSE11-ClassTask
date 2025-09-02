@@ -19,9 +19,9 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
 
     @Override
     public void save(User user) throws Exception {
-        user.setId(ConnectionProvider.getProvider().getNextId("users_seq"));
+        user.setId(ConnectionProvider.getProvider().getNextId("user_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into Users (id,person_id,username,password,nickName, locked,register_date)  values (users_seq.nextval,?,?,?,?,?,?,?)"
+                "insert into Users (id,person_id,username,password,nick_name, locked,register_date)  values (?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, user.getId());
         preparedStatement.setInt(2, user.getPerson().getId());
@@ -29,7 +29,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());
-        preparedStatement.setDate(7, Date.valueOf(user.getBirthdate()));
+        preparedStatement.setDate(7, Date.valueOf(user.getRegisterDate()));
         preparedStatement.execute();
     }
 
@@ -44,7 +44,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());
-        preparedStatement.setDate(7, Date.valueOf(user.getBirthdate()));
+        preparedStatement.setDate(7, Date.valueOf(user.getRegisterDate()));
         preparedStatement.execute();
     }
 

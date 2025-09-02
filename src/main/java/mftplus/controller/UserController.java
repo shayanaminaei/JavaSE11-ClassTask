@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Person;
 import mftplus.model.entity.User;
 import mftplus.model.service.PersonService;
+import mftplus.model.service.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,13 +27,13 @@ public class UserController {
                             .username(username)
                             .password(password)
                             .nickname(nickname)
-                            .birthdate(birthdate)
+                            .registerDate(birthdate)
                             .locked(locked)
                             .build();
             PersonService.getService().save(person);
-          log.info(System.out.println(" User  saved Successfully");
+          log.info(" User  saved Successfully");
         } catch (Exception e) {
-          log.error(System.out.println(" User  Save Failed" + e.getMessage());
+          log.error(" User  Save Failed" + e.getMessage());
         }
     }
 
@@ -41,14 +42,15 @@ public class UserController {
             User user =
                     User
                             .builder()
+                            .id(id)
                             .person(person)
                             .username(username)
                             .password(password)
                             .nickname(nickname)
-                            .birthdate(birthdate)
+                            .registerDate(birthdate)
                             .locked(locked)
                             .build();
-            PersonService.getService().save(person);
+            UserService.getService().save(user);
             System.out.println("Info: User Edited Successfully");
         } catch (Exception e) {
             System.out.println("Info: User Edited Failed" + e.getMessage());
@@ -66,7 +68,7 @@ public class UserController {
 
     public List<User> findAll() throws Exception {
         try {
-            return PersonService.getService().findAll();
+            return UserService.getService().findAll();
         } catch (Exception e) {
             System.out.println("Info: User FindAll Failed" + e.getMessage());
             return null;
@@ -75,7 +77,7 @@ public class UserController {
 
     public User findById(Integer id) throws Exception {
         try {
-            return PersonService.getService().findById(id);
+            return UserService.getService().findById(id);
         } catch (Exception e) {
             System.out.println("Info: User FindById Failed" + "Failed" + e.getMessage());
             return null;
@@ -84,9 +86,9 @@ public class UserController {
 
     public User findByPersonId(int personId) throws Exception {
         try {
-            return PersonService.getService().findByPersonId( int personId);
+            return UserService.getService().findByPersonId( personId);
         } catch (Exception e) {
-            System.out.println("Info: User FindByPersonId Failed" + "" + "Failed" + e.getMessage());
+            System.out.println("Info: User FindByPersonId Failed" + e.getMessage());
             return null;
         }
 
@@ -94,7 +96,7 @@ public class UserController {
 
     public User findUsersByUsername(String username) throws Exception {
         try {
-            return PersonService.getService().findUsersByUsername(String username);
+            return UserService.getService().findUsersByUsername(username);
         } catch (Exception e) {
             System.out.println("Info: User FindByUsername Failed" + e.getMessage());
         }
@@ -103,7 +105,7 @@ public class UserController {
 
     public User findUsersByUsernameAndPassword(String username, String password) throws Exception {
         try {
-            return PersonService.getService().findUsersByUsernameAndPassword(String username, String password);
+            return UserService.getService().findUsersByUsernameAndPassword(username, password);
         } catch (Exception e) {
             System.out.println("Info: UsersByUsernameAndPassword Failed" + e.getMessage());
         }

@@ -36,7 +36,7 @@ public class JobApi {
             return Response.ok(job).build();
         } catch (Exception e) {
             log.error(e.getMessage());
-            return return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     };
 }

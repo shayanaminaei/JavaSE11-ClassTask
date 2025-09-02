@@ -19,7 +19,7 @@ public class User {
     private String password;
     private String nickname;
     private Boolean locked;
-    private LocalDate birthdate;
+    private LocalDate registerDate;
 
 
     @Override
