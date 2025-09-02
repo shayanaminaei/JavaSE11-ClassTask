@@ -1,7 +1,7 @@
 package mftplus.controller.api;
 
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Salary;
 import mftplus.model.service.SalaryService;
 
@@ -9,7 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Log4j
+@Log4j2
 @Path("/Salary")
 public class SalaryApi {
     @GET

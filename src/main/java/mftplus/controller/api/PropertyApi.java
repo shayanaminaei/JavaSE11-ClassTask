@@ -1,13 +1,13 @@
 package mftplus.controller.api;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PropertyService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-@Log4j
+@Log4j2
 
 @Path("/properties")
 public class PropertyApi {

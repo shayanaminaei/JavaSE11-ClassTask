@@ -1,13 +1,16 @@
 package mftplus.controller.api;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.DriverLicense;
 import mftplus.model.service.DriverLicenseService;
-import javax.xml.ws.Response;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 
 
-@Log4j
+@Log4j2
 @Path("/DriverLicenses")
 public class DriverLicenseApi {
 

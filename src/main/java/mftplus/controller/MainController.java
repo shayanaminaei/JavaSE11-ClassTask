@@ -4,13 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 public class MainController implements Initializable {
     @FXML
     private MenuItem addPersonMnu;

@@ -1,13 +1,13 @@
 package mftplus.controller.api;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Car;
 import mftplus.model.service.CarService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Log4j
+@Log4j2
 @Path("/Car")
 
 public class CarApi {

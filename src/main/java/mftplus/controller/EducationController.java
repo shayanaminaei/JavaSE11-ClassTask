@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Education;
 import mftplus.model.entity.enums.EducationGrade;
 import mftplus.model.service.EducationService;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 public class EducationController implements Initializable {
 
     @FXML
