@@ -11,8 +11,6 @@ public class UserMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .person(PersonService.getService().findById(resultSet.getInt("person_id")))
-                .name(resultSet.getString("name"))
-                .family(resultSet.getString("family"))
                 .username(resultSet.getString("username"))
                 .password(resultSet.getString("password"))
                 .nickname(resultSet.getString("nick_name"))
