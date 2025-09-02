@@ -20,7 +20,11 @@ public class PropertyApi {
         return Response.status(Response.Status.FORBIDDEN).build();
     }
     @POST
-    public Response save(@QueryParam("id")Integer id,@QueryParam("name") String name,@QueryParam("brand") String brand,@QueryParam("serial") String serial,@QueryParam("count") String count ) {
+    public Response save(@QueryParam("id")Integer id,
+                         @QueryParam("name") String name,
+                         @QueryParam("brand") String brand,
+                         @QueryParam("serial") String serial,
+                         @QueryParam("count") String count ){
         try {
             Property property = new Property();
             PropertyService.getService().save(property);
