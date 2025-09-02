@@ -75,7 +75,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(dateTime.getValue().atStartOfDay())
+                                .dateTime(LocalDateTime.from(dateTime.getValue()))
                                 .build();
                 PropertyService.getService().save(property);
                 log.info("Property saved");
@@ -99,7 +99,7 @@ public class PropertyController implements Initializable {
                                 .brand(brandText.getText())
                                 .serial(serialText.getText())
                                 .count(Integer.parseInt(countText.getText()))
-                                .dateTime(dateTime.getValue().atStartOfDay())
+                                .dateTime(LocalDateTime.from(dateTime.getValue()))
                                 .build();
                 PropertyService.getService().edit(property);
                 log.info("Property edited");

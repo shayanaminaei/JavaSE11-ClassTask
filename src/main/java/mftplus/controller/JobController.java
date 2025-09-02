@@ -6,13 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Job;
 import mftplus.model.entity.enums.JobTitle;
 import mftplus.model.service.JobService;
 import mftplus.model.service.PersonService;
-import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -21,7 +19,7 @@ import java.util.ResourceBundle;
 
 @Log4j
 public class JobController implements Initializable {
-    MainController mainController = new MainController();
+    //MainController mainController = new MainController();
 
     @FXML
     private TextField idText, personIdText, organisationText, descriptionText, searchOrganisationText;
@@ -54,7 +52,9 @@ public class JobController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             resetForm();
+            log.info("Form initialized successfully");
         } catch (Exception e) {
+            log.error("Form initialization failed" + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
@@ -88,6 +88,7 @@ public class JobController implements Initializable {
                Job job =
                        Job
                                .builder()
+                               .id(Integer.parseInt(idText.getText()))
                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                .organisation(organisationText.getText())
                                .title(titleCombo.getSelectionModel().getSelectedItem())
@@ -176,7 +177,7 @@ public class JobController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
-        mainController.changeText(1);
+        //mainController.changeText(1);
     }
 
     public void searchByOrganisation() {
