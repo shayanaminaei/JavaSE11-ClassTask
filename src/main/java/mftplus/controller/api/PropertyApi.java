@@ -28,7 +28,7 @@ public class PropertyApi {
         try {
             Property property = new Property();
             PropertyService.getService().save(property);
-            log.info("Property saved");
+            log.info("Property Saved");
             return Response.ok(property).build();
         }catch (Exception e){
             log.error(e.getMessage());
