@@ -2,7 +2,7 @@ package mftplus.controller.api;
 
 
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Marriage;
 import mftplus.model.entity.enums.AliveStatus;
 import mftplus.model.service.MarriageService;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 
-@Log4j
+@Log4j2
 @Path("/marriages")
 public class MarriageApi {
     @GET

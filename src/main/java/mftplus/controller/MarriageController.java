@@ -6,26 +6,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.Getter;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Marriage;
 import mftplus.model.service.MarriageService;
 import mftplus.model.service.PersonService;
-import mftplus.model.tools.FormLoader;
-import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 public class MarriageController implements Initializable {
     MainController mainController = new MainController();
 
 
     @FXML
-    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText, searchFamilyText;
+    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText;
 
     @FXML
     private DatePicker marriageDate;
@@ -34,7 +31,7 @@ public class MarriageController implements Initializable {
     private CheckBox statusCheckBox;
 
     @FXML
-    private Button saveButton, editButton, removeButton, newMarriageButton;
+    private Button saveButton, editButton, removeButton;
 
     @FXML
     private TableView<Marriage> marriageTable;

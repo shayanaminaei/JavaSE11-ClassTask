@@ -1,14 +1,14 @@
 package mftplus.controller;
 
 import lombok.Getter;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Contact;
 import mftplus.model.entity.enums.ContactTitle;
 import mftplus.model.service.ContactService;
 
 import java.util.List;
 
-@Log4j
+@Log4j2
 public class ContactController {
     @Getter
     private static ContactController controller = new ContactController();

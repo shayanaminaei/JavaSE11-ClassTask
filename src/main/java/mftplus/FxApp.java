@@ -2,16 +2,14 @@ package mftplus;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.repository.DatabaseManager;
 import mftplus.model.tools.FormLoader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
-
+@Log4j2
 public class FxApp extends Application {
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws Exception{
+        log.info("Starting FxApp");
         DatabaseManager.createDatabase();
         launch();
     }

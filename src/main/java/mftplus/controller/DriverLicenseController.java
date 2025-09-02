@@ -7,19 +7,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.DriverLicense;
 import mftplus.model.entity.enums.DriverLicenseType;
 import mftplus.model.service.DriverLicenseService;
 import mftplus.model.service.PersonService;
-import mftplus.model.service.SimCardService;
 import mftplus.model.tools.FormLoader;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-@Log4j
+@Log4j2
 public class DriverLicenseController  implements Initializable {
 
     @FXML

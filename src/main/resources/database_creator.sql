@@ -15,8 +15,6 @@ create table users
 (
     id            number primary key,
     person_id     number,
-    name          nvarchar2(20) not null,
-    family        nvarchar2(20) not null,
     username      nvarchar2(20) not null unique,
     password      nvarchar2(20) not null,
     nick_name     nvarchar2(20) not null,
