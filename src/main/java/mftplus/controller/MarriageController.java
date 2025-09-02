@@ -22,7 +22,7 @@ public class MarriageController implements Initializable {
 
 
     @FXML
-    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText, searchFamilyText;
+    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText;
 
     @FXML
     private DatePicker marriageDate;
@@ -31,7 +31,7 @@ public class MarriageController implements Initializable {
     private CheckBox statusCheckBox;
 
     @FXML
-    private Button saveButton, editButton, removeButton, newMarriageButton;
+    private Button saveButton, editButton, removeButton;
 
     @FXML
     private TableView<Marriage> marriageTable;

@@ -6,7 +6,7 @@ import mftplus.model.entity.Marriage;
 import mftplus.model.repository.MarriageRepository;
 
 import java.time.LocalDate;
-import java.util.Collections;
+
 import java.util.List;
 
 public class MarriageService implements Service<Marriage, Integer> {

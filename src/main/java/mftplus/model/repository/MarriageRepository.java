@@ -12,7 +12,7 @@ import java.util.List;
 public class MarriageRepository implements Repository<Marriage, Integer>, AutoCloseable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
-    private MarriageMapper marriageMapper;
+
 
 
     public MarriageRepository() throws SQLException {
