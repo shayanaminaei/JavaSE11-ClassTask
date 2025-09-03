@@ -23,15 +23,19 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
 
     @Override
     public void save(Lesson lesson) throws Exception {
+        lesson.setId(ConnectionProvider.getProvider().getNextId("lesson_seq"));
+
         preparedStatement = connection.prepareStatement(
-                "insert into LESSONS (id,person_id, title, code,teacher,unit,start_date_time) values (lesson_seq.nextval,?, ?, ?, ?, ?, ?)"
+                "insert into lessons (id, person_id, title, code, teacher, unit, start_date_time) values (?, ?, ?, ?, ?, ?, ?)"
         );
-        preparedStatement.setInt(1, lesson.getPersonId());
-        preparedStatement.setString(2, lesson.getTitle());
-        preparedStatement.setInt(3, lesson.getCode());
-        preparedStatement.setString(4, lesson.getTeacher());
-        preparedStatement.setString(5, lesson.getUnit());
-        preparedStatement.setDate(6,Date.valueOf(lesson.getStartDateTime()));
+
+        preparedStatement.setInt(1, lesson.getId());
+        preparedStatement.setInt(2, lesson.getPersonId());
+        preparedStatement.setString(3, lesson.getTitle());
+        preparedStatement.setInt(4, lesson.getCode());
+        preparedStatement.setString(5, lesson.getTeacher());
+        preparedStatement.setString(6, lesson.getUnit());
+        preparedStatement.setDate(7,Date.valueOf(lesson.getStartDateTime()));
         preparedStatement.execute();
 
     }
@@ -40,7 +44,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public void edit(Lesson lesson) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update LESSONS set id=?,person_id=?,title=?,code=?,teacher=?,unit=?,start_date_time=? where id=?"
+                "update lessons set id=?,person_id=?,title=?,code=?,teacher=?,unit=?,start_date_time=? where id=?"
         );
 
         preparedStatement.setInt(1, lesson.getPersonId());
@@ -57,7 +61,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from LESSONS where id=?"
+                "delete from lessons where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -68,7 +72,9 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public List<Lesson> findAll() throws Exception {
         List<Lesson> lessonList= new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from LESSONS order by id, person_id");
+
+
+        preparedStatement = connection.prepareStatement("select * from lessons order by id, person_id");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {
@@ -90,6 +96,22 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
             lesson=lessonMapper.lessonMapper(resultSet);
         }
         return lesson;
+    }
+
+
+    public List<Lesson> findByTeacherAndUnit(String teacher, String unit) throws Exception {
+        List<Lesson> lessonList= new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement("select * from lessons where teacher=? and unit=?");
+        preparedStatement.setString(1, teacher);
+        preparedStatement.setString(2, unit);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Lesson lesson =lessonMapper.lessonMapper(resultSet);
+            lessonList.add(lesson);
+        }
+        return lessonList;
     }
 
     @Override
