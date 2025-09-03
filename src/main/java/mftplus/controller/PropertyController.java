@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Property;
 import mftplus.model.service.PersonService;
 import mftplus.model.service.PropertyService;
@@ -17,16 +17,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 
 public class PropertyController implements Initializable {
 
 
     @FXML
-    private TextField idText,personIdText,nameText,brandText,serialText,countText,searchNameText,dateTimeText;
+    private TextField idText, personIdText, nameText, brandText, serialText, countText, searchNameText, dateTimeText;
 
     @FXML
-    private Button saveButton,editButton,deleteButton;
+    private Button saveButton, editButton, deleteButton;
 
     @FXML
     private TableColumn<Property, Integer> idColumn;
@@ -79,7 +79,7 @@ public class PropertyController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("save failed " + e.getMessage());
+                log.error("save failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error saving data" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -103,7 +103,7 @@ public class PropertyController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("edit failed " + e.getMessage());
+                log.error("edit failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error editing data" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -112,12 +112,12 @@ public class PropertyController implements Initializable {
             try {
                 PropertyService.getService().delete(Integer.parseInt(idText.getText()));
                 log.info("Property deleted");
-                Alert alert =new Alert(Alert.AlertType.INFORMATION, "Property deleted"+idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Property deleted" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
 
             } catch (Exception e) {
-                log.error("delete failed " + e.getMessage());
+                log.error("delete failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error deleting data" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -129,16 +129,17 @@ public class PropertyController implements Initializable {
     }
 
     private void resetForm() throws Exception {
-            idText.clear();
-            personIdText.clear();
-            nameText.clear();
-            brandText.clear();
-            serialText.clear();
-            countText.clear();
-            dateTimeText.clear();
+        idText.clear();
+        personIdText.clear();
+        nameText.clear();
+        brandText.clear();
+        serialText.clear();
+        countText.clear();
+        dateTimeText.clear();
 
-            showDateOnTable(PropertyService.getService().findAll());
+        showDateOnTable(PropertyService.getService().findAll());
     }
+
     private void showDateOnTable(List<Property> propertyList) {
         ObservableList<Property> observableList = FXCollections.observableArrayList(propertyList);
 
@@ -151,8 +152,9 @@ public class PropertyController implements Initializable {
         dateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
 
         propertyTable.setItems(observableList);
-        }
-        public void selectFromTable() {
+    }
+
+    public void selectFromTable() {
         try {
             Property property = propertyTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(property.getId()));
@@ -166,19 +168,20 @@ public class PropertyController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();
         }
-        }
-        public void searchName(){
+    }
+
+    public void searchName() {
         try {
             showDateOnTable(PropertyService.getService().findByName(searchNameText.getText()));
-            log.info("Property findByName " + searchNameText.getText());
+            log.info("Property findByName {}", searchNameText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading data" + e.getMessage(), ButtonType.OK);
             alert.show();
-            log.error("Property FindByName"+searchNameText.getText()+"failed"+e.getMessage());
+            log.error("Property FindByName{}failed{}", searchNameText.getText(), e.getMessage());
         }
-        }
-
     }
+
+}
 
 
 
