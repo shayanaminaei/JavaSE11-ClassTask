@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -54,8 +55,11 @@
                   <RadioButton fx:id="disableRadio" mnemonicParsing="false" prefHeight="5.0" prefWidth="109.0" text="Disable">
                      <padding>
                         <Insets top="15.0" />
-                     </padding></RadioButton>
-                  <RadioButton fx:id="enableRadio" mnemonicParsing="false" text="Enable">
+                     </padding>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="statusToggle" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="enableRadio" mnemonicParsing="false" text="Enable" toggleGroup="$statusToggle">
                      <padding>
                         <Insets top="15.0" />
                      </padding></RadioButton>
@@ -104,12 +108,17 @@
       <HBox layoutX="443.0" layoutY="43.0" prefHeight="31.0" prefWidth="513.0">
          <children>
             <Label text="search :" />
-            <Label text="id">
+            <Label>
+               <opaqueInsets>
+                  <Insets left="15.0" />
+               </opaqueInsets>
+            </Label>
+            <Label text="Disease">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="searchIdText">
+            <TextField fx:id="searchDiseaseText">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>

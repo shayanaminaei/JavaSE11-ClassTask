@@ -88,6 +88,18 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         return medical;
     }
 
+    public List<Medical> findByDisease(String disease)throws Exception{
+        List<Medical> medicals = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from medical where disease like ?");
+        preparedStatement.setString(1, disease + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Medical medical =medicalMapper.medicalMapper(resultSet);
+            medicals.add(medical);
+        }
+        return medicals;
+    }
+
     public List<Medical>findAllByPersonId(Integer personId) throws Exception {
         List<Medical> medicals = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from medicals where person_id=?");
