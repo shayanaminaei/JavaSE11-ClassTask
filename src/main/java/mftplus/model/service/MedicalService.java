@@ -23,7 +23,7 @@ public class MedicalService implements Service<Medical, Integer> {
 
     @Override
     public void edit(Medical medical) throws Exception {
-        try(MedicalRepository medicalRepository = new MedicalRepository()) {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.edit(medical);
         }
     }
@@ -43,6 +43,7 @@ public class MedicalService implements Service<Medical, Integer> {
             return medicalRepository.findAll();
         }
     }
+
 
     @Override
     public Medical findById(Integer id) throws Exception {

@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 @Log4j2
 public class MedicalController implements Initializable {
+
     @FXML
     private TextField idText, personIdText, diseaseText, medicineText, searchDiseaseText;
 

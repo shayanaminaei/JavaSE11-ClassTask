@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MedicalRepository implements Repository <Medical, Integer> ,AutoCloseable{
+public class MedicalRepository implements Repository<Medical, Integer>, AutoCloseable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
     private final MedicalMapper medicalMapper = new MedicalMapper();
@@ -50,7 +50,6 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         preparedStatement.setBoolean(6, medical.isStatus());
         preparedStatement.setInt(7, medical.getId());
         preparedStatement.execute();
-
     }
 
     @Override
@@ -70,7 +69,7 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            Medical medical =medicalMapper.medicalMapper(resultSet);
+            Medical medical = medicalMapper.medicalMapper(resultSet);
             medicals.add(medical);
         }
         return medicals;
@@ -88,19 +87,19 @@ public class MedicalRepository implements Repository <Medical, Integer> ,AutoClo
         return medical;
     }
 
-    public List<Medical> findByDisease(String disease)throws Exception{
+    public List<Medical> findByDisease(String disease) throws Exception {
         List<Medical> medicals = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from medical where disease like ?");
         preparedStatement.setString(1, disease + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Medical medical =medicalMapper.medicalMapper(resultSet);
+            Medical medical = medicalMapper.medicalMapper(resultSet);
             medicals.add(medical);
         }
         return medicals;
     }
 
-    public List<Medical>findAllByPersonId(Integer personId) throws Exception {
+    public List<Medical> findAllByPersonId(Integer personId) throws Exception {
         List<Medical> medicals = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from medicals where person_id=?");
         preparedStatement.setInt(1, personId);
