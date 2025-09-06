@@ -15,15 +15,15 @@ import mftplus.model.service.PersonService;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
 @Log4j2
 public class MedicalController implements Initializable {
+
     @FXML
-    private TextField idText, personIdText, diseaseText, medicineText, searchIdText;
+    private TextField idText, personIdText, diseaseText, medicineText, searchDiseaseText;
 
     @FXML
     private ComboBox<Doctor> doctorCombo;
@@ -60,9 +60,8 @@ public class MedicalController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             resetForm();
-            log.info("Form initialized successfully");
+
         } catch (Exception e) {
-            log.error("Form initialization failed" + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR,"Error Loading Data" ,ButtonType.OK);
             alert.show();
         }
@@ -110,7 +109,6 @@ public class MedicalController implements Initializable {
                 alert.show();
                 resetForm();
             }catch (Exception e){
-                log.error("medical Edit Failed" + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Medical Edit Failed " + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -130,7 +128,7 @@ public class MedicalController implements Initializable {
             }
         });
 
-        searchIdText.setOnKeyReleased((event) -> searchById());
+        searchDiseaseText.setOnKeyReleased((event) -> searchByDisease());
 
        medicalTable.setOnMouseReleased((event) -> selectFromTable());
        medicalTable.setOnKeyReleased((event) -> selectFromTable());
@@ -140,7 +138,10 @@ public class MedicalController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
-
+        personIdText.clear();
+        diseaseText.clear();
+        medicineText.clear();
+        searchDiseaseText.clear();
 
         visitDate.setValue(LocalDate.now());
 
@@ -185,14 +186,14 @@ public class MedicalController implements Initializable {
         }
     }
 
-    public void searchById() {
+    public void searchByDisease() {
         try {
-            showDateOnTable(Collections.singletonList(MedicalService.getService().findById(Integer.valueOf(searchIdText.getText()))));
-            log.info("Medical SearchFindId" + searchIdText.getText());
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
+            showDateOnTable(MedicalService.getService().findByMedicalDisease(searchDiseaseText.getText()));
+            log.info("Medical Search Successfully" + searchDiseaseText.getText());
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+            log.info("Medical Search Failed" +searchDiseaseText.getText()+ "error" + e.getMessage());
             alert.show();
-            log.error("Medical FindIdFailed" + searchIdText.getText());
         }
     }
 
