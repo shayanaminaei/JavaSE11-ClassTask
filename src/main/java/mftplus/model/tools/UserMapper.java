@@ -1,6 +1,7 @@
 package mftplus.model.tools;
 
 import mftplus.model.entity.User;
+import mftplus.model.entity.enums.UserName;
 import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ public class UserMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .person(PersonService.getService().findById(resultSet.getInt("person_id")))
-                .username(resultSet.getString("username"))
+                .username(UserName.valueOf(resultSet.getString("username")))
                 .password(resultSet.getString("password"))
                 .nickname(resultSet.getString("nick_name"))
                 .locked(resultSet.getBoolean("locked"))
