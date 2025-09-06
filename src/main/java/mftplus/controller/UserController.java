@@ -45,8 +45,9 @@ public class UserController implements Initializable {
     @FXML
     private  TableColumn<User, Boolean> lockedColumn;
     @FXML
-    private   TableColumn<User, String> nicknameColumn;
+    private TableColumn<User, String> nicknameColumn;
     @FXML
+    private  TableColumn<User, LocalDate> birthdateColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
