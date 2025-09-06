@@ -6,16 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 import mftplus.model.entity.Lesson;
 import mftplus.model.service.LessonService;
-import mftplus.model.service.PersonService;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 
@@ -23,7 +20,7 @@ import java.util.ResourceBundle;
 public class LessonController implements Initializable {
 
     @FXML
-    private TextField idText, personIdText, titleText, codeText, teacherText, unitText;
+    private TextField idText, personIdText, titleText, codeText, teacherText, unitText, searchTeacherText, searchUnitText;
 
     @FXML
     private DatePicker startDate;
@@ -115,6 +112,12 @@ public class LessonController implements Initializable {
 
         });
 
+        searchTeacherText.setOnKeyReleased(event ->{searchByTeacherAndUnit();});
+
+        searchUnitText.setOnKeyReleased(event -> {
+            searchByTeacherAndUnit();
+        });
+
         lessonTable.setOnMouseReleased(event -> {
             selectFromTable();
         });
@@ -137,16 +140,16 @@ public class LessonController implements Initializable {
         //showDateOnTable(LessonService.getService().findAll());
     }
 
-    private void showDateOnTable(List<Lesson> lessonList){
+    private void showDateOnTable(List<Lesson> lessonList) {
         ObservableList<Lesson> observableList =FXCollections.observableList(lessonList);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Lesson,Integer>("id"));
-        personIdColumn.setCellValueFactory(new PropertyValueFactory<Lesson,Integer>("personId"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Lesson,String>("title"));
-        codeColumn.setCellValueFactory(new PropertyValueFactory<Lesson,Integer>("code"));
-        teacherColumn.setCellValueFactory(new PropertyValueFactory<Lesson,String>("teacher"));
-        unitColumn.setCellValueFactory(new PropertyValueFactory<Lesson,String>("unit"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<Lesson,LocalDate>("startDateTime"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
+        teacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
 
         lessonTable.setItems(observableList);
     }
@@ -166,5 +169,14 @@ public class LessonController implements Initializable {
             alert.show();
         }
 
+    }
+
+    public void searchByTeacherAndUnit(){
+        try {
+           showDateOnTable(LessonService.getService().findByTeacherAndUnit(searchTeacherText.getText(),searchUnitText.getText()));
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"error loading data", ButtonType.OK);
+            alert.show();
+        }
     }
 }
