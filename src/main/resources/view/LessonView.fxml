@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mftplus.controller.LessonController">
    <children>
       <GridPane layoutX="28.0" layoutY="39.0" prefHeight="330.0" prefWidth="244.0">
         <columnConstraints>
@@ -46,7 +46,7 @@
             <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <HBox layoutX="28.0" layoutY="406.0" prefHeight="41.0" prefWidth="232.0">
+      <HBox layoutX="28.0" layoutY="406.0" prefHeight="41.0" prefWidth="244.0">
          <children>
             <Button fx:id="saveButton" mnemonicParsing="false" prefWidth="60.0" text="save">
                <HBox.margin>
@@ -55,13 +55,16 @@
             </Button>
             <Button fx:id="editButton" mnemonicParsing="false" prefWidth="60.0" text="edit">
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets left="10.0" right="20.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Delete" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Delete" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
-      <TableView fx:id="lessonTable" layoutX="313.0" layoutY="39.0" prefHeight="374.0" prefWidth="533.0">
+      <TableView fx:id="lessonTable" layoutX="295.0" layoutY="98.0" prefHeight="330.0" prefWidth="533.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="63.20001220703125" text="id" />
           <TableColumn fx:id="personIdColumn" prefWidth="78.4000244140625" text="personId" />
@@ -72,5 +75,34 @@
             <TableColumn fx:id="startDateColumn" prefWidth="99.9998779296875" text="startDateTime" />
         </columns>
       </TableView>
+      <HBox layoutX="294.0" layoutY="48.0" prefHeight="34.0" prefWidth="533.0">
+         <children>
+            <Label prefHeight="29.0" prefWidth="54.0" text="search:">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="28.0" prefWidth="44.0" text="Teacher">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="searchTeacherText" prefHeight="26.0" prefWidth="125.0">
+               <HBox.margin>
+                  <Insets left="10.0" top="3.0" />
+               </HBox.margin>
+            </TextField>
+            <Label text="Unit">
+               <HBox.margin>
+                  <Insets left="30.0" top="3.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="searchUnitText" prefHeight="26.0" prefWidth="125.0">
+               <HBox.margin>
+                  <Insets left="10.0" top="3.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
    </children>
 </Pane>
