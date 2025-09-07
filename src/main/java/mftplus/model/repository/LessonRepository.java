@@ -26,7 +26,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
         lesson.setId(ConnectionProvider.getProvider().getNextId("lesson_seq"));
 
         preparedStatement = connection.prepareStatement(
-                "insert into lessons (id, person_id, title, code, teacher, unit, start_date_time) values (?, ?, ?, ?, ?, ?, ?)"
+                "insert into LESSONS (id, person_id, title, code, teacher, unit, start_date_time) values (?, ?, ?, ?, ?, ?, ?)"
         );
 
         preparedStatement.setInt(1, lesson.getId());
@@ -44,7 +44,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public void edit(Lesson lesson) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update lessons set id=?,person_id=?,title=?,code=?,teacher=?,unit=?,start_date_time=? where id=?"
+                "update LESSONS set id=?,person_id=?,title=?,code=?,teacher=?,unit=?,start_date_time=? where id=?"
         );
 
         preparedStatement.setInt(1, lesson.getPersonId());
@@ -61,7 +61,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from lessons where id=?"
+                "delete from LESSONS where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -74,7 +74,7 @@ public class LessonRepository implements Repository<Lesson, Integer> , AutoClose
         List<Lesson> lessonList= new ArrayList<>();
 
 
-        preparedStatement = connection.prepareStatement("select * from lessons order by id, person_id");
+        preparedStatement = connection.prepareStatement("select * from LESSONS order by id, person_id");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {
