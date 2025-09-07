@@ -18,7 +18,7 @@ public class Job {
     private int id;
     private Person person;
     private String organisation;
-    private JobTitle title;
+    private JobTitle jobTitle;
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;

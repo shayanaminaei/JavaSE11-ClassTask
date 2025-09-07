@@ -22,7 +22,7 @@ public class MarriageController implements Initializable {
 
 
     @FXML
-    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText;
+    private TextField personIdText, marriageIdText, nameText, familyText, childrenText, searchNameText, searchFamilyText;
 
     @FXML
     private DatePicker marriageDate;

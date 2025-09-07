@@ -19,12 +19,11 @@ import java.util.ResourceBundle;
 
 @Log4j2
 public class JobController implements Initializable {
-
     @FXML
     private TextField idText, personIdText, organisationText, descriptionText, searchOrganisationText;
 
     @FXML
-    private ComboBox<JobTitle> titleCombo;
+    private ComboBox<JobTitle> jobTitelCombo;
 
     @FXML
     private DatePicker startDate, endDate;
@@ -39,21 +38,22 @@ public class JobController implements Initializable {
     private TableColumn<Job, Integer> idColumn,personIdColumn;
 
     @FXML
-    private TableColumn<Job, String> organisationColumn,descriptionColumn;
+    private TableColumn<Job, String> organisationColumn;
+
+    @FXML
+    private TableColumn<Job, JobTitle> jobTitelColumn;
 
     @FXML
     private TableColumn<Job, LocalDate> startDateColumn,endDateColumn;
 
     @FXML
-    private TableColumn<Job, JobTitle> jobTitleColumn;
+    private TableColumn<Job, String> descriptionColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             resetForm();
-            log.info("Form initialized successfully");
         } catch (Exception e) {
-            log.error("Form initialization failed" + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
@@ -65,7 +65,7 @@ public class JobController implements Initializable {
                                 .builder()
                                 .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .organisation(organisationText.getText())
-                                .title(titleCombo.getSelectionModel().getSelectedItem())
+                                .jobTitle(jobTitelCombo.getSelectionModel().getSelectedItem())
                                 .startDate(startDate.getValue())
                                 .endDate(endDate.getValue())
                                 .description(descriptionText.getText())
@@ -90,7 +90,7 @@ public class JobController implements Initializable {
                                .id(Integer.parseInt(idText.getText()))
                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                .organisation(organisationText.getText())
-                               .title(titleCombo.getSelectionModel().getSelectedItem())
+                               .jobTitle(jobTitelCombo.getSelectionModel().getSelectedItem())
                                .startDate(startDate.getValue())
                                .endDate(endDate.getValue())
                                .description(descriptionText.getText())
@@ -129,23 +129,30 @@ public class JobController implements Initializable {
 
     }
 
-    private void resetForm() throws Exception {
-        idText.clear();
-        personIdText.clear();
-        organisationText.clear();
+    private void resetForm() {
+        try {
+            idText.clear();
+            personIdText.clear();
+            organisationText.clear();
 
-        for (JobTitle jobTitle : JobTitle.values()) {
-            titleCombo.getItems().add(jobTitle);
+            jobTitelCombo.getItems().clear();
+            for (JobTitle jobTitle : JobTitle.values()) {
+                jobTitelCombo.getItems().add(jobTitle);
+            }
+            jobTitelCombo.getSelectionModel().select(0);
+
+            startDate.setValue(LocalDate.now());
+            endDate.setValue(LocalDate.now());
+
+            descriptionText.clear();
+
+            searchOrganisationText.clear();
+
+            showDateOnTable(JobService.getService().findAll());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, String.format("Error in Loading Education Form:%n%s", e.getMessage()), ButtonType.OK);
+            alert.show();
         }
-        titleCombo.getSelectionModel().select(0);
-
-        startDate.setValue(LocalDate.now());
-
-        endDate.setValue(LocalDate.now());
-
-        descriptionText.clear();
-
-        showDateOnTable(JobService.getService().findAll());
     }
 
     private void showDateOnTable(List<Job> jobList) {
@@ -154,7 +161,7 @@ public class JobController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
         organisationColumn.setCellValueFactory(new PropertyValueFactory<>("organisation"));
-        jobTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        jobTitelColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -165,10 +172,11 @@ public class JobController implements Initializable {
     public void selectFromTable() {
         try {
             Job job = jobTable.getSelectionModel().getSelectedItem();
+
             idText.setText(String.valueOf(job.getId()));
             personIdText.setText(String.valueOf(job.getPerson().getId()));
             organisationText.setText(String.valueOf(job.getOrganisation()));
-            titleCombo.getSelectionModel().select(job.getTitle());
+            jobTitelCombo.getSelectionModel().select(job.getJobTitle());
             startDate.setValue(job.getStartDate());
             endDate.setValue(job.getEndDate());
             descriptionText.setText(job.getDescription());

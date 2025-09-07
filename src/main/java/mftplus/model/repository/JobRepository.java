@@ -28,7 +28,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
         preparedStatement.setInt(1, job.getId());
         preparedStatement.setInt(2, job.getPerson().getId());
         preparedStatement.setString(3, job.getOrganisation());
-        preparedStatement.setString(4, job.getTitle().name());
+        preparedStatement.setString(4, job.getJobTitle().name());
         preparedStatement.setDate(5,Date.valueOf(job.getStartDate()));
         preparedStatement.setDate(6,Date.valueOf(job.getEndDate()));
         preparedStatement.setString(7, job.getDescription());
@@ -42,7 +42,7 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
         );
         preparedStatement.setInt(1, job.getPerson().getId());
         preparedStatement.setString(2, job.getOrganisation());
-        preparedStatement.setString(3, job.getTitle().name());
+        preparedStatement.setString(3, job.getJobTitle().name());
         preparedStatement.setDate(4,Date.valueOf(job.getStartDate()));
         preparedStatement.setDate(5,Date.valueOf(job.getEndDate()));
         preparedStatement.setString(6, job.getDescription());
@@ -62,12 +62,12 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public List<Job> findAll() throws Exception {
         List<Job> jobList = new ArrayList<>();
-
-        preparedStatement  = connection.prepareStatement("select * from jobs order by organisation");
+        preparedStatement  = connection.prepareStatement(
+                "select * from jobs order by organisation"
+        );
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Job job = jobMapper.jobMapper(resultSet);
-            jobList.add(job);
+            jobList.add(jobMapper.jobMapper(resultSet));
         }
         return jobList;
     }
@@ -75,7 +75,9 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
     @Override
     public Job findById(Integer id) throws Exception {
         Job job = null;
-        preparedStatement = connection.prepareStatement("select * from jobs where id=?");
+        preparedStatement = connection.prepareStatement(
+                "select * from jobs where id=?"
+        );
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -92,21 +94,21 @@ public class JobRepository implements Repository<Job, Integer>, AutoCloseable{
         preparedStatement.setInt(1, personId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Job job = jobMapper.jobMapper(resultSet);
-            jobList.add(job);
+            jobList.add(jobMapper.jobMapper(resultSet));
         }
         return jobList;
     }
 
     public List<Job> findByOrganisation(String organisation) throws Exception {
         List<Job> jobList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from jobs where organisation like ?");
+        preparedStatement = connection.prepareStatement(
+                "select * from jobs where organisation like ?"
+        );
         preparedStatement.setString(1, "%" + organisation + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            Job job = jobMapper.jobMapper(resultSet);
-            jobList.add(job);
+            jobList.add(jobMapper.jobMapper(resultSet));
         }
         return jobList;
     }
