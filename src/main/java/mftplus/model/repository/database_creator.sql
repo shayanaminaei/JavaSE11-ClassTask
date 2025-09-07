@@ -1,6 +1,6 @@
 create table persons
 (
-    id              number primary key,
+    id       number primary key,
     name       nvarchar2(20) not null,
     family     nvarchar2(20) not null,
     birth_date date          not null,
@@ -8,7 +8,19 @@ create table persons
     status     number(1)     default 1
 );
 
-create sequence person_seq start with 1 increment by 1;
+
+create table Accounts
+ (
+     Id number primary key,
+     person_id     INT,
+     bank nvarchar2(30) not null,
+     branch nvarchar2(30) not null,
+     account_id    INT,
+     card_number    int,
+     register_date date,
+ );
+--
+
 
 --
 create table cars
