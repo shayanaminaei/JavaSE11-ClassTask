@@ -7,11 +7,11 @@ import mftplus.model.repository.MarriageRepository;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
-@Log4j
+@Log4j2
 public class MarriageTest {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception {
 
         MarriageRepository repo = new MarriageRepository();
 

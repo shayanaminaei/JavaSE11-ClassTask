@@ -9,10 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MarriageRepository implements Repository<Marriage, Integer>, AutoCloseable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
-
+    private final MarriageMapper marriageMapper = new MarriageMapper();
 
 
     public MarriageRepository() throws SQLException {
@@ -72,7 +73,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         );
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
+            Marriage marriage = marriageMapper.marriageMapper(resultSet);
             marriageList.add(marriage);
         }
         return marriageList;
@@ -88,25 +89,10 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            marriage = MarriageMapper.marriageMapper(resultSet);
+            marriage = marriageMapper.marriageMapper(resultSet);
 
         }
         return marriage;
-    }
-
-
-    public List<Marriage> findByName(String name) throws Exception {
-        List<Marriage> marriageList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement(
-                "SELECT * FROM marriages WHERE name=?"
-        );
-        preparedStatement.setString(1, name + "%");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
-            marriageList.add(marriage);
-        }
-        return marriageList;
     }
 
 
@@ -121,22 +107,22 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
+            Marriage marriage = marriageMapper.marriageMapper(resultSet);
             marriageList.add(marriage);
         }
         return marriageList;
     }
 
-    public List<Marriage> findByNameAndFamily(String name , String family) throws Exception {
+    public List<Marriage> findByNameAndFamily(String name, String family) throws Exception {
         List<Marriage> marriageList = new ArrayList<>();
 
-        preparedStatement = connection.prepareStatement("SELECT * FROM marriages WHERE name LIKE ? AND family LIKE ?");
-        preparedStatement.setString(1, "%"+name+"%");
-        preparedStatement.setString(2, "%"+family+"%");
+        preparedStatement = connection.prepareStatement("select * from marriages where name like ? and family like ?");
+        preparedStatement.setString(1, name + "%");
+        preparedStatement.setString(2, family + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
-            Marriage marriage = MarriageMapper.marriageMapper(resultSet);
+            Marriage marriage = marriageMapper.marriageMapper(resultSet);
             marriageList.add(marriage);
         }
         return marriageList;

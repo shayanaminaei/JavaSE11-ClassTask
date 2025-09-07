@@ -15,7 +15,7 @@ public class MarriageMapper {
                 .person(PersonService.getService().findById(resultSet.getInt("person_id")))
                 .name(resultSet.getString("name"))
                 .family(resultSet.getString("family"))
-                .marriageDate(resultSet.getObject("marriage_date", LocalDate.class))
+                .marriageDate(LocalDate.from(resultSet.getTimestamp("marriage_date").toLocalDateTime()))
                 .isAlive(resultSet.getBoolean("is_alive"))
                 .children(resultSet.getInt("children"))
                 .build();
