@@ -54,7 +54,7 @@ public class CarController implements Initializable {
                 Car car = Car
 
                         .builder()
-                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
+                        .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -79,7 +79,7 @@ public class CarController implements Initializable {
 
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
-                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
+                        .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -182,6 +182,8 @@ public class CarController implements Initializable {
             log.error("Car FindAll Failed " + e.getMessage());
         }
     }
+
+
 
 
 }
