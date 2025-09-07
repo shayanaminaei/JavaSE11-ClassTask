@@ -18,14 +18,14 @@ Create table if not exists persons(
 );
 
 
-CREATE TABLE marriages (
-                           id             BIGSERIAL PRIMARY KEY,
-                           person_id      BIGINT      NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
-                           name           VARCHAR(50) NOT NULL,
-                           family         VARCHAR(50) NOT NULL,
-                           marriage_date  DATE        NOT NULL,
-                           is_alive       BOOLEAN     NOT NULL DEFAULT TRUE,
-                           children       INTEGER     NOT NULL DEFAULT 0 CHECK (children >= 0)
+CREATE TABLE  if not exists marriages (
+        id             BIGSERIAL PRIMARY KEY,
+        person_id      BIGINT      NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        name           VARCHAR(50) NOT NULL,
+        family         VARCHAR(50) NOT NULL,
+        marriage_date  DATE        NOT NULL,
+        is_alive       BOOLEAN     NOT NULL DEFAULT TRUE,
+        children       INTEGER     NOT NULL DEFAULT 0 CHECK (children >= 0)
 );
 
 CREATE INDEX idx_marriages_person_id ON marriages(person_id);

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import mftplus.model.entity.enums.EducationGrade;
 
@@ -15,10 +14,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-
 public class Education {
     private int id;
-    private int personId;
+    private Person person;
     private String university;
     private EducationGrade educationGrade;
     private double average;
@@ -27,7 +25,6 @@ public class Education {
 
     @Override
     public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+        return new Gson().toJson(this);
     }
 }

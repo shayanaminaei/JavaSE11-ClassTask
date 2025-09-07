@@ -1,22 +1,23 @@
 package mftplus.model.tools;
 
 import mftplus.model.entity.Marriage;
+import mftplus.model.service.PersonService;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class MarriageMapper {
 
-    public static Marriage map(ResultSet rs) throws SQLException {
-        return Marriage.builder()
-                .marriageId(rs.getInt("id"))
-                .personId(rs.getInt("person_id"))
-                .name(rs.getString("name"))
-                .family(rs.getString("family"))
-                .marriageDate(rs.getObject("marriage_date", LocalDate.class))
-                .isAlive(rs.getBoolean("is_alive"))
-                .children(rs.getInt("children"))
+    public static Marriage marriageMapper(ResultSet resultSet) throws Exception {
+        return Marriage
+                .builder()
+                .marriageId(resultSet.getInt("id"))
+                .person(PersonService.getService().findById(resultSet.getInt("person_id")))
+                .name(resultSet.getString("name"))
+                .family(resultSet.getString("family"))
+                .marriageDate(LocalDate.from(resultSet.getTimestamp("marriage_date").toLocalDateTime()))
+                .isAlive(resultSet.getBoolean("is_alive"))
+                .children(resultSet.getInt("children"))
                 .build();
     }
 }

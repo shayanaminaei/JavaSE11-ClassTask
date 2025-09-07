@@ -9,8 +9,10 @@ import java.util.List;
 public class EducationService implements Service<Education, Integer> {
 
     @Getter
-    private static EducationService service = new EducationService();
-    private EducationService() {}
+    private final static EducationService service = new EducationService();
+
+    private EducationService() {
+    }
 
     @Override
     public void save(Education education) throws Exception {
@@ -47,9 +49,15 @@ public class EducationService implements Service<Education, Integer> {
         }
     }
 
-    public List<Education> findByUniversityAndGrade(String university, String educationGrade) throws Exception {
+    public List<Education> findByPersonId(Integer personId) throws Exception {
         try (EducationRepository educationRepository = new EducationRepository()) {
-            return educationRepository.findByUniversityAndGrade(university, educationGrade);
+            return educationRepository.findByPersonId(personId);
+        }
+    }
+
+    public List<Education> findByUniversityAndEducationGrade(String university, String educationGrade) throws Exception {
+        try (EducationRepository educationRepository = new EducationRepository()) {
+            return educationRepository.findByUniversityAndEducationGrade(university, educationGrade);
         }
     }
 }

@@ -1,9 +1,9 @@
 package mftplus.model.entity;
 
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
@@ -12,16 +12,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+
 
 
 public class Car {
     private int id;
-    private int personId;
+    private Person person;
     private String name;
-    private String model;
     private String brand;
     private LocalDate manDate;
     private String color;
     private String plate;
+
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
 }

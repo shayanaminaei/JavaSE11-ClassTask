@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane fx:controller="mftplus.controller.UserController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="265.0" prefWidth="240.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="id" />
+            <Label text="pesonid" GridPane.rowIndex="1" />
+            <Label text="username" GridPane.rowIndex="2" />
+            <Label text="password" GridPane.rowIndex="3" />
+            <Label text="nickname" GridPane.rowIndex="4" />
+            <Label text="locked" GridPane.rowIndex="6" />
+            <Label text="registerDay" GridPane.rowIndex="5" />
+            <HBox prefHeight="33.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <RadioButton fx:id="enableRadio" mnemonicParsing="false" text="Enable" />
+                  <RadioButton fx:id="disableRadio" mnemonicParsing="false" text="Disable" />
+               </children>
+            </HBox>
+            <DatePicker fx:id="registerDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="idText" GridPane.columnIndex="1" />
+            <PasswordField fx:id="PasswordText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="nickNameText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="PersonIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <HBox layoutX="14.0" layoutY="279.0" prefHeight="100.0" prefWidth="337.0" spacing="50.0">
+         <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
+            <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="removeButton" mnemonicParsing="false" text="Remove" />
+         </children>
+      </HBox>
+      <TableView fx:id="personTable" layoutX="261.0" layoutY="-7.0" prefHeight="330.0" prefWidth="559.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+            <TableColumn fx:id="PersonIdCloumn" prefWidth="75.0" text="PersonId" />
+            <TableColumn fx:id="UserNameColumn" prefWidth="75.0" text="UserName" />
+            <TableColumn fx:id="PsswordColumn" prefWidth="75.0" text="Password" />
+            <TableColumn fx:id="nickNameColumn" prefWidth="75.0" text="nickName" />
+            <TableColumn fx:id="RegisterDateColumn" prefWidth="75.0" text="RegisterDate" />
+            <TableColumn fx:id="LokedColumn" prefWidth="75.0" text="Locked" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

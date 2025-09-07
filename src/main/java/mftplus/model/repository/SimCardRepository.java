@@ -9,21 +9,22 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimCardsRepository implements Repository<SimCard, Integer>, AutoCloseable {
-    private Connection connection;
+public class SimCardRepository implements Repository<SimCard, Integer>, AutoCloseable {
+    private final Connection connection;
     private PreparedStatement preparedStatement;
-    private SimCardMapper simCardMapper = new SimCardMapper();
+    private final SimCardMapper simCardMapper = new SimCardMapper();
 
-    public SimCardsRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+    public SimCardRepository() throws SQLException {
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
     public void save(SimCard simCard) throws Exception {
+        simCard.setId(ConnectionProvider.getProvider().getNextId("sim_card_seq"));
         preparedStatement = connection.prepareStatement(
                 "insert into sim_Cards (id,person_id,title,numbers,operator,register_date,status) values (sim_card_seq.nextval,?,?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, simCard.getPersonId());
+        preparedStatement.setInt(1, simCard.getPerson().getId());
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
@@ -37,7 +38,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
         preparedStatement = connection.prepareStatement(
                 "update sim_Cards set person_id=?,title=?,numbers=?,operator=?,register_date=?,status=? where id=?"
         );
-        preparedStatement.setInt(1, simCard.getPersonId());
+        preparedStatement.setInt(1, simCard.getPerson().getId());
         preparedStatement.setString(2, simCard.getTitle().name());
         preparedStatement.setString(3, simCard.getNumbers());
         preparedStatement.setString(4, simCard.getSimCardOperator().name());
@@ -64,7 +65,7 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
         preparedStatement = connection.prepareStatement("select * from sim_cards");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            SimCard simCard = simCardMapper.SimCardMapper(resultSet);
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
             simCardList.add(simCard);
         }
         return simCardList;
@@ -78,9 +79,33 @@ public class SimCardsRepository implements Repository<SimCard, Integer>, AutoClo
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            simCard = simCardMapper.SimCardMapper(resultSet);
+            simCard = simCardMapper.simCardMapper(resultSet);
         }
         return simCard;
+    }
+
+    public List<SimCard> findSimCardByNumber(String number) throws Exception {
+        List<SimCard> simCardList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from sim_cards where numbers like ?");
+        preparedStatement.setString(1, number + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
+            simCardList.add(simCard);
+        }
+        return simCardList;
+    }
+
+    public List<SimCard>findByPersonId(Integer personId) throws Exception {
+        List<SimCard> simCardList = new ArrayList<>();
+        preparedStatement=connection.prepareStatement("select * from sim_cards where person_id=?");
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            SimCard simCard = simCardMapper.simCardMapper(resultSet);
+            simCardList.add(simCard);
+        }
+        return simCardList;
     }
 
     @Override

@@ -41,16 +41,18 @@ public class PropertyService implements Service<Property, Integer> {
         }
     }
 
+    @Override
     public Property findById(Integer id) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
             return propertyRepository.findById(id);
         }
     }
 
-    public void findByName(String name) throws Exception {
+    public List<Property> findByName(String name) throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {
-            propertyRepository.findByName(name);
+            return propertyRepository.findByName(name);
         }
+
     }
 }
 

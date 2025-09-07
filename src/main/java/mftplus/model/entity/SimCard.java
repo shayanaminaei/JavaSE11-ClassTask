@@ -10,15 +10,14 @@ import mftplus.model.entity.enums.Title;
 
 import java.time.LocalDate;
 
-
+@SuperBuilder
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 
 public class SimCard {
     private int id;
-    private int personId;
+    private Person person;
     private Title title;
     private String numbers;
     private SimCardOperator simCardOperator;

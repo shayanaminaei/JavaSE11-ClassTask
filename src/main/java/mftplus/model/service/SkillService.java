@@ -1,10 +1,12 @@
 package mftplus.model.service;
 
 import lombok.Getter;
+
 import mftplus.model.entity.Skill;
+
 import mftplus.model.repository.SkillRepository;
 
-import java.util.Collections;
+
 import java.util.List;
 
 public class SkillService implements Service<Skill,Integer> {
@@ -45,6 +47,18 @@ public class SkillService implements Service<Skill,Integer> {
     public Skill findById(Integer id) throws Exception {
         try (SkillRepository skillRepository = new SkillRepository()) {
             return skillRepository.findById(id);
+        }
+    }
+
+
+    public List<Skill> findSkillByTitle(String title) throws Exception {
+        try (SkillRepository skillRepository = new SkillRepository()) {
+            return skillRepository.findSkillByTitle(title);
+        }
+    }
+    public List<Skill> findByPersonId(Integer personId) throws Exception {
+        try (SkillRepository skillRepository = new SkillRepository()) {
+            return skillRepository.findByPersonId(personId);
         }
     }
 }

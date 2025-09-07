@@ -1,6 +1,7 @@
 package mftplus.model.repository;
 
 import mftplus.model.entity.Salary;
+import mftplus.model.entity.enums.EmployeeType;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.SalariesMapper;
 
@@ -14,7 +15,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
     private SalariesMapper salariesMapper = new SalariesMapper();
 
     public SalaryRepository() throws SQLException {
-        connection = ConnectionProvider.getProvider().getConnection();
+        connection = ConnectionProvider.getProvider().getOracleConnection();
     }
 
     @Override
@@ -22,7 +23,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
         preparedStatement = connection.prepareStatement(
                 "INSERT INTO salaries (person_id, weekly_hour, pay_per_hour, start_date, end_date, employee_type) VALUES (?, ?, ?, ?, ?, ?)"
         );
-        preparedStatement.setInt(1, salary.getPersonId());
+        preparedStatement.setInt(1, salary.getPerson().getId());
         preparedStatement.setInt(2, salary.getWeeklyHour());
         preparedStatement.setInt(3, salary.getPayPerHour());
         preparedStatement.setDate(4, Date.valueOf(salary.getStartDate()));
@@ -36,7 +37,7 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
         preparedStatement = connection.prepareStatement(
                 "UPDATE salaries SET person_id=?, weekly_hour=?, pay_per_hour=?, start_date=?, end_date=?, employee_type=? WHERE id=?"
         );
-        preparedStatement.setInt(1, salary.getPersonId());
+        preparedStatement.setInt(1, salary.getPerson().getId());
         preparedStatement.setInt(2, salary.getWeeklyHour());
         preparedStatement.setInt(3, salary.getPayPerHour());
         preparedStatement.setDate(4, Date.valueOf(salary.getStartDate()));
@@ -74,6 +75,32 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
             salary = salariesMapper.salaryMapper(rs);
         }
         return salary;
+    }
+    public List<Salary> findByPersonId(Integer personId) throws Exception {
+        List<Salary> salaryList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("SELECT * FROM salaries WHERE person_id=?");
+        preparedStatement.setInt(1, personId);
+        ResultSet resultSets = preparedStatement.executeQuery();
+        while (resultSets.next()) {
+            Salary salary = salariesMapper.salaryMapper(resultSets);
+            salaryList.add(salary);
+
+        }
+        return salaryList;
+
+
+    }
+    public List<Salary> findByEmployeeType(EmployeeType employeeType) throws Exception {
+        List<Salary> salaryList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("SELECT * FROM salaries WHERE employee_type=?");
+        preparedStatement.setString(1, employeeType.name());
+        ResultSet resultSets = preparedStatement.executeQuery();
+        while (resultSets.next()) {
+            Salary salary = salariesMapper.salaryMapper(resultSets);
+            salaryList.add(salary);
+
+        }
+        return salaryList;
     }
 
 

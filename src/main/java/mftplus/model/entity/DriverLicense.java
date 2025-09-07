@@ -1,0 +1,32 @@
+package mftplus.model.entity;
+
+import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import mftplus.model.entity.enums.DriverLicenseType;
+
+import java.time.LocalDate;
+
+@SuperBuilder
+@NoArgsConstructor
+@Getter
+@Setter
+
+public class DriverLicense {
+    private int id;
+    private Person person;
+    private String serial;
+    private DriverLicenseType driverLicenseType;
+    private String city;
+    private LocalDate registerDate;
+    private LocalDate expireDate;
+
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+}

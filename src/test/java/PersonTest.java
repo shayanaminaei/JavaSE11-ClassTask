@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Log4j
 public class PersonTest {
     public static void main(String[] args) throws Exception {
-        log.info("Starting Person Test");
-        log.error("error saving");
+//        log.info("Starting Person Test");
+//        log.error("error saving");
 //        UNIT TEST
 //        تست واحد
 //        PersonController.getController().save("ali", "alipour", LocalDate.of(2010, 1, 1), Role.customer,true);
@@ -20,16 +20,16 @@ public class PersonTest {
 //        System.out.println(PersonController.getController().findById(6));
 //        System.out.println(PersonController.getController().findByNameAndFamily("a" ,"a"));
 
-//        Person person = Person
-//                .builder()
-//                .name("reza")
-//                .family("rezsdfdsfsdaii")
-//                .birthDate(LocalDate.of(2000, 1, 1))
-//                .role(Role.admin)
-//                .status(true)
-//                .build();
-//
-//        PersonService.getService().save(person);
+        Person person = Person
+                .builder()
+                .name("reza")
+                .family("rezsdfdsfsdaii")
+                .birthDate(LocalDate.of(2000, 1, 1))
+                .role(Role.admin)
+                .status(true)
+                .build();
+
+        PersonService.getService().save(person);
 //        System.out.println(person);
 //        System.out.println(PersonService.getService().findByNameAndFamily("r", ""));
 

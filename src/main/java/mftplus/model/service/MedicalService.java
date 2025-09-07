@@ -14,28 +14,28 @@ public class MedicalService implements Service<Medical, Integer> {
     }
 
     @Override
+
     public void save(Medical medical) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.save(medical);
         }
-
     }
 
     @Override
     public void edit(Medical medical) throws Exception {
-       try (MedicalRepository medicalRepository = new MedicalRepository()) {
-    medicalRepository.edit(medical);
-       }
-
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            medicalRepository.edit(medical);
+        }
     }
+
 
     @Override
     public void delete(Integer id) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.delete(id);
         }
-
     }
+
 
     @Override
     public List<Medical> findAll() throws Exception {
@@ -44,11 +44,23 @@ public class MedicalService implements Service<Medical, Integer> {
         }
     }
 
+
     @Override
     public Medical findById(Integer id) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             return medicalRepository.findById(id);
         }
+    }
 
+    public List<Medical> findByMedicalDisease(String disease) throws Exception {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            return medicalRepository.findByDisease(disease);
+        }
+    }
+
+    public List<Medical> findByPersonId(Integer personId) throws Exception {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            return medicalRepository.findAllByPersonId(personId);
+        }
     }
 }

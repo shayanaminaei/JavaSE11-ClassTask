@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class Skill {
     private int id;
-    private int personId;
+    private Person person;
     private String title;
     private String institute;
     private int duration;
