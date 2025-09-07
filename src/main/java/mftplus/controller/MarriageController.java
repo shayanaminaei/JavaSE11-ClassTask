@@ -55,7 +55,7 @@ public class MarriageController implements Initializable {
             resetForm();
             log.info("form initialized successfully");
         } catch (Exception e) {
-            log.error("form initialization failed");
+            log.error("form initialization failed" +  e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data!!!", ButtonType.OK);
             alert.show();
         }
