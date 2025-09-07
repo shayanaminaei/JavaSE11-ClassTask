@@ -14,6 +14,7 @@ import mftplus.model.service.PersonService;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -162,8 +163,12 @@ public class CarController implements Initializable {
 
     public void searchById() {
         try {
-            Car car = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
-            showDateOnTable(FXCollections.observableArrayList(car));
+//            Car car = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
+//            List<Car> carList = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
+            List<Car> carList = Collections.singletonList(CarService.getService().findById(Integer.parseInt(searchIdText.getText())));
+//            showDateOnTable(FXCollections.observableArrayList(car));
+            showDateOnTable(carList);
+
             log.info("Car FindById: " + searchIdText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
