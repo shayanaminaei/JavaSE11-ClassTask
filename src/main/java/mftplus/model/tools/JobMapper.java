@@ -14,7 +14,7 @@ public class JobMapper {
                 .id(resultSet.getInt("id"))
                 .person(PersonService.getService().findById(resultSet.getInt("person_id")))
                 .organisation(resultSet.getString("organisation"))
-                .title(JobTitle.valueOf(resultSet.getString("job_title")))
+                .jobTitle(JobTitle.valueOf(resultSet.getString("job_title")))
                 .startDate(resultSet.getDate("start_date").toLocalDate())
                 .endDate(resultSet.getDate("end_date").toLocalDate())
                 .description(resultSet.getString("description"))

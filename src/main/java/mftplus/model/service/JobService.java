@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JobService implements Service<Job, Integer> {
     @Getter
-    private static JobService service = new JobService();
+    private final static JobService service = new JobService();
 
     private JobService() {
     }
