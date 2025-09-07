@@ -14,6 +14,7 @@ import mftplus.model.service.PersonService;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,7 +55,7 @@ public class CarController implements Initializable {
                 Car car = Car
 
                         .builder()
-                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
+                        .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -79,7 +80,7 @@ public class CarController implements Initializable {
 
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
-                        .person(PersonService.getService().findById(Integer.parseInt(idText.getText())))
+                        .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                         .name(nameText.getText())
                         .brand(brandText.getText())
                         .manDate(manDate.getValue())
@@ -162,8 +163,12 @@ public class CarController implements Initializable {
 
     public void searchById() {
         try {
-            Car car = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
-            showDateOnTable(FXCollections.observableArrayList(car));
+//            Car car = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
+//            List<Car> carList = CarService.getService().findById(Integer.parseInt(searchIdText.getText()));
+            List<Car> carList = Collections.singletonList(CarService.getService().findById(Integer.parseInt(searchIdText.getText())));
+//            showDateOnTable(FXCollections.observableArrayList(car));
+            showDateOnTable(carList);
+
             log.info("Car FindById: " + searchIdText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
@@ -182,6 +187,8 @@ public class CarController implements Initializable {
             log.error("Car FindAll Failed " + e.getMessage());
         }
     }
+
+
 
 
 }

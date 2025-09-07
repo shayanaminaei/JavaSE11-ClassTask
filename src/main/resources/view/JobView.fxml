@@ -16,7 +16,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mftplus.controller.JobController">
    <children>
-      <GridPane fx:id="idText" layoutX="22.0" layoutY="34.0" prefHeight="296.0" prefWidth="203.0">
+      <GridPane layoutX="22.0" layoutY="34.0" prefHeight="296.0" prefWidth="203.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.60000610351562" minWidth="10.0" prefWidth="84.39999389648438" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.60000610351562" minWidth="10.0" prefWidth="136.60000610351562" />
@@ -38,7 +38,7 @@
             <Label text="StartDate" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="66.0" text="Description" GridPane.rowIndex="6" />
             <Label text="EndDate" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="idText" GridPane.columnIndex="1" />
             <TextField fx:id="personIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="organisationText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="jobTitelCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />

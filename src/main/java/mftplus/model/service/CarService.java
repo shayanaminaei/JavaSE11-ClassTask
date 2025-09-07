@@ -69,6 +69,7 @@ public class CarService implements Service<Car, Integer> {
             return carRepository.findByBrand(brand);
         }
     }
+
 }
 
 
