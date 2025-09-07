@@ -1,6 +1,6 @@
 package mftplus.model.entity.enums;
 
-public enum User {
+public enum UserName {
 
     customer,
     admin,

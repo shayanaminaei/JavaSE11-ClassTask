@@ -10,12 +10,12 @@ import mftplus.model.tools.FormLoader;
 public class FxApp extends Application {
     public static void main(String[] args) throws Exception{
         log.info("Starting FxApp");
-        DatabaseManager.createDatabase();
+//        DatabaseManager.createDatabase();
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/PropertyView.fxml", "d_l");
     }
 }

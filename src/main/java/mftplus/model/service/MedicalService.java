@@ -19,13 +19,12 @@ public class MedicalService implements Service<Medical, Integer> {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.save(medical);
         }
-
     }
 
     @Override
     public void edit(Medical medical) throws Exception {
-        try(MedicalRepository medicalRepository = new MedicalRepository()) {
-            medicalRepository.save(medical);
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            medicalRepository.edit(medical);
         }
     }
 
@@ -35,7 +34,6 @@ public class MedicalService implements Service<Medical, Integer> {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             medicalRepository.delete(id);
         }
-
     }
 
 
@@ -46,10 +44,17 @@ public class MedicalService implements Service<Medical, Integer> {
         }
     }
 
+
     @Override
     public Medical findById(Integer id) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
             return medicalRepository.findById(id);
+        }
+    }
+
+    public List<Medical> findByMedicalDisease(String disease) throws Exception {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            return medicalRepository.findByDisease(disease);
         }
     }
 

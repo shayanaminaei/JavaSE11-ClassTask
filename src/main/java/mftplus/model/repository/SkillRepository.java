@@ -22,7 +22,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
     public void save(Skill skill) throws Exception {
         skill.setId(ConnectionProvider.getProvider().getNextId("skill_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into skills (id,personId,title,institute,duration,registerDate,score)"+" values (?,?,?,?,?,?,?)"
+                "insert into skills (id,person_id,title,institute,duration,register_date,score) values (?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, skill.getId());
         preparedStatement.setInt(2, skill.getPerson().getId());
@@ -32,7 +32,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         preparedStatement.setDate(6, Date.valueOf(skill.getRegisterDate()));
         preparedStatement.setInt(7, skill.getScore());
         preparedStatement.execute();
-}
+    }
 
     @Override
     public void edit(Skill skill) throws Exception {
@@ -62,7 +62,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         List<Skill> skillList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from skills order by title,institute");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             Skill skill = skillMapper.skillMapper(resultSet);
             skillList.add(skill);
         }
@@ -71,14 +71,14 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
 
     @Override
     public Skill findById(Integer id) throws Exception {
-        Skill  skill= null;
+        Skill skill = null;
 
         preparedStatement = connection.prepareStatement("select * from skills where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        if(resultSet.next()) {
-            skill= skillMapper.skillMapper(resultSet);
+        if (resultSet.next()) {
+            skill = skillMapper.skillMapper(resultSet);
         }
         return skill;
     }
@@ -94,6 +94,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         }
         return skillList;
     }
+
     public List<Skill> findByPersonId(int personId) throws Exception {
         List<Skill> skillList = new ArrayList<>();
 
@@ -109,6 +110,7 @@ public class SkillRepository implements Repository<Skill, Integer>, AutoCloseabl
         }
         return skillList;
     }
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();

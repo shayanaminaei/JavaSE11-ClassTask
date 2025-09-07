@@ -4,6 +4,7 @@ import lombok.Getter;
 import mftplus.model.entity.Lesson;
 import mftplus.model.repository.LessonRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LessonService implements Service<Lesson,Integer> {
@@ -45,5 +46,12 @@ public class LessonService implements Service<Lesson,Integer> {
         try (LessonRepository lessonRepository = new LessonRepository()) {
             return lessonRepository.findById(id);
         }
+    }
+
+    public List<Lesson> findByTeacherAndUnit(String teacher, String unit) throws Exception {
+        try (LessonRepository lessonRepository = new LessonRepository()) {
+            return lessonRepository.findByTeacherAndUnit(teacher, unit);
+        }
+
     }
 }

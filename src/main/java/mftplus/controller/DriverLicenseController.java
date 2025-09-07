@@ -28,7 +28,7 @@ public class DriverLicenseController  implements Initializable {
     private DatePicker registerDate,expireDate;
 
     @FXML
-    private ComboBox<DriverLicenseType> driverLisenseCombo;
+    private ComboBox<DriverLicenseType> driverLicenseCombo;
 
 
     @FXML
@@ -66,7 +66,7 @@ public class DriverLicenseController  implements Initializable {
                                 .builder()
                                 .person(PersonService.getService().findById(Integer.parseInt(personText.getText())))
                                 .serial(serialText.getText())
-                                .driverLicenseType(driverLisenseCombo.getSelectionModel().getSelectedItem())
+                                .driverLicenseType(driverLicenseCombo.getSelectionModel().getSelectedItem())
                                 .city(cityText.getText())
                                 .registerDate(registerDate.getValue())
                                 .expireDate(expireDate.getValue())
@@ -90,7 +90,7 @@ public class DriverLicenseController  implements Initializable {
                                 .builder()
                                 .person(PersonService.getService().findById(Integer.parseInt(personText.getText())))
                                 .serial(serialText.getText())
-                                .driverLicenseType(driverLisenseCombo.getSelectionModel().getSelectedItem())
+                                .driverLicenseType(driverLicenseCombo.getSelectionModel().getSelectedItem())
                                 .city(cityText.getText())
                                 .registerDate(registerDate.getValue())
                                 .expireDate(expireDate.getValue())
@@ -133,9 +133,9 @@ public class DriverLicenseController  implements Initializable {
         expireDate.setValue(LocalDate.now());
 
         for (DriverLicenseType driverLicenseType : DriverLicenseType.values()) {
-            driverLisenseCombo.getItems().add(driverLicenseType);
+            driverLicenseCombo.getItems().add(driverLicenseType);
         }
-        driverLisenseCombo.getSelectionModel().select(0);
+        driverLicenseCombo.getSelectionModel().select(0);
 
 
 
@@ -162,7 +162,7 @@ public class DriverLicenseController  implements Initializable {
             idText.setText(String.valueOf(driverLicense.getId()));
             personIdColumn.setText(String.valueOf(driverLicense.getPerson().getId()));
             serialText.setText(driverLicense.getSerial());
-            driverLisenseCombo.getSelectionModel().select(driverLicense.getDriverLicenseType());
+            driverLicenseCombo.getSelectionModel().select(driverLicense.getDriverLicenseType());
             cityText.setText(driverLicense.getCity());
             registerDate.setValue(driverLicense.getRegisterDate());
             expireDate.setValue(driverLicense.getExpireDate());

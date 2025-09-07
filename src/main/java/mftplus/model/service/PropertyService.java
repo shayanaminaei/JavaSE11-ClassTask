@@ -33,6 +33,7 @@ public class PropertyService implements Service<Property, Integer> {
             propertyRepository.delete(id);
         }
     }
+
     @Override
     public List<Property> findAll() throws Exception {
         try (PropertyRepository propertyRepository = new PropertyRepository()) {

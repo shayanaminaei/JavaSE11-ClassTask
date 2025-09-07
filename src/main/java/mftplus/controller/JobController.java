@@ -17,15 +17,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-@Log4j
+@Log4j2
 public class JobController implements Initializable {
-    //MainController mainController = new MainController();
-
     @FXML
     private TextField idText, personIdText, organisationText, descriptionText, searchOrganisationText;
 
     @FXML
-    private ComboBox<JobTitle> titleCombo;
+    private ComboBox<JobTitle> jobTitelCombo;
 
     @FXML
     private DatePicker startDate, endDate;
@@ -40,21 +38,22 @@ public class JobController implements Initializable {
     private TableColumn<Job, Integer> idColumn,personIdColumn;
 
     @FXML
-    private TableColumn<Job, String> organisationColumn,descriptionColumn;
+    private TableColumn<Job, String> organisationColumn;
+
+    @FXML
+    private TableColumn<Job, JobTitle> jobTitelColumn;
 
     @FXML
     private TableColumn<Job, LocalDate> startDateColumn,endDateColumn;
 
     @FXML
-    private TableColumn<Job, JobTitle> jobTitleColumn;
+    private TableColumn<Job, String> descriptionColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             resetForm();
-            log.info("Form initialized successfully");
         } catch (Exception e) {
-            log.error("Form initialization failed" + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
@@ -66,18 +65,18 @@ public class JobController implements Initializable {
                                 .builder()
                                 .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                 .organisation(organisationText.getText())
-                                .title(titleCombo.getSelectionModel().getSelectedItem())
+                                .title(jobTitelCombo.getSelectionModel().getSelectedItem())
                                 .startDate(startDate.getValue())
                                 .endDate(endDate.getValue())
                                 .description(descriptionText.getText())
                                 .build();
                 JobService.getService().save(job);
-                log.info("Job Saved Successfully");
+                //log.info("Job Saved Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + job, ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("Job Save Failed" + e.getMessage());
+                //log.error("Job Save Failed" + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Job Save Failed" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -91,18 +90,18 @@ public class JobController implements Initializable {
                                .id(Integer.parseInt(idText.getText()))
                                .person(PersonService.getService().findById(Integer.parseInt(personIdText.getText())))
                                .organisation(organisationText.getText())
-                               .title(titleCombo.getSelectionModel().getSelectedItem())
+                               .title(jobTitelCombo.getSelectionModel().getSelectedItem())
                                .startDate(startDate.getValue())
                                .endDate(endDate.getValue())
                                .description(descriptionText.getText())
                                .build();
                JobService.getService().edit(job);
-               log.info("Job Edited Successfully");
+               //log.info("Job Edited Successfully");
                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + job, ButtonType.OK);
                alert.show();
                resetForm();
            } catch (Exception e) {
-               log.error("Job Edit Failed" + e.getMessage());
+               //log.error("Job Edit Failed" + e.getMessage());
                Alert alert = new Alert(Alert.AlertType.ERROR, "Job Edit Failed" + e.getMessage(), ButtonType.OK);
                alert.show();
            }
@@ -111,12 +110,12 @@ public class JobController implements Initializable {
         deleteButton.setOnAction(event -> {
             try {
                 JobService.getService().delete(Integer.parseInt(idText.getText()));
-                log.info("Job Deleted Successfully");
+                //log.info("Job Deleted Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("Job Delete Failed" + e.getMessage());
+                //log.error("Job Delete Failed" + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Job Delete Failed " + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -130,23 +129,30 @@ public class JobController implements Initializable {
 
     }
 
-    private void resetForm() throws Exception {
-        idText.clear();
-        personIdText.clear();
-        organisationText.clear();
+    private void resetForm() {
+        try {
+            idText.clear();
+            personIdText.clear();
+            organisationText.clear();
 
-        for (JobTitle jobTitle : JobTitle.values()) {
-            titleCombo.getItems().add(jobTitle);
+            jobTitelCombo.getItems().clear();
+            for (JobTitle jobTitle : JobTitle.values()) {
+                jobTitelCombo.getItems().add(jobTitle);
+            }
+            jobTitelCombo.getSelectionModel().select(0);
+
+            startDate.setValue(LocalDate.now());
+            endDate.setValue(LocalDate.now());
+
+            descriptionText.clear();
+
+            searchOrganisationText.clear();
+
+            showDateOnTable(JobService.getService().findAll());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, String.format("Error in Loading Education Form:%n%s", e.getMessage()), ButtonType.OK);
+            alert.show();
         }
-        titleCombo.getSelectionModel().select(0);
-
-        startDate.setValue(LocalDate.now());
-
-        endDate.setValue(LocalDate.now());
-
-        descriptionText.clear();
-
-        showDateOnTable(JobService.getService().findAll());
     }
 
     private void showDateOnTable(List<Job> jobList) {
@@ -155,7 +161,7 @@ public class JobController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         personIdColumn.setCellValueFactory(new PropertyValueFactory<>("personId"));
         organisationColumn.setCellValueFactory(new PropertyValueFactory<>("organisation"));
-        jobTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        jobTitelColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -166,10 +172,11 @@ public class JobController implements Initializable {
     public void selectFromTable() {
         try {
             Job job = jobTable.getSelectionModel().getSelectedItem();
+
             idText.setText(String.valueOf(job.getId()));
             personIdText.setText(String.valueOf(job.getPerson().getId()));
             organisationText.setText(String.valueOf(job.getOrganisation()));
-            titleCombo.getSelectionModel().select(job.getTitle());
+            jobTitelCombo.getSelectionModel().select(job.getTitle());
             startDate.setValue(job.getStartDate());
             endDate.setValue(job.getEndDate());
             descriptionText.setText(job.getDescription());
@@ -183,11 +190,11 @@ public class JobController implements Initializable {
     public void searchByOrganisation() {
         try {
             showDateOnTable(JobService.getService().findByOrganisation(searchOrganisationText.getText()));
-            log.info("Job Find By Organisation : " + searchOrganisationText.getText());
+            //log.info("Job Find By Organisation : " + searchOrganisationText.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
             alert.show();
-            log.error("Job Find By Organisation :  " + searchOrganisationText.getText() + e.getMessage());
+            //log.error("Job Find By Organisation :  " + searchOrganisationText.getText() + e.getMessage());
         }
     }
 }

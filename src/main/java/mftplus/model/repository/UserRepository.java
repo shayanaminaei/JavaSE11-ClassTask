@@ -25,7 +25,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         );
         preparedStatement.setInt(1, user.getId());
         preparedStatement.setInt(2, user.getPerson().getId());
-        preparedStatement.setString(3, user.getUsername());
+        preparedStatement.setString(3, user.getUsername().name());
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());
@@ -40,7 +40,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable 
         );
         preparedStatement.setInt(1, user.getId());
         preparedStatement.setInt(2, user.getPerson().getId());
-        preparedStatement.setString(3, user.getUsername());
+        preparedStatement.setString(3, user.getUsername().name());
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.setString(5, user.getNickname());
         preparedStatement.setBoolean(6, user.getLocked());

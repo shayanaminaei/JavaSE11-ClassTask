@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import mftplus.model.entity.enums.UserName;
 
 import java.time.LocalDate;
 @Getter
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 public class User {
     private int id;
     private Person person;
-    private String username;
+    private UserName username;
     private String password;
     private String nickname;
     private Boolean locked;

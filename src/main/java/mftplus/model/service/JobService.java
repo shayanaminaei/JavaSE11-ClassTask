@@ -4,7 +4,6 @@ import lombok.Getter;
 import mftplus.model.entity.Job;
 import mftplus.model.repository.JobRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -58,8 +57,7 @@ public class JobService implements Service<Job, Integer> {
 
     public List<Job> findByOrganisation(String organisation) throws Exception {
         try (JobRepository jobRepository = new JobRepository()) {
-            jobRepository.findByOrganisation(organisation);
+            return jobRepository.findByOrganisation(organisation);
         }
-        return null;
     }
 }

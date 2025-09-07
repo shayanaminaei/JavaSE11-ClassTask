@@ -21,7 +21,7 @@ public class PropertyRepository implements Repository<Property, Integer>, AutoCl
     @Override
     public void save(Property property) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "insert into properties (id, person_id, name, brand, serial, count, date_time)" + " values (?,?,?,?,?,?,?)"
+                "insert into properties (id, person_id, name, brand, serial, count, date_time) values (?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, property.getId());
         preparedStatement.setInt(2, property.getPerson().getId());
