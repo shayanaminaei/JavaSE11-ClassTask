@@ -45,7 +45,7 @@
             <Label id="manDateId" text="ManDate" GridPane.rowIndex="4" />
             <Label id="colorText" text="Color" GridPane.rowIndex="5" />
             <Label id="plateText" text="Plate" GridPane.rowIndex="6" />
-            <TextField fx:id="idText" GridPane.columnIndex="1" />
+            <TextField fx:id="idText" GridPane.columnIndex="1" editable="false"/>
             <TextField fx:id="personIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="nameText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="brandText" GridPane.columnIndex="1" GridPane.rowIndex="3" />

@@ -1,6 +1,7 @@
 package mftplus.model.repository;
 
 import mftplus.model.entity.Salary;
+import mftplus.model.entity.enums.EmployeeType;
 import mftplus.model.tools.ConnectionProvider;
 import mftplus.model.tools.SalariesMapper;
 
@@ -88,6 +89,18 @@ public class SalaryRepository implements Repository<Salary, Integer>, AutoClosea
         return salaryList;
 
 
+    }
+    public List<Salary> findByEmployeeType(EmployeeType employeeType) throws Exception {
+        List<Salary> salaryList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("SELECT * FROM salaries WHERE employee_type=?");
+        preparedStatement.setString(1, employeeType.name());
+        ResultSet resultSets = preparedStatement.executeQuery();
+        while (resultSets.next()) {
+            Salary salary = salariesMapper.salaryMapper(resultSets);
+            salaryList.add(salary);
+
+        }
+        return salaryList;
     }
 
 

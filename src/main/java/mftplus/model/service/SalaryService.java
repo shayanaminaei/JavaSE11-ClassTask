@@ -2,6 +2,7 @@ package mftplus.model.service;
 
 import lombok.Getter;
 import mftplus.model.entity.Salary;
+import mftplus.model.entity.enums.EmployeeType;
 import mftplus.model.repository.SalaryRepository;
 
 import java.util.List;
@@ -15,17 +16,14 @@ public class SalaryService implements Service<Salary, Integer> {
 
     @Override
     public void save(Salary salary) throws Exception {
+        if (salary.getPayPerHour() <= 0) {
+            throw new Exception("Pay per hour must be positive!");
+        }
+        if (salary.getEndDate().isBefore(salary.getStartDate())) {
+            throw new Exception("End date must be after start date!");
+        }
         try (SalaryRepository salaryRepository = new SalaryRepository()) {
-            if (salary.getPayPerHour() > 0) {
-                salaryRepository.save(salary);
-            } else {
-                throw new Exception("Pay per hour must be positive!");
-            }
-            if (salary.getEndDate().isAfter(salary.getStartDate())) {
-                salaryRepository.save(salary);
-            }else  {
-                throw new Exception("Start date must be greater than end date!");
-            }
+            salaryRepository.save(salary);
         }
     }
 
@@ -57,10 +55,15 @@ public class SalaryService implements Service<Salary, Integer> {
         }
     }
 
-    public Salary findByPersonId(Integer personId)throws Exception {
+    public List<Salary> findByPersonId(Integer personId) throws Exception {
         try (SalaryRepository salaryRepository = new SalaryRepository()) {
-            return (Salary) salaryRepository.findByPersonId(personId);
+            return salaryRepository.findByPersonId(personId);
         }
     }
 
+    public List<Salary> findByEmployeeType(EmployeeType employeeType) throws Exception {
+        try (SalaryRepository salaryRepository = new SalaryRepository()) {
+            return salaryRepository.findByEmployeeType(employeeType);
+        }
+    }
 }
