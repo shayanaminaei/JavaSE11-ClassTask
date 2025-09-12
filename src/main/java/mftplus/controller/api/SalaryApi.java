@@ -5,9 +5,9 @@ import lombok.extern.log4j.Log4j2;
 import mftplus.model.entity.Salary;
 import mftplus.model.service.SalaryService;
 
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Log4j2
 @Path("/Salary")

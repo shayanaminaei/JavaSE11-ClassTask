@@ -18,7 +18,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
 
     @Override
     public void save(Car car) throws Exception {
-        car.setId(ConnectionProvider.getProvider().getNextId("Car_seq"));
+        car.setId(ConnectionProvider.getProvider().getNextId("Cars_seq"));
         preparedStatement = connection.prepareStatement(
                 "insert into cars(id, person_id, name, brand, man_date,color,plate) values(?, ?, ?, ?, ?, ?, ?)"
         );
@@ -116,6 +116,7 @@ public class CarRepository implements Repository<Car, Integer>, AutoCloseable {
         }
         return carList;
     }
+
 
     @Override
     public void close() throws Exception {

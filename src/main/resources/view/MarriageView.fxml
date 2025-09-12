@@ -34,7 +34,7 @@
          <children>
             <Label text="PersonId" />
             <TextField fx:id="personIdText" prefHeight="27.0" prefWidth="126.0" GridPane.columnIndex="1" />
-            <TextField fx:id="marriageIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="marriageIdText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="MarriageId" GridPane.rowIndex="1" />
             <TextField fx:id="nameText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Name" GridPane.rowIndex="2" />

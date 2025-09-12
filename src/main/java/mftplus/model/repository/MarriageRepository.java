@@ -16,7 +16,7 @@ public class MarriageRepository implements Repository<Marriage, Integer>, AutoCl
     private final MarriageMapper marriageMapper = new MarriageMapper();
 
 
-    public MarriageRepository() throws SQLException {
+    public MarriageRepository() throws Exception {
         connection = ConnectionProviderPostgres.getProvider().getConnection();
 
     }
