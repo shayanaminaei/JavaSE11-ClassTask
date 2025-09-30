@@ -1,33 +1,55 @@
-- +15 babak oveisi : educations (id, person_id, university, grade, average, start_date, end_date)    
+# JavaSE11-ClassTask
 
-- 9 mohadese saeedi : jobs (id, person_id, organisation, job_title, start_date, end_date, description)
+![Java](https://img.shields.io/badge/Java-SE11-blue?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-green?style=flat-square)
+![Fork](https://img.shields.io/badge/Forked-Yes-orange?style=flat-square)
+![Contributor](https://img.shields.io/badge/Contributor-Shayan%20Aminaei-blue?style=flat-square)
 
-- 8 zahra moradi nejhad : driver_licenses (id, person_id, serial, license_type, city, register_date, expire_date)
+This repository is a **Java SE class project** demonstrating **Object-Oriented Programming (OOP)** concepts.  
+It includes **entity management, repositories, and service layers**, implemented by multiple contributors.
 
-- -15 saray qorbani : military_cards : (id, person_id, card_serial, license_type, city, organisation, duration)
+---
 
-- -1 alireza nourahmadi : marriages (id, person_id, name, family, marriage_date, is_alive, childes)
+## 🗂 Modules & Contributors
 
-- -15 tina aghaei : childes (id, person_id, name, family, birth_date, is_alive, status)
+| Contributor | Module | Description | Key Functions | GitHub Link |
+|------------|--------|------------|---------------|------------|
+| Babak Oveisi | `educations` | Education records | `save`, `edit`, `delete`, `findAll` | - |
+| Mohadese Saeedi | `jobs` | Job history | `save`, `edit`, `delete`, `findAll` | - |
+| Zahra Moradi Nejhad | `driver_licenses` | Driver licenses | `save`, `edit`, `delete`, `findAll` | - |
+| Saray Qorbani | `military_cards` | Military service cards | `save`, `edit`, `delete`, `findAll` | - |
+| Alireza Nourahmadi | `marriages` | Marriage records | `save`, `edit`, `delete`, `findAll` | - |
+| Tina Aghaei | `childes` | Child information | `save`, `edit`, `delete`, `findAll` | - |
+| Samin Salehzadeh | `skills` | Skills & certificates | `save`, `edit`, `delete`, `findAll` | - |
+| Mobina Mokhbery | `medicals` | Medical records | `save`, `edit`, `delete`, `findAll` | - |
+| AmirSobhan Ghandizadeh | `salaries` | Salary information | `save`, `edit`, `delete`, `findAll` | - |
+| Mobina Rahi | `sim_cards` | SIM card info | `save`, `edit`, `delete`, `findAll` | - |
+| **+13/15Shayan Aminaei** | `cars` | Car information | `save`, `edit`, `delete`, `findAll`, `findByBrand` | [GitHub](https://github.com/shayanaminaei) |
+| Seyed Arian Sadat | `properties` | Properties owned | `save`, `edit`, `delete`, `findAll` | - |
+| Mahdiar Naseri | `accounts` | Bank accounts | `save`, `edit`, `delete`, `findAll` | - |
+| Milad Jaafari | `contacts` | Contact info | `save`, `edit`, `delete`, `findAll` | - |
 
-- 14 samin salehzadeh : skills (id ,person_id, title, institute, duration, register_date, score)
+---
 
-- 13 mobina mokhbery : medicals (id, person_id, disease, medicine, doctor, visit_date, status)
+## ⚙️ Features
 
-- OK amirsobhan ghandizadeh:  : salary (id, person_id, weekly_hour, pay_per_hour, start_date, end_date, employment_type)
+- **CRUD operations**: add, edit, delete, and query records in memory.  
+- **Singleton Service pattern**: ensures consistent access to services.  
+- **Lombok annotations**: reduces boilerplate code (`@Getter`, `@Setter`, `@Builder`).  
+- **In-memory repositories**: all data is stored in lists before integrating with database.  
+- **Example module (Cars)**: supports searching by ID, plate, and brand.
 
-- OK(CHECK) mobina rahi : sim_cards (id, person_id, title, number, operator, register_date, status)
+---
 
-- -1 shayan aminaei : cars (id, person_id, name, brand, man_date, color, plate)
+## 🔗 Useful Links
 
-- OK seyed arian sadat : properties (id, person_id, name, brand, serial, count, date_time)
+- [Original Project](https://github.com/AhmadMessbah/JavaSE_346252) – Forked source  
+- [Cars Module Entity](src/main/java/mftplus/model/entity/Cars.java)  
+- [Cars Service](src/main/java/mftplus/model/service/CarsService.java)  
+- [Cars Repository](src/main/java/mftplus/model/repository/CarsRepository.java)  
+- [Cars Test](src/test/java/CarsTest.java)  
 
-- mahdiar naseri : accounts (id, person_id, bank, branch, account_id, card_number, register_date)
+---
 
-- 5 milad jaafari : contacts (id, person_id, title, contact_id, contact_type, description, status)
-  (polymorphism)
-
-- -5 romina mirfatahi : lessons (id, person_id, title, code, teacher, unit, start_date_time)
-  (POJO/entity/bean)
-
-- -5 hedieh khodaei : user (id, person_id, username, password, nickName, locked, register_date)
+**Forked from:** [JavaSE_346252](https://github.com/AhmadMessbah/JavaSE_346252)  
+**Contributor:** [Shayan Aminaei](https://github.com/shayanaminaei)
