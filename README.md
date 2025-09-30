@@ -24,7 +24,7 @@ It includes **entity management, repositories, and service layers**, implemented
 | Mobina Mokhbery | `medicals` | Medical records | `save`, `edit`, `delete`, `findAll` | - |
 | AmirSobhan Ghandizadeh | `salaries` | Salary information | `save`, `edit`, `delete`, `findAll` | - |
 | Mobina Rahi | `sim_cards` | SIM card info | `save`, `edit`, `delete`, `findAll` | - |
-| **+13/15Shayan Aminaei** | `cars` | Car information | `save`, `edit`, `delete`, `findAll`, `findByBrand` | [GitHub](https://github.com/shayanaminaei) |
+| **+13/15 Shayan Aminaei** | `cars` | Car information | `save`, `edit`, `delete`, `findAll`, `findByBrand` | [GitHub](https://github.com/shayanaminaei) |
 | Seyed Arian Sadat | `properties` | Properties owned | `save`, `edit`, `delete`, `findAll` | - |
 | Mahdiar Naseri | `accounts` | Bank accounts | `save`, `edit`, `delete`, `findAll` | - |
 | Milad Jaafari | `contacts` | Contact info | `save`, `edit`, `delete`, `findAll` | - |
